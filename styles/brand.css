@@ -1,0 +1,16 @@
+:root {
+  --heading-font-family: "Syncopate", sans-serif;
+  --body-font-family: "Instrument Sans", sans-serif;
+  --background-color: rgb(255 255 255);
+  --text-color: rgb(0 0 0);
+  --link-color: rgb(102 102 102);
+  --link-hover-color: rgb(0 0 0);
+  --section-padding: 128px;
+  --nav-height: 64px;
+  --heading-size-xxl: 56px;
+  --heading-size-xl: 40px;
+  --heading-size-l: 32px;
+  --heading-size-m: 24px;
+  --heading-size-s: 20px;
+  --heading-size-xs: 18px;
+}

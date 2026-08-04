@@ -1,0 +1,10 @@
+{
+  "type": "da",
+  "sites": {
+    "eds-ema-training": {
+      "previewOrg": "hariharan653",
+      "previewSite": "eds-ema-training",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}
