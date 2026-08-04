@@ -1,0 +1,129 @@
+/* hero-banner: full-bleed dark CTA card
+ * Values extracted from source computed styles:
+ * https://wknd-trendsetters.site/about-us
+ * DOM (authored .plain.html):
+ *   .hero-banner
+ *     > div (row 1) > div (cell) > picture/img   -> background image layer
+ *     > div (row 2) > div (cell) > h2 + p + p>a  -> content on top
+ */
+
+/* The block is the rounded card. */
+.hero-banner {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 448px;
+  border-radius: 20px;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* Dark gradient overlay (source: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 60%)) */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 0%) 60%);
+  pointer-events: none;
+}
+
+/* Heading (authored h2, styled like source h1) */
+.hero-banner h2 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Subheading */
+.hero-banner p {
+  margin: 16px 0 0;
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* CTA button container spacing */
+.hero-banner .button-container {
+  margin: 24px 0 0;
+}
+
+/* CTA button: white pill, black text (inverse of default button) */
+.hero-banner a.button:any-link {
+  margin: 0;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  background-color: #fff;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-transform: none;
+}
+
+.hero-banner a.button:any-link:hover,
+.hero-banner a.button:any-link:focus-visible {
+  border-color: #fff;
+  background-color: transparent;
+  color: #fff;
+}
+
+/* Row 1 = background image layer */
+.hero-banner > div:first-child {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+}
+
+/* Row 2 = content body (sits on top of image + overlay) */
+.hero-banner > div:last-child {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin: 0;
+}
+
+.hero-banner > div:first-child > div,
+.hero-banner > div:first-child p {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.hero-banner > div:last-child > div {
+  max-width: 672px;
+  padding: 32px;
+}
+
+.hero-banner > div:first-child picture,
+.hero-banner > div:first-child img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .hero-banner > div:last-child > div {
+    padding: 64px;
+  }
+
+  .hero-banner h2 {
+    line-height: 61.6px;
+  }
+
+  .hero-banner p {
+    font-size: 18px;
+    line-height: 28.8px;
+  }
+}
