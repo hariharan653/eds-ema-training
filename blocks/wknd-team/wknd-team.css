@@ -78,13 +78,23 @@
   color: var(--text-color);
 }
 
-/* social icon row */
+/* social icon row (parser emits a <ul><li><a> inside the social cell) */
 .wknd-team .wknd-team-card-social {
+  margin: 20px 0 0;
+}
+
+.wknd-team .wknd-team-card-social ul {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 20px 0 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wknd-team .wknd-team-card-social li {
+  margin: 0;
   padding: 0;
   list-style: none;
 }
