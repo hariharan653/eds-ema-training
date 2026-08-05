@@ -1,5 +1,72 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
+/*
+ * Category filter map (from wknd.site/us/en/adventures). Keys are the tab
+ * labels; values are the adventure slugs that belong to each category. "All"
+ * is derived (every card), so it is not listed here.
+ */
+const CATEGORY_MAP = {
+  Climbing: ['climbing-new-zealand', 'colorado-rock-climbing'],
+  Cycling: ['whistler-mountain-biking', 'cycling-tuscany', 'west-coast-cycling'],
+  Skiing: ['downhill-skiing-wyoming', 'ski-touring-mont-blanc', 'tahoe-skiing'],
+  Surfing: ['bali-surf-camp', 'surf-camp-costa-rica'],
+  Travel: ['beervana-portland', 'cycling-tuscany', 'gastronomic-marais-tour',
+    'napa-wine-tasting', 'riverside-camping-australia', 'yosemite-backpacking'],
+};
+
+const TAB_ORDER = ['All', 'Climbing', 'Cycling', 'Skiing', 'Surfing', 'Travel'];
+
+/**
+ * Derive an adventure slug from a card's link (…/adventures/<slug>.html).
+ */
+function slugForCard(li) {
+  const a = li.querySelector('a[href*="/adventures/"]');
+  if (!a) return null;
+  return a.getAttribute('href').replace(/.*\/adventures\//, '').replace(/\.html$/, '');
+}
+
+/**
+ * Build the category filter tab strip and wire click filtering.
+ * Only used on the adventures listing (many cards); skipped elsewhere.
+ */
+function addFilterTabs(block, ul) {
+  const items = [...ul.children];
+  // tag each card with its slug for filtering
+  items.forEach((li) => {
+    const slug = slugForCard(li);
+    if (slug) li.dataset.slug = slug;
+  });
+
+  const tablist = document.createElement('div');
+  tablist.className = 'cards-adventures-wknd-tabs';
+  tablist.setAttribute('role', 'tablist');
+  tablist.setAttribute('aria-label', 'Filter adventures by category');
+
+  const applyFilter = (label) => {
+    items.forEach((li) => {
+      const show = label === 'All' || (CATEGORY_MAP[label] || []).includes(li.dataset.slug);
+      li.hidden = !show;
+    });
+  };
+
+  TAB_ORDER.forEach((label, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'cards-adventures-wknd-tab';
+    btn.textContent = label;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    btn.addEventListener('click', () => {
+      tablist.querySelectorAll('button').forEach((b) => b.setAttribute('aria-selected', 'false'));
+      btn.setAttribute('aria-selected', 'true');
+      applyFilter(label);
+    });
+    tablist.append(btn);
+  });
+
+  block.prepend(tablist);
+}
+
 export default function decorate(block) {
   /* change to ul, li */
   const ul = document.createElement('ul');
@@ -18,4 +85,10 @@ export default function decorate(block) {
   });
   block.textContent = '';
   block.append(ul);
+
+  // Category filter tabs only on the full adventures listing (many cards);
+  // the homepage "Next Adventures" grid (4 cards) keeps a simple grid.
+  if (ul.children.length >= 8) {
+    addFilterTabs(block, ul);
+  }
 }

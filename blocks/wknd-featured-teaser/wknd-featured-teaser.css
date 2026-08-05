@@ -145,3 +145,37 @@ main .wknd-featured-teaser p > a:any-link:hover {
     justify-content: center;
   }
 }
+
+/* ---- Adventures listing hero variant ----
+   On the Adventures index the intro teaser is a full-width image with a white
+   content card overlapping the bottom of the image (source margin-top -180px on
+   desktop). Scoped to the adventures listing (teaser shares its section with the
+   adventures card grid) so the homepage/magazine teasers are unaffected. */
+@media (width >= 900px) {
+  .wknd-featured-teaser-container.cards-adventures-wknd-container
+    .wknd-featured-teaser > div {
+    display: block;
+    position: relative;
+  }
+
+  .wknd-featured-teaser-container.cards-adventures-wknd-container
+    .wknd-featured-teaser .wknd-featured-teaser-img-col {
+    width: 100%;
+  }
+
+  .wknd-featured-teaser-container.cards-adventures-wknd-container
+    .wknd-featured-teaser .wknd-featured-teaser-img-col img {
+    height: auto;
+    aspect-ratio: 16 / 7;
+  }
+
+  .wknd-featured-teaser-container.cards-adventures-wknd-container
+    .wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) {
+    position: relative;
+    z-index: 1;
+    width: 66%;
+    margin-top: -180px;
+    background-color: #fff;
+    padding: 40px 48px 0 0;
+  }
+}
