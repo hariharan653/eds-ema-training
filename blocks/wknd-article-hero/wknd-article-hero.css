@@ -1,0 +1,80 @@
+/* WKND Article Hero
+ * Variant of the vanilla `hero` block for WKND magazine article headers.
+ * Layout differs from vanilla hero: the lead image sits full-width on top and
+ * the title + author byline render below it in normal flow (no overlay).
+ * Inherits body.wknd design tokens (Asar serif headings, Source Sans body,
+ * yellow accent). All selectors scoped under .wknd-article-hero.
+ *
+ * EDS DOM (after decorate + decorateMain):
+ *   .wknd-article-hero
+ *     > div.wknd-article-hero-image   (lead banner picture/img)
+ *     > div.wknd-article-hero-text    (h1 title + p/h4 byline)
+ */
+
+/* Let the block span the section wrapper width (lead banner is full-width). */
+.wknd-article-hero-container .wknd-article-hero-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.wknd-article-hero {
+  padding: 0;
+}
+
+/* ---- Lead banner image ---- */
+.wknd-article-hero .wknd-article-hero-image {
+  margin: 0;
+}
+
+.wknd-article-hero .wknd-article-hero-image p {
+  margin: 0;
+}
+
+.wknd-article-hero .wknd-article-hero-image picture {
+  display: block;
+  width: 100%;
+}
+
+.wknd-article-hero .wknd-article-hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+/* ---- Title + byline ---- */
+.wknd-article-hero .wknd-article-hero-text {
+  padding: 36px 24px 12px;
+}
+
+.wknd-article-hero .wknd-article-hero-text h1 {
+  margin: 0 0 8px;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+/* Author byline — uppercase, muted, body font */
+.wknd-article-hero .wknd-article-hero-text .wknd-article-hero-byline,
+.wknd-article-hero .wknd-article-hero-text h4 {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .wknd-article-hero .wknd-article-hero-image img {
+    aspect-ratio: auto;
+    max-height: 620px;
+  }
+
+  .wknd-article-hero .wknd-article-hero-text {
+    padding: 48px 32px 16px;
+  }
+}
