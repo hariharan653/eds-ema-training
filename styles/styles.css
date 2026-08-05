@@ -438,9 +438,16 @@ body.wknd a:hover {
   text-decoration: underline;
 }
 
-/* WKND signature button: square, yellow, uppercase, dark text */
+/* WKND signature button: square, yellow, uppercase, dark text.
+   Covers both EDS-buttonized links (a.button) and standalone default-content
+   CTAs (a lone `<a>` in its own `<p>` in a section, e.g. "All Articles"/"All
+   Trips") which the block-adjacent decoration does not auto-buttonize. */
 body.wknd a.button:any-link,
-body.wknd button.button {
+body.wknd button.button,
+body.wknd main > .section > .default-content-wrapper > p > a:only-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
   border-radius: 0;
   padding: 13px 20px;
@@ -454,12 +461,15 @@ body.wknd button.button {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   text-align: center;
+  text-decoration: none;
 }
 
 body.wknd a.button:any-link:hover,
-body.wknd button.button:hover {
+body.wknd button.button:hover,
+body.wknd main > .section > .default-content-wrapper > p > a:only-child:hover {
   background-color: var(--wknd-accent-hover);
   color: var(--text-color);
+  text-decoration: none;
 }
 
 body.wknd a.button.secondary,
