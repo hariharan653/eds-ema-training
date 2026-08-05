@@ -80,3 +80,34 @@
   font: inherit;
   color: inherit;
 }
+
+/* ==========================================================================
+   WKND FAQ variant (body.wknd) — borderless rows with a thin divider between
+   items and uppercase questions, matching wknd.site/us/en/faqs. The about-us
+   (wknd-trendsetters) accordion keeps the boxed-card styling above.
+   ========================================================================== */
+body.wknd .accordion-faq {
+  gap: 0;
+}
+
+body.wknd .accordion-faq .accordion-faq-item {
+  border: 0;
+  border-bottom: 2px solid rgb(235 235 235);
+  border-radius: 0;
+}
+
+body.wknd .accordion-faq .accordion-faq-item-label {
+  padding: 18px 4px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+body.wknd .accordion-faq .accordion-faq-item-label:focus-visible {
+  border-radius: 0;
+}
+
+body.wknd .accordion-faq .accordion-faq-item-body {
+  padding: 0 4px 18px;
+}

@@ -502,4 +502,39 @@ body.wknd main > .section > .default-content-wrapper > h3::after {
   margin-top: 16px;
 }
 
+/* FAQ page: two-column layout — FAQ content (title/hero/intro + accordion) on
+   the left, "Need more help?" as a right sidebar, matching wknd.site/us/en/faqs.
+   The FAQ section has three children: [intro default-content, accordion,
+   need-more-help default-content]. On desktop, lay them out in a 2-col grid so
+   the third child becomes the right sidebar. Mobile stays single-column. */
+@media (width >= 900px) {
+  body.wknd main > .section.accordion-faq-container {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    column-gap: 64px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+
+  body.wknd main > .section.accordion-faq-container > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* intro (title + hero + text) and accordion stack in the left column */
+  body.wknd main > .section.accordion-faq-container > .default-content-wrapper:first-child,
+  body.wknd main > .section.accordion-faq-container > .accordion-faq-wrapper {
+    grid-column: 1;
+  }
+
+  /* "Need more help?" sidebar in the right column, top-aligned */
+  body.wknd main > .section.accordion-faq-container > .default-content-wrapper:last-child {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
 /* stylelint-enable no-descending-specificity */
