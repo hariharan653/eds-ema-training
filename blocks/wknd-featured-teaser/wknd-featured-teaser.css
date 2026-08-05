@@ -114,6 +114,16 @@ main .wknd-featured-teaser p > a:any-link:hover {
   text-decoration: none;
 }
 
+/* ---- Magazine listing variant: grey content panel ----
+   On the Magazine index the featured teaser shares its section with the article
+   grid (both -container classes present) and the source renders the content
+   side on a light-grey panel. The homepage featured teaser is in its own
+   section, so this stays white there. */
+.wknd-featured-teaser-container.cards-articles-wknd-container
+  .wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) {
+  background-color: rgb(235 235 235);
+}
+
 /* ---- Desktop: image left, text right, side-by-side ---- */
 @media (width >= 900px) {
   .wknd-featured-teaser > div {
