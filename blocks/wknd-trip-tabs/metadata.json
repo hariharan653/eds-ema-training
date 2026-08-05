@@ -1,0 +1,38 @@
+{
+  "variantName": "wknd-trip-tabs",
+  "baseBlock": "tabs",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures/climbing-new-zealand.html",
+    "originPage": "WKND adventure detail page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "content-tabs",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "one row per tab: label | rich panel content (h2, images, paragraphs, lists)",
+    "buttonCount": 0,
+    "imageCount": 5,
+    "tabCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "adventure/trip content tabs (Overview / Itinerary / What to Bring)",
+      "generic rich-content tabbed panels with dark active chip"
+    ],
+    "notSuitableFor": [
+      "testimonial/profile tab switchers (use tabs-testimonial)",
+      "simple two-line label lists that are not interactive"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures/climbing-new-zealand"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

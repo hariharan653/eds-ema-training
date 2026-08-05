@@ -1,0 +1,105 @@
+/* ==========================================================================
+   WKND Trip Tabs
+   Tabbed content switcher (Overview / Itinerary / What to Bring). Tab chips
+   sit in a row; the active chip is a dark (near-black) pill with white text,
+   matching the WKND source. Panels hold rich content (h2 subtitles, images,
+   paragraphs, lists). All selectors scoped to .wknd-trip-tabs; inherits
+   body.wknd tokens (Asar headings, Source Sans body, yellow accent).
+   Mobile-first.
+   ========================================================================== */
+
+.wknd-trip-tabs {
+  margin: 0;
+}
+
+/* ---- tablist ------------------------------------------------------------ */
+
+.wknd-trip-tabs .wknd-trip-tabs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-tab {
+  margin: 0;
+  padding: 10px 20px;
+  border: 1px solid rgb(0 0 0 / 15%);
+  border-radius: 0;
+  background-color: rgb(255 255 255);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs, 14px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-tab:hover {
+  background-color: rgb(0 0 0 / 6%);
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-tab[aria-selected="true"] {
+  border-color: var(--text-color);
+  background-color: var(--text-color);
+  color: rgb(255 255 255);
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-tab:focus-visible {
+  outline: 2px solid var(--wknd-accent);
+  outline-offset: 2px;
+}
+
+/* ---- panels ------------------------------------------------------------- */
+
+.wknd-trip-tabs .wknd-trip-tabs-panel-wrapper[hidden],
+.wknd-trip-tabs .wknd-trip-tabs-panel[hidden] {
+  display: none;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel h2 {
+  margin: 0 0 24px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-size-l, 30px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel h2 b,
+.wknd-trip-tabs .wknd-trip-tabs-panel h2 strong {
+  font-weight: 400;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel p {
+  margin: 0 0 24px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m, 18px);
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 24px;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel ul,
+.wknd-trip-tabs .wknd-trip-tabs-panel ol {
+  margin: 0 0 24px;
+  padding-left: 20px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m, 18px);
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel > *:last-child {
+  margin-bottom: 0;
+}

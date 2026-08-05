@@ -1,0 +1,186 @@
+/* ==========================================================================
+   WKND Image Carousel
+   Image-only full-bleed slide carousel at the top of adventure detail pages.
+   Each slide is a single full-width photo. Indicator dots (centered) + circular
+   prev/next arrows. No content card (that is what wknd-hero-carousel adds).
+   All selectors scoped to .wknd-image-carousel. Inherits body.wknd tokens
+   (Asar headings, Source Sans body, yellow accent). Mobile-first.
+   ========================================================================== */
+
+/* Full-bleed: break the block out of the .section > div 1200px container. */
+main .section > .wknd-image-carousel-wrapper {
+  max-width: 100%;
+  padding: 0;
+}
+
+.wknd-image-carousel {
+  /* image height drives both the picture and the arrow alignment box.
+     mobile = 16:9; desktop clamps up to the source ~480px band. */
+  --wkndic-img-h: 56.25vw;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ---- slides scroller ---------------------------------------------------- */
+
+.wknd-image-carousel .wknd-image-carousel-slides-container {
+  position: relative;
+}
+
+.wknd-image-carousel .wknd-image-carousel-slides {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.wknd-image-carousel .wknd-image-carousel-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.wknd-image-carousel .wknd-image-carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  list-style: none;
+}
+
+/* ---- image -------------------------------------------------------------- */
+
+.wknd-image-carousel .wknd-image-carousel-slide-image {
+  width: 100%;
+}
+
+.wknd-image-carousel .wknd-image-carousel-slide-image picture {
+  display: block;
+  width: 100%;
+}
+
+.wknd-image-carousel .wknd-image-carousel-slide-image img {
+  display: block;
+  width: 100%;
+  height: var(--wkndic-img-h);
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* ---- prev / next arrows ------------------------------------------------- */
+
+.wknd-image-carousel .wknd-image-carousel-navigation-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--wkndic-img-h);
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.wknd-image-carousel .wknd-image-carousel-navigation-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(255 255 255 / 85%);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.2s ease;
+}
+
+.wknd-image-carousel .wknd-image-carousel-navigation-buttons button:hover,
+.wknd-image-carousel .wknd-image-carousel-navigation-buttons button:focus-visible {
+  background-color: var(--wknd-accent);
+  outline: none;
+}
+
+/* chevron glyphs drawn with borders (no icon font dependency) */
+.wknd-image-carousel .wknd-image-carousel-navigation-buttons button::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
+.wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-prev::before {
+  margin-left: 4px;
+  transform: rotate(135deg);
+}
+
+.wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-next::before {
+  margin-right: 4px;
+  transform: rotate(-45deg);
+}
+
+/* ---- indicator dots ----------------------------------------------------- */
+
+.wknd-image-carousel .wknd-image-carousel-slide-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wknd-image-carousel .wknd-image-carousel-slide-indicator {
+  margin: 0 7px;
+  list-style: none;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.wknd-image-carousel .wknd-image-carousel-slide-indicator button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(175 175 175);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* the JS marks the active indicator's button with [disabled] */
+.wknd-image-carousel .wknd-image-carousel-slide-indicator button:disabled {
+  background-color: rgb(0 0 0 / 80%);
+  cursor: default;
+}
+
+.wknd-image-carousel .wknd-image-carousel-slide-indicator button:focus-visible {
+  outline: 2px solid var(--wknd-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Desktop: taller image band
+   ========================================================================== */
+
+@media (width >= 900px) {
+  .wknd-image-carousel {
+    --wkndic-img-h: clamp(360px, 37.5vw, 480px);
+  }
+
+  .wknd-image-carousel .wknd-image-carousel-navigation-buttons {
+    padding: 0 32px;
+  }
+}

@@ -15,6 +15,43 @@
 const TransformHook = { beforeTransform: 'beforeTransform', afterTransform: 'afterTransform' };
 
 export default function transform(hookName, element, payload) {
+  if (hookName === TransformHook.beforeTransform) {
+    // Content fragments carry a `.cmp-contentfragment__title` heading that
+    // duplicates the article/trip title (hidden via CSS on the source, but
+    // ingested by the importer). Remove it so each page keeps a single title.
+    WebImporter.DOMUtils.remove(element, [
+      '.cmp-contentfragment__title',
+      '.sharing',                    // "Share this story/adventure" social widget
+      '.cmp-sharing',
+    ]);
+
+    // "Share this Adventure/Story" widget on article/adventure pages: a title
+    // block + a Pinterest share link, not authorable content. Remove the
+    // Pinterest link and any sibling title whose text starts with "Share this".
+    element.querySelectorAll('a[href*="pinterest.com/pin/create"]').forEach((a) => {
+      const wrapper = a.closest('.cmp-sharing, .sharing, div');
+      (wrapper || a).remove();
+    });
+    element.querySelectorAll('.cmp-title').forEach((t) => {
+      if (/^\s*share this/i.test(t.textContent || '')) t.remove();
+    });
+
+    // Adventures listing: the category filter tabs (All / Climbing / Cycling /
+    // ...) each render the SAME trips in their own hidden tabpanel. Keep only
+    // the active "All" panel; remove the inactive duplicates and the tab strip
+    // so the listing shows one card grid, not six.
+    // IMPORTANT: only do this for card-grid tabs (panels containing an
+    // .image-list). Adventure DETAIL pages use tabs for Overview/Itinerary/
+    // What-to-Bring rich content (no .image-list) — those must be preserved so
+    // the wknd-trip-tabs block parser can capture all panels.
+    const activeGridPanel = element.querySelector('.cmp-tabs__tabpanel--active .image-list');
+    if (activeGridPanel) {
+      element.querySelectorAll('.cmp-tabs__tabpanel:not(.cmp-tabs__tabpanel--active)').forEach((p) => {
+        if (p.querySelector('.image-list')) p.remove();
+      });
+      element.querySelectorAll('.cmp-tabs__tablist, [role="tablist"]').forEach((tl) => tl.remove());
+    }
+  }
   if (hookName === TransformHook.afterTransform) {
     // Non-authorable global chrome (verified in cleaned.html):
     //  - header experience-fragment: sign-in buttons, language navigation,
