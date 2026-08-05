@@ -12,7 +12,6 @@
 .cards-gallery > ul > li {
   margin: 0;
   padding: 0;
-  border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 1 / 1;
 }
