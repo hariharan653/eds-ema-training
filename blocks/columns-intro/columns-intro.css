@@ -101,7 +101,10 @@
 @media (width >= 900px) {
   .columns-intro > div {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    /* match source: two 544px columns with a 64px gap (1152px content row) */
+    grid-template-columns: minmax(0, 544px) minmax(0, 544px);
+    justify-content: space-between;
     align-items: center;
     gap: 64px;
   }
