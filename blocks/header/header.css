@@ -246,6 +246,7 @@ header nav .nav-sections ul > li > ul > li {
 
   header nav .nav-sections ul {
     display: flex;
+    justify-content: center;
     gap: 24px;
     margin: 0;
   }
