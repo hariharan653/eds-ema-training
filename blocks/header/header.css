@@ -39,8 +39,8 @@ header nav[aria-expanded='true'] {
     display: flex;
     justify-content: space-between;
     gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
+    max-width: 1200px;
+    padding: 0 24px;
   }
 
   header nav[aria-expanded='true'] {
@@ -156,10 +156,10 @@ header nav .nav-brand a:any-link {
   align-items: center;
   gap: 8px;
   color: var(--text-color);
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 400;
-  text-transform: none;
+  font-family: var(--heading-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
   text-decoration: none;
 }
 
