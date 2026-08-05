@@ -497,6 +497,12 @@
           "instances": [
             ".accordion.panelcontainer"
           ]
+        },
+        {
+          "name": "wknd-team",
+          "instances": [
+            ".cmp-experience-fragment--contributor"
+          ]
         }
       ],
       "sections": [

@@ -3,14 +3,17 @@
 
 // PARSER IMPORTS
 import accordionFaqWkndParser from './parsers/accordion-faq-wknd.js';
+import wkndTeamParser from './parsers/wknd-team.js';
 
 // TRANSFORMER IMPORTS
 import cleanupTransformer from './transformers/wknd-cleanup.js';
 import sectionsTransformer from './transformers/wknd-sections.js';
 
-// PARSER REGISTRY (WKND FAQ accordion emits an accordion-faq block)
+// PARSER REGISTRY (WKND FAQ accordion emits an accordion-faq block;
+// wknd-team builds contributor/guide card grids on the About Us page)
 const parsers = {
   'accordion-faq': accordionFaqWkndParser,
+  'wknd-team': wkndTeamParser,
 };
 
 // PAGE TEMPLATE CONFIGURATION - Embedded from page-templates.json
@@ -22,6 +25,7 @@ const PAGE_TEMPLATE = {
   ],
   blocks: [
     { name: 'accordion-faq', instances: ['.accordion.panelcontainer'] },
+    { name: 'wknd-team', instances: ['.cmp-experience-fragment--contributor'] },
   ],
   sections: [
     { id: 'sec-1', name: 'FAQ accordion', selector: '.accordion.panelcontainer', style: null, blocks: ['accordion-faq'], defaultContent: [] },
