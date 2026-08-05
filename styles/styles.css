@@ -359,6 +359,12 @@ main .section.secondary {
   padding: var(--section-padding) 0;
 }
 
+/* secondary sections center their default-content intro (heading + subtext),
+   matching the source; block wrappers keep their own alignment */
+main .section.secondary > .default-content-wrapper {
+  text-align: center;
+}
+
 main .section.dark {
   background-color: var(--dark-color);
   color: #fff;
