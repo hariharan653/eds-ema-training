@@ -140,3 +140,86 @@ footer .footer .footer-nav-link:focus-visible {
     padding: 0 24px;
   }
 }
+
+/* ==========================================================================
+   WKND Adventures footer — page-scoped (body.wknd). Applies ONLY to the WKND
+   page (which loads the /us/footer fragment). About-us footer is unaffected.
+   Source: wknd.site — bg rgb(32,32,32), text rgb(235,235,235), Source Sans.
+   ========================================================================== */
+body.wknd footer {
+  background-color: rgb(32 32 32);
+  color: rgb(235 235 235);
+  padding: 56px 0;
+}
+
+/* logo column */
+body.wknd footer .footer .footer-logo {
+  gap: 0;
+  color: rgb(235 235 235);
+}
+
+body.wknd footer .footer .footer-logo img {
+  width: 128px;
+  height: auto;
+}
+
+/* nav column headings ("Explore") */
+body.wknd footer .footer .footer-nav-heading {
+  color: rgb(235 235 235);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+body.wknd footer .footer .footer-nav-link {
+  color: rgb(235 235 235);
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+body.wknd footer .footer .footer-nav-link:hover,
+body.wknd footer .footer .footer-nav-link:focus-visible {
+  color: #fff;
+  opacity: 1;
+}
+
+/* social column ("Follow Us") */
+body.wknd footer .footer .footer-social-heading {
+  margin: 0 0 12px;
+  color: rgb(235 235 235);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+body.wknd footer .footer .footer-social-column .footer-social {
+  margin: 0;
+}
+
+body.wknd footer .footer .footer-social-link {
+  width: 40px;
+  height: 40px;
+  background-color: var(--wknd-accent);
+  color: rgb(32 32 32);
+}
+
+body.wknd footer .footer .footer-social-link:hover,
+body.wknd footer .footer .footer-social-link:focus-visible {
+  background-color: var(--wknd-accent-hover);
+}
+
+/* legal / copyright column */
+body.wknd footer .footer .footer-legal {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgb(247 247 247);
+  opacity: 0.75;
+}
+
+body.wknd footer .footer .footer-legal p {
+  margin: 0 0 8px;
+}

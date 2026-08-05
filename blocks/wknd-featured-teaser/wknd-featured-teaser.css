@@ -1,0 +1,137 @@
+/* WKND Featured Article Teaser
+ * Values extracted from wknd.site/us/en #featured-teaser-home computed styles.
+ * Source layout: image + text side-by-side (image left / text right) on desktop,
+ * stacked (text on top, image below) on mobile.
+ *
+ * EDS DOM (after decorate + decorateMain):
+ *   .wknd-featured-teaser.wknd-featured-teaser-2-cols
+ *     > div                                  (row)
+ *       > div.wknd-featured-teaser-img-col    (image cell — picture/img, may be wrapped in <p>)
+ *       > div                                 (text cell — eyebrow p, h2, description p, CTA a.button)
+ */
+
+/* ---- Row layout (mobile-first: stacked, text above image) ---- */
+.wknd-featured-teaser > div {
+  display: flex;
+  flex-direction: column-reverse; /* cells are [image, text]; reverse => text on top, image below */
+  gap: 0;
+}
+
+/* ---- Image cell ---- */
+.wknd-featured-teaser .wknd-featured-teaser-img-col {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.wknd-featured-teaser .wknd-featured-teaser-img-col p {
+  margin: 0;
+  width: 100%;
+}
+
+.wknd-featured-teaser .wknd-featured-teaser-img-col picture {
+  display: block;
+  width: 100%;
+}
+
+.wknd-featured-teaser .wknd-featured-teaser-img-col img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  aspect-ratio: 16 / 9; /* mobile banner crop (source ~1.9); removed on desktop */
+}
+
+/* ---- Text cell ---- */
+.wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) {
+  display: flex;
+  flex-direction: column;
+  padding: 63px 36px 36px;
+}
+
+/* Eyebrow / pretitle — first paragraph "Featured Article" */
+.wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) > p:first-child {
+  margin: 0 0 13.5px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 45px;
+  color: var(--text-color);
+  text-transform: none;
+}
+
+/* Title */
+.wknd-featured-teaser h2 {
+  margin: 18px 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+  color: var(--text-color);
+  text-transform: none;
+}
+
+/* Description — the middle paragraph (not the eyebrow, not the CTA paragraph
+   which contains a link). */
+.wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) > p:not(:first-child, :has(> a)) {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24.5px;
+  color: var(--text-color);
+}
+
+/* CTA — a standalone `<a>` in its own `<p>` (block links are not auto-buttonized
+   by EDS); style the bare link as the source yellow square button. */
+/* stylelint-disable-next-line no-descending-specificity */
+.wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) > p:has(> a) {
+  margin: 24px 0 0;
+}
+
+main .wknd-featured-teaser p > a:any-link {
+  display: inline-block;
+  margin: 0;
+  padding: 14px 35px;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--wknd-accent);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+main .wknd-featured-teaser p > a:any-link:hover {
+  background-color: var(--wknd-accent-hover);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* ---- Desktop: image left, text right, side-by-side ---- */
+@media (width >= 900px) {
+  .wknd-featured-teaser > div {
+    flex-direction: row; /* cells [image, text] render image-left, text-right */
+    align-items: stretch;
+  }
+
+  .wknd-featured-teaser .wknd-featured-teaser-img-col {
+    flex: 0 0 62.4%; /* source: 709 / 1136 */
+  }
+
+  .wknd-featured-teaser .wknd-featured-teaser-img-col img {
+    height: 100%;
+    aspect-ratio: auto; /* fill the column height, matching the text cell */
+  }
+
+  .wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) {
+    flex: 1 1 37.6%; /* source: 427 / 1136 */
+    justify-content: center;
+  }
+}

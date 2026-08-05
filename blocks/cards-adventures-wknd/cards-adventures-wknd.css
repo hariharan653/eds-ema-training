@@ -1,0 +1,109 @@
+/*
+ * Block: cards-adventures-wknd -- "Where do you want to go?" trip cards.
+ * Values extracted from wknd.site/us/en.html (image-list component,
+ * getComputedStyle @1440 + @375). Same visual family as cards-articles-wknd.
+ * Source cards are borderless on white: no card border, background, or shadow.
+ * Typography re-branded to WKND tokens (serif titles, weight 400, not
+ * uppercase) per brand direction; layout/spacing/sizing match the source.
+ */
+
+.cards-adventures-wknd > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+
+  /* mobile-first: single column */
+  grid-template-columns: 1fr;
+
+  /* source: 14px horizontal gutter, 32px vertical between cards */
+  gap: 32px 14px;
+}
+
+@media (width >= 600px) {
+  .cards-adventures-wknd > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards-adventures-wknd > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width >= 1200px) {
+  .cards-adventures-wknd > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* borderless card matching source (transparent bg, no border/shadow) */
+.cards-adventures-wknd > ul > li {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* image: 260x200 in source -> 13/10 aspect ratio, fills column width */
+.cards-adventures-wknd .cards-adventures-wknd-card-image {
+  line-height: 0;
+}
+
+.cards-adventures-wknd .cards-adventures-wknd-card-image a,
+.cards-adventures-wknd .cards-adventures-wknd-card-image picture {
+  display: block;
+}
+
+.cards-adventures-wknd .cards-adventures-wknd-card-image img {
+  width: 100%;
+  aspect-ratio: 13 / 10;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* body: title sits directly under the image in source (~2px), no side padding */
+.cards-adventures-wknd .cards-adventures-wknd-card-body {
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+/* title link -- override global h3 (20/32px heading) with source 18/27px,
+   re-branded to WKND serif, weight 400, not uppercase */
+.cards-adventures-wknd .cards-adventures-wknd-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  text-transform: none;
+  color: var(--text-color);
+}
+
+.cards-adventures-wknd .cards-adventures-wknd-card-body h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards-adventures-wknd .cards-adventures-wknd-card-body h3 a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--wknd-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* description -- source: 14/21px, grey, 16px above; body font, not uppercase */
+.cards-adventures-wknd .cards-adventures-wknd-card-body p {
+  margin: 16px 0 0;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-transform: none;
+  color: rgb(105 105 105);
+}

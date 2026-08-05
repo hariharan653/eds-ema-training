@@ -14,3 +14,30 @@
   --heading-size-s: 20px;
   --heading-size-xs: 18px;
 }
+
+/*
+ * WKND Adventures theme — page-scoped to <body class="wknd"> (set via the
+ * Theme:wknd metadata row + decorateTemplateAndTheme). Redefining the design
+ * tokens here re-cascades them to every descendant WITHOUT touching the
+ * global :root, so the about-us brand is unaffected. See the wknd-* blocks
+ * for block-level styling that inherits these tokens.
+ */
+body.wknd {
+  --heading-font-family: "Asar", georgia, "Times New Roman", times, serif;
+  --body-font-family: "Source Sans 3", "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif;
+  --background-color: rgb(255 255 255);
+  --text-color: rgb(32 32 32);
+  --link-color: rgb(32 32 32);
+  --link-hover-color: rgb(0 0 0);
+
+  /* WKND accent (signature yellow) used by buttons and title underlines */
+  --wknd-accent: rgb(255 234 0);
+  --wknd-accent-hover: rgb(230 211 0);
+  --section-padding: 64px;
+  --heading-size-xxl: 48px;
+  --heading-size-xl: 36px;
+  --heading-size-l: 30px;
+  --heading-size-m: 24px;
+  --heading-size-s: 20px;
+  --heading-size-xs: 18px;
+}

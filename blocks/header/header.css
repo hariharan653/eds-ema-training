@@ -321,3 +321,67 @@ header nav .nav-tools a:any-link:focus-visible {
   background-color: var(--background-color);
   color: var(--text-color);
 }
+
+/* ==========================================================================
+   WKND Adventures header — page-scoped (body.wknd). Applies ONLY to the WKND
+   page (which loads the /us/nav fragment). About-us header is unaffected.
+   Source: wknd.site — white bg, WKND logo, Source Sans uppercase nav, Sign In.
+   These theme overrides are ordered after the base rules to win the cascade
+   for body.wknd, so no-descending-specificity is disabled for this section.
+   ========================================================================== */
+/* stylelint-disable no-descending-specificity */
+
+/* logo: WKND wordmark SVG, no adjacent text */
+body.wknd header nav .nav-brand a:any-link {
+  gap: 0;
+  font-size: 0;
+}
+
+body.wknd header nav .nav-brand img {
+  width: 110px;
+  height: auto;
+}
+
+/* nav links: Source Sans, uppercase, regular weight */
+body.wknd header nav .nav-sections a:any-link {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-color);
+}
+
+body.wknd header nav .nav-sections a:any-link:hover {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+/* Sign In: plain uppercase text link (not a pill button) */
+body.wknd header nav .nav-tools a:any-link {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+body.wknd header nav .nav-tools a:any-link:hover,
+body.wknd header nav .nav-tools a:any-link:focus-visible {
+  background-color: transparent;
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  body.wknd header nav .nav-brand img {
+    width: 128px;
+  }
+}
+
+/* stylelint-enable no-descending-specificity */
