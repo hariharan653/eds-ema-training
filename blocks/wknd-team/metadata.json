@@ -1,0 +1,21 @@
+{
+  "variantName": "wknd-team",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/about-us.html",
+    "originPage": "WKND About Us",
+    "blockPosition": "body"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "comfortable",
+    "purpose": "team-grid",
+    "imagePattern": "circular-avatar"
+  },
+  "contentPattern": {
+    "structure": "photo + name + role + social links",
+    "columns": 4
+  }
+}
