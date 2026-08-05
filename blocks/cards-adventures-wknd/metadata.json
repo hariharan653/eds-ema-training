@@ -1,0 +1,38 @@
+{
+  "variantName": "cards-adventures-wknd",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en.html",
+    "originPage": "WKND Adventures homepage",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "adventure-list",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title(link) + description",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "cardCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "WKND 'Where do you want to go?' trip/adventure card rows",
+      "4-up destination teaser grids with image + uppercase title + short description"
+    ],
+    "notSuitableFor": [
+      "article/blog card rows (use cards-articles-wknd)",
+      "cards without images"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

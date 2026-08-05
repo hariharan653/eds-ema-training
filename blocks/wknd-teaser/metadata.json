@@ -1,0 +1,37 @@
+{
+  "variantName": "wknd-teaser",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en.html",
+    "originPage": "WKND Adventures homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "featured-trip-teaser",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "single full-bleed featured trip/story banners with overlaid content card and CTA",
+      "WKND 'Next Adventures' Climbing New Zealand style teasers"
+    ],
+    "notSuitableFor": [
+      "multi-slide rotators (use wknd-hero-carousel)",
+      "repeating card grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

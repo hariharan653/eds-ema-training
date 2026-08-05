@@ -1,0 +1,38 @@
+{
+  "variantName": "wknd-featured-teaser",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en.html",
+    "originPage": "WKND Adventures homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "grey",
+    "density": "spacious",
+    "purpose": "featured-article",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + eyebrow + title + description + CTA",
+    "buttonCount": 1,
+    "imageCount": 1,
+    "columnCount": 2
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "featured article/story teasers with large image and text on grey panel",
+      "two-column image + rich-text promos"
+    ],
+    "notSuitableFor": [
+      "repeating card grids (use cards variants)",
+      "full-bleed hero banners"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

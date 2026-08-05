@@ -14,46 +14,66 @@
       "blocks": [
         {
           "name": "section-intro",
-          "instances": ["#main-content > header.section.secondary-section"],
+          "instances": [
+            "#main-content > header.section.secondary-section"
+          ],
           "section": "secondary"
         },
         {
           "name": "columns-intro",
-          "instances": ["#main-content > header.section.secondary-section > div.container > div.grid-layout"]
+          "instances": [
+            "#main-content > header.section.secondary-section > div.container > div.grid-layout"
+          ]
         },
         {
           "name": "columns-article",
-          "instances": ["#main-content > section.section:nth-of-type(1) > div.container > div.grid-layout"]
+          "instances": [
+            "#main-content > section.section:nth-of-type(1) > div.container > div.grid-layout"
+          ]
         },
         {
           "name": "section-gallery",
-          "instances": ["#main-content > section.section.secondary-section:nth-of-type(2)"],
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(2)"
+          ],
           "section": "secondary"
         },
         {
           "name": "cards-gallery",
-          "instances": ["#main-content > section.section.secondary-section:nth-of-type(2) > div.container > div.grid-layout.grid-gap-sm"]
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(2) > div.container > div.grid-layout.grid-gap-sm"
+          ]
         },
         {
           "name": "tabs-testimonial",
-          "instances": ["#main-content > section.section:nth-of-type(3) > div.container > div.tabs-wrapper"]
+          "instances": [
+            "#main-content > section.section:nth-of-type(3) > div.container > div.tabs-wrapper"
+          ]
         },
         {
           "name": "section-articles",
-          "instances": ["#main-content > section.section.secondary-section:nth-of-type(4)"],
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(4)"
+          ],
           "section": "secondary"
         },
         {
           "name": "cards-article",
-          "instances": ["#main-content > section.section.secondary-section:nth-of-type(4) > div.container > div.grid-layout.grid-gap-md"]
+          "instances": [
+            "#main-content > section.section.secondary-section:nth-of-type(4) > div.container > div.grid-layout.grid-gap-md"
+          ]
         },
         {
           "name": "accordion-faq",
-          "instances": ["#main-content > section.section:nth-of-type(5) .faq-list"]
+          "instances": [
+            "#main-content > section.section:nth-of-type(5) .faq-list"
+          ]
         },
         {
           "name": "hero-banner",
-          "instances": ["#main-content > section.section.inverse-section > div.container > div.grid-layout"]
+          "instances": [
+            "#main-content > section.section.inverse-section > div.container > div.grid-layout"
+          ]
         }
       ],
       "sections": [
@@ -62,7 +82,9 @@
           "name": "Intro",
           "selector": "#main-content > header.section.secondary-section",
           "style": "secondary",
-          "blocks": ["columns-intro"],
+          "blocks": [
+            "columns-intro"
+          ],
           "defaultContent": []
         },
         {
@@ -70,7 +92,9 @@
           "name": "Article header",
           "selector": "#main-content > section.section:nth-of-type(1)",
           "style": null,
-          "blocks": ["columns-article"],
+          "blocks": [
+            "columns-article"
+          ],
           "defaultContent": []
         },
         {
@@ -78,15 +102,21 @@
           "name": "Gallery",
           "selector": "#main-content > section.section.secondary-section:nth-of-type(2)",
           "style": "secondary",
-          "blocks": ["cards-gallery"],
-          "defaultContent": ["#main-content > section.section.secondary-section:nth-of-type(2) > div.container > div.utility-text-align-center"]
+          "blocks": [
+            "cards-gallery"
+          ],
+          "defaultContent": [
+            "#main-content > section.section.secondary-section:nth-of-type(2) > div.container > div.utility-text-align-center"
+          ]
         },
         {
           "id": "section-4",
           "name": "Testimonials",
           "selector": "#main-content > section.section:nth-of-type(3)",
           "style": null,
-          "blocks": ["tabs-testimonial"],
+          "blocks": [
+            "tabs-testimonial"
+          ],
           "defaultContent": []
         },
         {
@@ -94,24 +124,134 @@
           "name": "Latest articles",
           "selector": "#main-content > section.section.secondary-section:nth-of-type(4)",
           "style": "secondary",
-          "blocks": ["cards-article"],
-          "defaultContent": ["#main-content > section.section.secondary-section:nth-of-type(4) > div.container > div.utility-text-align-center"]
+          "blocks": [
+            "cards-article"
+          ],
+          "defaultContent": [
+            "#main-content > section.section.secondary-section:nth-of-type(4) > div.container > div.utility-text-align-center"
+          ]
         },
         {
           "id": "section-6",
           "name": "FAQ",
           "selector": "#main-content > section.section:nth-of-type(5)",
           "style": null,
-          "blocks": ["accordion-faq"],
-          "defaultContent": ["#main-content > section.section:nth-of-type(5) > div.container > div.grid-layout > div:first-child"]
+          "blocks": [
+            "accordion-faq"
+          ],
+          "defaultContent": [
+            "#main-content > section.section:nth-of-type(5) > div.container > div.grid-layout > div:first-child"
+          ]
         },
         {
           "id": "section-7",
           "name": "CTA banner",
           "selector": "#main-content > section.section.inverse-section",
           "style": null,
-          "blocks": ["hero-banner"],
+          "blocks": [
+            "hero-banner"
+          ],
           "defaultContent": []
+        }
+      ]
+    },
+    {
+      "name": "us-en",
+      "urls": [
+        "https://wknd.site/us/en.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/en.html",
+      "coverageGaps": [],
+      "description": "WKND Adventures homepage: hero carousel, featured article teaser, recent articles list, featured trip teaser, adventures list, plus header/footer",
+      "blocks": [
+        {
+          "name": "wknd-hero-carousel",
+          "instances": [
+            ".carousel.cmp-carousel--hero"
+          ]
+        },
+        {
+          "name": "wknd-featured-teaser",
+          "instances": [
+            "#featured-teaser-home"
+          ]
+        },
+        {
+          "name": "cards-articles-wknd",
+          "instances": [
+            "#container-9c4899b718 > div.aem-Grid > div.image-list.list:nth-of-type(3)"
+          ]
+        },
+        {
+          "name": "wknd-teaser",
+          "instances": [
+            ".teaser.cmp-teaser--imagebottom"
+          ]
+        },
+        {
+          "name": "cards-adventures-wknd",
+          "instances": [
+            "#container-4d3fed64ff > div.aem-Grid > div.image-list.list:nth-of-type(2)"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc2",
+          "name": "Hero carousel",
+          "selector": ".carousel.cmp-carousel--hero",
+          "style": null,
+          "blocks": [
+            "wknd-hero-carousel"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc3",
+          "name": "Featured article",
+          "selector": "#featured-teaser-home",
+          "style": null,
+          "blocks": [
+            "wknd-featured-teaser"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc5",
+          "name": "Recent articles",
+          "selector": "#container-9c4899b718",
+          "style": null,
+          "blocks": [
+            "cards-articles-wknd"
+          ],
+          "defaultContent": [
+            "#container-9c4899b718 > div.aem-Grid > div.title.cmp-title--underline:nth-of-type(2)",
+            "#container-9c4899b718 > div.aem-Grid > div.button.cmp-button--primary:nth-of-type(4)",
+            "#container-9c4899b718 > div.aem-Grid > div.title.cmp-title--underline:nth-of-type(6)"
+          ]
+        },
+        {
+          "id": "rc9",
+          "name": "Featured trip",
+          "selector": ".teaser.cmp-teaser--imagebottom",
+          "style": null,
+          "blocks": [
+            "wknd-teaser"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc11",
+          "name": "Adventures",
+          "selector": "#container-4d3fed64ff",
+          "style": null,
+          "blocks": [
+            "cards-adventures-wknd"
+          ],
+          "defaultContent": [
+            "#container-4d3fed64ff > div.aem-Grid > div.title:nth-of-type(1)",
+            "#container-4d3fed64ff > div.aem-Grid > div.button.cmp-button--primary:nth-of-type(3)"
+          ]
         }
       ]
     }

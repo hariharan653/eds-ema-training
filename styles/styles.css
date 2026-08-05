@@ -382,3 +382,114 @@ main .section.dark h6,
 main .section.dark p {
   color: #fff;
 }
+
+/* ==========================================================================
+   WKND Adventures theme — page-scoped global overrides (body.wknd)
+   All rules below apply ONLY to the WKND page. The about-us brand keeps the
+   base rules above unchanged. Tokens come from body.wknd in brand.css.
+   These theme overrides are intentionally ordered after the base rules so
+   they win the cascade for body.wknd, so no-descending-specificity is off here.
+   ========================================================================== */
+/* stylelint-disable no-descending-specificity */
+
+/* Body typography */
+body.wknd {
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+/* Headings: Asar serif, regular weight, sentence case (no uppercase) */
+body.wknd h1,
+body.wknd h2,
+body.wknd h3,
+body.wknd h4,
+body.wknd h5,
+body.wknd h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--text-color);
+}
+
+body.wknd h1 { font-size: var(--heading-size-xxl); }
+body.wknd h2 { font-size: var(--heading-size-xl); }
+body.wknd h3 { font-size: var(--heading-size-l); }
+body.wknd h4 { font-size: var(--heading-size-m); }
+body.wknd h5 { font-size: var(--heading-size-s); }
+body.wknd h6 { font-size: var(--heading-size-xs); }
+
+body.wknd p {
+  color: var(--text-color);
+  line-height: 1.75;
+}
+
+/* Links: dark, no underline (underline on hover) */
+body.wknd a:any-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+body.wknd a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+/* WKND signature button: square, yellow, uppercase, dark text */
+body.wknd a.button:any-link,
+body.wknd button.button {
+  border: 0;
+  border-radius: 0;
+  padding: 13px 20px;
+  min-width: 146px;
+  background-color: var(--wknd-accent);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+body.wknd a.button:any-link:hover,
+body.wknd button.button:hover {
+  background-color: var(--wknd-accent-hover);
+  color: var(--text-color);
+}
+
+body.wknd a.button.secondary,
+body.wknd button.button.secondary {
+  background-color: transparent;
+  border: 2px solid var(--text-color);
+  color: var(--text-color);
+}
+
+body.wknd a.button.secondary:hover,
+body.wknd button.button.secondary:hover {
+  background-color: var(--text-color);
+  color: #fff;
+}
+
+/* Section title with signature yellow underline (Recent Articles / Next Adventures / etc.)
+   Applies to default-content headings inside WKND sections. */
+body.wknd main > .section > .default-content-wrapper > h2,
+body.wknd main > .section > .default-content-wrapper > h3 {
+  padding-bottom: 16px;
+  position: relative;
+}
+
+body.wknd main > .section > .default-content-wrapper > h2::after,
+body.wknd main > .section > .default-content-wrapper > h3::after {
+  content: "";
+  display: block;
+  width: 84px;
+  border-bottom: 2px solid var(--wknd-accent);
+  margin-top: 16px;
+}
+
+/* stylelint-enable no-descending-specificity */

@@ -1,0 +1,250 @@
+/* ==========================================================================
+   WKND Hero Carousel
+   Full-bleed slide carousel. Each slide = full-width background image with a
+   centered white content card (serif title, description, yellow CTA) that
+   overlaps the bottom of the image on desktop and stacks below it on mobile.
+   Indicator dots + prev/next arrows. Values extracted from wknd.site source.
+   All selectors scoped to .wknd-hero-carousel. Mobile-first.
+   ========================================================================== */
+
+/* Full-bleed: break the block out of the .section > div 1200px container.
+   Higher specificity than `main > .section > div { max-width: 1200px }`. */
+main .section > .wknd-hero-carousel-wrapper {
+  max-width: 100%;
+  padding: 0;
+}
+
+.wknd-hero-carousel {
+  /* image height drives both the picture and the arrow alignment box.
+     mobile = 16:9 (source 375x211); desktop clamps up to source 640px. */
+  --wkndhc-img-h: 56.25vw;
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ---- slides scroller ---------------------------------------------------- */
+
+.wknd-hero-carousel .wknd-hero-carousel-slides-container {
+  position: relative;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slides {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  list-style: none;
+}
+
+/* ---- image -------------------------------------------------------------- */
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-image {
+  width: 100%;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-image picture {
+  display: block;
+  width: 100%;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-image img {
+  display: block;
+  width: 100%;
+  height: var(--wkndhc-img-h);
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* ---- content card ------------------------------------------------------- */
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-content {
+  padding: 0 14px;
+  text-align: left;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-content h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+  color: var(--text-color);
+  text-transform: none;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-content p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 31.5px;
+  color: var(--text-color);
+}
+
+/* CTA: EDS decorates the standalone `<p><a>` into .button-container > a.button.
+   Match the source yellow square button exactly (padding 14x35, uppercase). */
+.wknd-hero-carousel .wknd-hero-carousel-slide-content .button-container {
+  margin: 18px 0;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-content a.button:any-link {
+  display: inline-flex;
+  min-width: 0;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--wknd-accent);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-content a.button:any-link:hover {
+  background-color: var(--wknd-accent-hover);
+  color: var(--text-color);
+}
+
+/* ---- prev / next arrows ------------------------------------------------- */
+
+.wknd-hero-carousel .wknd-hero-carousel-navigation-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--wkndhc-img-h);
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(255 255 255 / 85%);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.2s ease;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button:hover,
+.wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button:focus-visible {
+  background-color: var(--wknd-accent);
+  outline: none;
+}
+
+/* chevron glyphs drawn with borders (no icon font dependency) */
+.wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button.slide-prev::before {
+  margin-left: 4px;
+  transform: rotate(135deg);
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button.slide-next::before {
+  margin-right: 4px;
+  transform: rotate(-45deg);
+}
+
+/* ---- indicator dots ----------------------------------------------------- */
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-indicator {
+  margin: 0 7px;
+  list-style: none;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.wknd-hero-carousel .wknd-hero-carousel-slide-indicator button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(175 175 175);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* the JS marks the active indicator's button with [disabled] */
+.wknd-hero-carousel .wknd-hero-carousel-slide-indicator button:disabled {
+  background-color: rgb(0 0 0 / 80%);
+  cursor: default;
+}
+
+.wknd-hero-carousel .wknd-hero-carousel-slide-indicator button:focus-visible {
+  outline: 2px solid var(--wknd-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Desktop: overlapping centered white content card + taller image
+   ========================================================================== */
+
+@media (width >= 900px) {
+  .wknd-hero-carousel {
+    --wkndhc-img-h: clamp(420px, 44.44vw, 640px);
+  }
+
+  .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons {
+    padding: 0 32px;
+  }
+
+  .wknd-hero-carousel .wknd-hero-carousel-slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1192px;
+    min-height: 180px;
+    margin: -180px auto 0;
+    padding: 0 28px;
+    background-color: rgb(255 255 255);
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "variantName": "cards-articles-wknd",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en.html",
+    "originPage": "WKND Adventures homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "article-list",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title(link) + description",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "cardCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "WKND 'Recent Articles' magazine card rows",
+      "4-up article/blog teaser grids with image + uppercase title + short description"
+    ],
+    "notSuitableFor": [
+      "trip/adventure card rows (use cards-adventures-wknd)",
+      "cards without images"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}
