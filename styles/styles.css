@@ -333,6 +333,12 @@ main > .section:first-of-type {
   margin-top: 0;
 }
 
+/* empty sections (e.g. trailing metadata-only section) must not create space */
+main > .section:empty {
+  margin: 0;
+  padding: 0;
+}
+
 @media (width >= 900px) {
   main > .section > div {
     padding: 0 32px;
