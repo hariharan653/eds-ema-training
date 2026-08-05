@@ -16,6 +16,14 @@ export default function decorate(block) {
     block.classList.add('no-image');
   }
 
+  // LCP: the lead banner image is the article's LCP candidate — load it eagerly
+  // at high priority (see modern-web optimize-image-priority).
+  const leadImg = block.querySelector(':scope > div:first-child img');
+  if (leadImg) {
+    leadImg.setAttribute('loading', 'eager');
+    leadImg.setAttribute('fetchpriority', 'high');
+  }
+
   [...block.children].forEach((row) => {
     const pic = row.querySelector('picture');
     if (pic && row.textContent.trim() === '') {
