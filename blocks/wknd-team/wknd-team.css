@@ -99,7 +99,7 @@
   list-style: none;
 }
 
-.wknd-team .wknd-team-card-social a {
+.wknd-team .wknd-team-card-social a:any-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -111,8 +111,8 @@
   transition: background-color 0.15s;
 }
 
-.wknd-team .wknd-team-card-social a:hover,
-.wknd-team .wknd-team-card-social a:focus-visible {
+.wknd-team .wknd-team-card-social a:any-link:hover,
+.wknd-team .wknd-team-card-social a:any-link:focus-visible {
   background-color: var(--wknd-accent);
   color: rgb(32 32 32);
 }
