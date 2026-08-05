@@ -99,13 +99,14 @@ main .section > .wknd-hero-carousel-wrapper {
   color: var(--text-color);
 }
 
-/* CTA: EDS decorates the standalone `<p><a>` into .button-container > a.button.
-   Match the source yellow square button exactly (padding 14x35, uppercase). */
-.wknd-hero-carousel .wknd-hero-carousel-slide-content .button-container {
-  margin: 18px 0;
+/* CTA: the CTA is a standalone `<a>` in its own `<p>` (block links are not
+   auto-buttonized by EDS), so style the bare link as the source yellow square
+   button (padding 14x35, uppercase). */
+.wknd-hero-carousel .wknd-hero-carousel-slide-content p:last-child {
+  margin: 18px 0 0;
 }
 
-.wknd-hero-carousel .wknd-hero-carousel-slide-content a.button:any-link {
+.wknd-hero-carousel .wknd-hero-carousel-slide-content p > a:any-link {
   display: inline-flex;
   min-width: 0;
   padding: 14px 35px;
@@ -118,12 +119,14 @@ main .section > .wknd-hero-carousel-wrapper {
   font-weight: 600;
   line-height: 21px;
   letter-spacing: normal;
+  text-decoration: none;
   text-transform: uppercase;
 }
 
-.wknd-hero-carousel .wknd-hero-carousel-slide-content a.button:any-link:hover {
+.wknd-hero-carousel .wknd-hero-carousel-slide-content p > a:any-link:hover {
   background-color: var(--wknd-accent-hover);
   color: var(--text-color);
+  text-decoration: none;
 }
 
 /* ---- prev / next arrows ------------------------------------------------- */

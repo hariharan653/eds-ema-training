@@ -72,8 +72,9 @@
   text-transform: none;
 }
 
-/* Description */
-.wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) > p:not(:first-child, .button-container) {
+/* Description — the middle paragraph (not the eyebrow, not the CTA paragraph
+   which contains a link). */
+.wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) > p:not(:first-child, :has(> a)) {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 14px;
@@ -82,13 +83,14 @@
   color: var(--text-color);
 }
 
-/* CTA — standalone <p><a> becomes a.button inside p.button-container after EDS decoration.
-   Selector uses `main .wknd-featured-teaser` to out-specify global `body.wknd a.button:any-link`. */
-.wknd-featured-teaser .button-container {
+/* CTA — a standalone `<a>` in its own `<p>` (block links are not auto-buttonized
+   by EDS); style the bare link as the source yellow square button. */
+/* stylelint-disable-next-line no-descending-specificity */
+.wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) > p:has(> a) {
   margin: 24px 0 0;
 }
 
-main .wknd-featured-teaser .button-container a.button:any-link {
+main .wknd-featured-teaser p > a:any-link {
   display: inline-block;
   margin: 0;
   padding: 14px 35px;
@@ -106,7 +108,7 @@ main .wknd-featured-teaser .button-container a.button:any-link {
   text-decoration: none;
 }
 
-main .wknd-featured-teaser .button-container a.button:any-link:hover {
+main .wknd-featured-teaser p > a:any-link:hover {
   background-color: var(--wknd-accent-hover);
   color: var(--text-color);
   text-decoration: none;

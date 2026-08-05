@@ -76,13 +76,15 @@
   line-height: 31.5px;
 }
 
-/* CTA "See Trip" — WKND yellow square button (exact source metrics) */
-.wknd-teaser .button-container {
+/* CTA "See Trip" — a standalone `<a>` in its own `<p>` (block links are not
+   auto-buttonized by EDS); style the bare link as the WKND yellow square
+   button (exact source metrics). */
+.wknd-teaser p:has(> a) {
   margin: 18px 0;
   padding: 0;
 }
 
-.wknd-teaser a.button:any-link {
+.wknd-teaser p > a:any-link {
   display: inline-block;
   min-width: 0;
   margin: 0;
@@ -101,7 +103,7 @@
   text-decoration: none;
 }
 
-.wknd-teaser a.button:any-link:hover {
+.wknd-teaser p > a:any-link:hover {
   background-color: var(--wknd-accent-hover);
   color: var(--text-color);
   text-decoration: none;
