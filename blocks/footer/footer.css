@@ -20,16 +20,32 @@ footer .footer p {
   margin: 0;
 }
 
-/* brand column: logo + social */
+/* brand column: logo at top, social icons pushed to the bottom */
+footer .footer .footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* EDS wraps default content in .default-content-wrapper; make it fill the
+   column height so the social list's margin-top:auto can bottom-align. */
+footer .footer .footer-brand > .default-content-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
 footer .footer .footer-brand .footer-logo {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   color: rgb(255 255 255);
-  font-family: var(--heading-font-family);
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: none;
   text-decoration: none;
 }
 
@@ -42,7 +58,7 @@ footer .footer .footer-social {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 24px 0 0;
+  margin: auto 0 0;
   padding: 0;
   list-style: none;
 }
