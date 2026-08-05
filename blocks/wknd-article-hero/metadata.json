@@ -1,0 +1,39 @@
+{
+  "variantName": "wknd-article-hero",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/magazine/western-australia.html",
+    "originPage": "WKND magazine article detail (Western Australia)",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "article-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "lead image + title (h1) + author byline",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "headingCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "magazine/blog article detail headers with a lead banner image, title and author byline",
+      "editorial article intros where the image sits above the heading (not overlaid)"
+    ],
+    "notSuitableFor": [
+      "dark full-bleed promo heroes with a CTA (use wknd-teaser or hero-banner)",
+      "grey two-column featured-article teasers (use wknd-featured-teaser)",
+      "rotating multi-slide heroes (use wknd-hero-carousel)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine/western-australia"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

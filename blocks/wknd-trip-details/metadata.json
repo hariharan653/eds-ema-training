@@ -1,0 +1,39 @@
+{
+  "variantName": "wknd-trip-details",
+  "baseBlock": "wknd-trip-details",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures/climbing-new-zealand.html",
+    "originPage": "WKND adventure detail page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "spec-list",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "one row per pair: label | value",
+    "buttonCount": 0,
+    "imageCount": 0,
+    "pairCount": 6
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "trip/product specification lists (label + value pairs)",
+      "adventure detail metadata (activity, difficulty, price, etc.)",
+      "any definition-style key/value spec block"
+    ],
+    "notSuitableFor": [
+      "free-form prose",
+      "content requiring images or CTAs"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures/climbing-new-zealand"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

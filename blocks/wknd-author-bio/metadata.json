@@ -1,0 +1,40 @@
+{
+  "variantName": "wknd-author-bio",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/magazine/western-australia.html",
+    "originPage": "WKND magazine article detail (Western Australia)",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "author-bio",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "author photo + name (h2) + role + social links",
+    "buttonCount": 0,
+    "imageCount": 1,
+    "columnCount": 2,
+    "linkCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "article author/contributor bio cards with a small circular photo, name, role and social links",
+      "compact person cards (profile + a few links) at the end of editorial content"
+    ],
+    "notSuitableFor": [
+      "grey two-column featured-article teasers with a large image and CTA (use wknd-featured-teaser)",
+      "general side-by-side content columns (use vanilla columns / columns-article)",
+      "repeating people/team card grids (use a cards variant)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine/western-australia"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

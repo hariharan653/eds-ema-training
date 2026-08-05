@@ -1,0 +1,38 @@
+{
+  "variantName": "wknd-image-carousel",
+  "baseBlock": "carousel",
+  "version": "1.0.0",
+  "created": "2026-08-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures/climbing-new-zealand.html",
+    "originPage": "WKND adventure detail page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "image-gallery",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image-only slides + indicator dots + prev/next",
+    "buttonCount": 0,
+    "imageCount": 3,
+    "slideCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "top-of-page adventure/trip image galleries",
+      "full-bleed image-only slideshows with dots + arrows"
+    ],
+    "notSuitableFor": [
+      "carousels with per-slide title/description/CTA (use wknd-hero-carousel)",
+      "single static banners (use wknd-teaser)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures/climbing-new-zealand"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-05T00:00:00.000Z"
+  }
+}

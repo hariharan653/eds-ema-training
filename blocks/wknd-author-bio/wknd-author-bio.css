@@ -1,0 +1,95 @@
+/* WKND Author Bio
+ * Variant of the vanilla `columns` block for the WKND magazine article
+ * author card (photo + name + role + social links).
+ * Inherits body.wknd design tokens (Asar serif headings, Source Sans body,
+ * yellow accent). All selectors scoped under .wknd-author-bio.
+ *
+ * EDS DOM (after decorate + decorateMain):
+ *   .wknd-author-bio.wknd-author-bio-2-cols
+ *     > div                                 (row)
+ *       > div.wknd-author-bio-img-col        (author photo)
+ *       > div                                (name h2 + role p + social links)
+ */
+
+.wknd-author-bio {
+  margin: 24px 0;
+}
+
+.wknd-author-bio > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+/* ---- Author photo (circular) ---- */
+.wknd-author-bio > div > .wknd-author-bio-img-col {
+  flex: 0 0 auto;
+  order: 0;
+}
+
+.wknd-author-bio > div > .wknd-author-bio-img-col img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---- Details cell ---- */
+.wknd-author-bio > div > div:not(.wknd-author-bio-img-col) {
+  flex: 1;
+  order: 1;
+}
+
+.wknd-author-bio h2 {
+  margin: 0 0 4px;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  color: var(--text-color);
+}
+
+.wknd-author-bio p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  color: var(--text-color);
+}
+
+/* ---- Social links row ---- */
+.wknd-author-bio ul {
+  display: flex;
+  gap: 16px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wknd-author-bio ul li {
+  margin: 0;
+}
+
+.wknd-author-bio a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-family: var(--body-font-family);
+  font-weight: 600;
+}
+
+.wknd-author-bio a:any-link:hover {
+  color: var(--wknd-accent-hover);
+}
+
+@media (width >= 900px) {
+  .wknd-author-bio > div {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .wknd-author-bio ul {
+    justify-content: flex-start;
+  }
+}
