@@ -127,6 +127,34 @@ export default async function decorate(block) {
     const slide = createSlide(row, idx, carouselId);
     slidesWrapper.append(slide);
 
+    // LCP optimization: the first slide's image is the LCP candidate — load it
+    // eagerly at high priority; hidden slides stay lazy at low priority so they
+    // don't compete for bandwidth (see modern-web optimize-image-priority).
+    const slideImg = slide.querySelector('img');
+    if (slideImg) {
+      if (idx === 0) {
+        slideImg.setAttribute('loading', 'eager');
+        slideImg.setAttribute('fetchpriority', 'high');
+      } else {
+        slideImg.setAttribute('loading', 'lazy');
+        slideImg.setAttribute('fetchpriority', 'low');
+      }
+    }
+
+    // SEO / heading hierarchy: promote the first slide's heading to the page's
+    // single <h1>. The source uses <h2> for every carousel title, which leaves
+    // the page with no <h1>; the first slide is the page's primary heading.
+    if (idx === 0) {
+      const heading = slide.querySelector('h2, h3, h4, h5, h6');
+      if (heading) {
+        const h1 = document.createElement('h1');
+        h1.id = heading.id;
+        h1.className = heading.className;
+        h1.innerHTML = heading.innerHTML;
+        heading.replaceWith(h1);
+      }
+    }
+
     if (slideIndicators) {
       const indicator = document.createElement('li');
       indicator.classList.add('wknd-hero-carousel-slide-indicator');

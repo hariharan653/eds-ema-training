@@ -80,6 +80,7 @@ main .section > .wknd-hero-carousel-wrapper {
   text-align: left;
 }
 
+.wknd-hero-carousel .wknd-hero-carousel-slide-content h1,
 .wknd-hero-carousel .wknd-hero-carousel-slide-content h2 {
   margin: 18px 0 0;
   font-family: var(--heading-font-family);
