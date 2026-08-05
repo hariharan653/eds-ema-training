@@ -26,7 +26,7 @@ const PAGE_TEMPLATE = {
     {
       "name": "wknd-featured-teaser",
       "instances": [
-        ".teaser.cmp-teaser--hero"
+        ".teaser.cmp-teaser--featured"
       ]
     },
     {
@@ -40,7 +40,7 @@ const PAGE_TEMPLATE = {
     {
       "id": "sec-1",
       "name": "Featured",
-      "selector": ".teaser.cmp-teaser--hero",
+      "selector": ".teaser.cmp-teaser--featured",
       "style": null,
       "blocks": [
         "wknd-featured-teaser"
