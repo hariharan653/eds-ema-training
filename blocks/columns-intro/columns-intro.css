@@ -78,11 +78,18 @@
   color: var(--background-color);
 }
 
-/* Right image cell — grid of 3 images, 2 columns */
+/* Right image cell — stacks to 1 column on mobile (matches source),
+   2 columns on desktop */
 .columns-intro > div > div:last-child {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 8px;
+}
+
+@media (width >= 900px) {
+  .columns-intro > div > div:last-child {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .columns-intro > div > div:last-child picture {
