@@ -376,10 +376,16 @@ body.wknd header nav .nav-sections a:any-link {
   font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: normal;
   color: var(--text-color);
   text-decoration: none;
   transition: background-color 0.15s;
+}
+
+/* nav items sit flush against each other — the only spacing between words is
+   each link's own 17px horizontal padding (matches source, which uses gap 0). */
+body.wknd header nav .nav-sections ul {
+  gap: 0;
 }
 
 /* hover + active: WKND yellow highlight block (matches source) */
