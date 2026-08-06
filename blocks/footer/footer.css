@@ -152,6 +152,25 @@ body.wknd footer {
   padding: 56px 0;
 }
 
+/* Layout (matches source): logo + nav on the left, Follow Us + social on the
+   right — all on one top row — with the legal/copyright text spanning the full
+   width beneath. */
+@media (width >= 900px) {
+  body.wknd footer .footer > div {
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-areas:
+      'logo nav . social'
+      'legal legal legal legal';
+    gap: 40px 64px;
+    align-items: start;
+  }
+
+  body.wknd footer .footer .footer-brand { grid-area: logo; }
+  body.wknd footer .footer .footer-nav { grid-area: nav; }
+  body.wknd footer .footer .footer-social-column { grid-area: social; }
+  body.wknd footer .footer .footer-legal { grid-area: legal; }
+}
+
 /* logo column */
 body.wknd footer .footer .footer-logo {
   gap: 0;
@@ -163,14 +182,10 @@ body.wknd footer .footer .footer-logo img {
   height: auto;
 }
 
-/* nav column headings ("Explore") */
+/* nav column heading ("Explore") — hidden: the source footer nav has no
+   heading, the links sit bare beneath the logo row. */
 body.wknd footer .footer .footer-nav-heading {
-  color: rgb(235 235 235);
-  font-family: var(--body-font-family);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  display: none;
 }
 
 body.wknd footer .footer .footer-nav-link {
@@ -200,16 +215,18 @@ body.wknd footer .footer .footer-social-column .footer-social {
   margin: 0;
 }
 
+/* social buttons: square light-grey chips with a dark glyph (matches source) */
 body.wknd footer .footer .footer-social-link {
-  width: 40px;
-  height: 40px;
-  background-color: var(--wknd-accent);
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  background-color: rgb(235 235 235);
   color: rgb(32 32 32);
 }
 
 body.wknd footer .footer .footer-social-link:hover,
 body.wknd footer .footer .footer-social-link:focus-visible {
-  background-color: var(--wknd-accent-hover);
+  background-color: #fff;
 }
 
 /* legal / copyright column */
