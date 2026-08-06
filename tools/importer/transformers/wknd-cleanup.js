@@ -74,5 +74,16 @@ export default function transform(hookName, element, payload) {
       'link',
       'noscript',
     ]);
+
+    // Strip the ".html" suffix from internal /us/en links. AEM Edge Delivery
+    // serves pages extensionless, so card/teaser links to "…/arctic-surfing.html"
+    // 404 on click. Rewrite them to "…/arctic-surfing" (leave external links and
+    // anchors untouched).
+    element.querySelectorAll('a[href$=".html"]').forEach((a) => {
+      const href = a.getAttribute('href');
+      if (href && /^\/us\/en\//.test(href)) {
+        a.setAttribute('href', href.replace(/\.html$/, ''));
+      }
+    });
   }
 }
