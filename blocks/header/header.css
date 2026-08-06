@@ -451,20 +451,53 @@ body.wknd header nav .nav-utility a:any-link:hover {
   text-decoration: underline;
 }
 
+/* EN-US language link: US flag before the text + a dropdown caret after it,
+   matching the source utility bar. */
+body.wknd header nav .nav-utility a[href='#language'] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.wknd header nav .nav-utility a[href='#language']::before {
+  content: '';
+  width: 20px;
+  height: 14px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 14"><rect width="20" height="14" fill="%23b22234"/><g fill="%23fff"><rect y="1.08" width="20" height="1.08"/><rect y="3.23" width="20" height="1.08"/><rect y="5.38" width="20" height="1.08"/><rect y="7.54" width="20" height="1.08"/><rect y="9.69" width="20" height="1.08"/><rect y="11.85" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="%233c3b6e"/></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  flex: 0 0 auto;
+}
+
+body.wknd header nav .nav-utility a[href='#language']::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentcolor;
+  border-bottom: 1.5px solid currentcolor;
+  transform: translateY(-2px) rotate(45deg);
+  flex: 0 0 auto;
+}
+
 @media (width >= 900px) {
   body.wknd header nav .nav-brand img {
     width: 128px;
   }
 
-  /* make room at the top of the header for the black utility bar */
+  /* make room at the top of the header for the black utility bar, plus
+     breathing room so the logo sits clear below it (matches source rhythm) */
   body.wknd header .nav-wrapper {
     padding-top: 44px;
   }
 
-  /* the flex nav row centers vertically in the white area */
+  /* the flex nav row: extra vertical padding for source-like breathing room */
   body.wknd header nav {
     flex-wrap: wrap;
     align-items: center;
+    height: auto;
+    min-height: var(--nav-height);
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   /* utility bar: full-width black strip pinned to the top of the header */
