@@ -137,7 +137,7 @@ main .section > .wknd-hero-carousel-wrapper {
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons {
   position: absolute;
   right: 16px;
-  bottom: 16px;
+  bottom: 8px;
   z-index: 3;
   display: flex;
   align-items: center;
@@ -235,7 +235,7 @@ main .section > .wknd-hero-carousel-wrapper {
 
   .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons {
     right: 32px;
-    bottom: 24px;
+    bottom: 8px;
   }
 
   .wknd-hero-carousel .wknd-hero-carousel-slide-content {
