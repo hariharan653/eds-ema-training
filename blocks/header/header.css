@@ -353,7 +353,7 @@ body.wknd header .nav-wrapper {
 
 @media (width >= 900px) {
   body.wknd header {
-    height: 108px;
+    height: 192px;
   }
 }
 
@@ -523,7 +523,9 @@ body.wknd header nav .nav-utility a[href='#language']::after {
     padding-top: 44px;
   }
 
-  /* the flex nav row: extra vertical padding for source-like breathing room */
+  /* the flex nav row: generous vertical breathing room so the logo sits well
+     clear of the black utility bar, matching the source (~57px gap above the
+     logo, ~44px below). */
   body.wknd header nav {
     flex-wrap: wrap;
     align-items: center;
@@ -531,8 +533,8 @@ body.wknd header nav .nav-utility a[href='#language']::after {
     gap: 0 28px;
     height: auto;
     min-height: var(--nav-height);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 56px;
+    padding-bottom: 44px;
   }
 
   /* group the nav links + search together on the right (matches source):
