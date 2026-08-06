@@ -130,8 +130,8 @@ main .section > .wknd-hero-carousel-wrapper {
   text-decoration: none;
 }
 
-/* ---- prev / next arrows ------------------------------------------------- */
-/* Source: small plain arrow glyphs (no button chrome) pinned to the
+/* ---- prev / next arrows -------------------------------------------------
+   Source: small plain arrow glyphs (no button chrome) pinned to the
    bottom-right of the carousel, on the same row as the indicator dots. */
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons {
