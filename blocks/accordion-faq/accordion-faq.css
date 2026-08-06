@@ -101,11 +101,19 @@ body.wknd .accordion-faq .accordion-faq-item {
 body.wknd .accordion-faq .accordion-faq-item-label {
   padding: 18px 4px;
   font-family: var(--heading-font-family);
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.3;
   letter-spacing: normal;
   text-transform: none;
+}
+
+/* desktop: larger Asar question like the source (24px). Kept smaller on
+   mobile so each question stays ~1-2 lines instead of wrapping tall. */
+@media (width >= 900px) {
+  body.wknd .accordion-faq .accordion-faq-item-label {
+    font-size: 24px;
+  }
 }
 
 body.wknd .accordion-faq .accordion-faq-item-label:focus-visible {
