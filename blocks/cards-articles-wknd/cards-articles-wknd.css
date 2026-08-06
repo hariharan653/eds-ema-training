@@ -50,15 +50,16 @@
   padding: 0;
 }
 
-/* Serif title (WKND token), weight 400, sentence case, 18px like source */
+/* Title: sans-serif body font, weight 400, UPPERCASE, 18px — matches source
+   (.cmp-image-list__item-title is Source Sans Pro, uppercase). */
 .cards-articles-wknd .cards-articles-wknd-card-body h3 {
   margin: 8px 0 0;
   padding: 0;
-  font-family: var(--heading-font-family);
+  font-family: var(--body-font-family);
   font-size: 18px;
   font-weight: 400;
   line-height: 1.5;
-  text-transform: none;
+  text-transform: uppercase;
   letter-spacing: normal;
 }
 
@@ -72,15 +73,21 @@
   text-decoration: underline;
 }
 
-/* Description: body font, muted gray, 14px, 16px above */
+/* Description: body font, muted grey, 14px, UPPERCASE, 16px above. Source
+   truncates each description to a SINGLE line with an ellipsis so all cards
+   keep an even height and the CTA row stays aligned. */
 .cards-articles-wknd .cards-articles-wknd-card-body p {
   margin: 16px 0 0;
   padding: 0;
+  overflow: hidden;
   font-family: var(--body-font-family);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
   color: rgb(105 105 105);
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Tablet: 2 columns */
