@@ -83,8 +83,10 @@
 
 /* ==========================================================================
    WKND FAQ variant (body.wknd) — borderless rows with a thin divider between
-   items and uppercase questions, matching wknd.site/us/en/faqs. The about-us
+   items and Asar serif questions, matching wknd.site/us/en/faqs. The about-us
    (wknd-trendsetters) accordion keeps the boxed-card styling above.
+   Source computed values: question h3 Asar 24px/weight 400 rgb(32,32,32),
+   2px solid rgb(235,235,235) bottom divider per item, no card/radius/gap.
    ========================================================================== */
 body.wknd .accordion-faq {
   gap: 0;
@@ -98,10 +100,12 @@ body.wknd .accordion-faq .accordion-faq-item {
 
 body.wknd .accordion-faq .accordion-faq-item-label {
   padding: 18px 4px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 body.wknd .accordion-faq .accordion-faq-item-label:focus-visible {
