@@ -53,9 +53,10 @@ export default async function decorate(block) {
       return;
     }
 
-    // a column with no heading, no list and no link is a legal/copyright column
-    const anyLink = col.querySelector('a');
-    if (!list && !anyLink) {
+    // a column with no heading and no list is a legal/copyright column — it may
+    // contain inline links (e.g. Core Components, Adobe Stock) but no logo/social
+    // icon list, which is what distinguishes it from the brand column.
+    if (!list) {
       col.classList.add('footer-legal');
       return;
     }
