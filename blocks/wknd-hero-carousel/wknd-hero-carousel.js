@@ -120,7 +120,10 @@ export default async function decorate(block) {
       <button type="button" class="slide-next" aria-label="Next Slide"></button>
     `;
 
-    container.append(slideNavButtons);
+    // append to the block (not the slides container) so the arrows can sit in
+    // the indicator-dots row below the image, matching the source — the source
+    // places prev/next in the white strip beneath the hero, not over it.
+    block.append(slideNavButtons);
   }
 
   rows.forEach((row, idx) => {
