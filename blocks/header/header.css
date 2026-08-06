@@ -331,6 +331,32 @@ header nav .nav-tools a:any-link:focus-visible {
    ========================================================================== */
 /* stylelint-disable no-descending-specificity */
 
+/* Sticky header + correct reserved height. The WKND header is taller than the
+   global --nav-height (utility bar + white row), so reserve the real height on
+   <header> to stop page content sliding underneath, and make <header> itself
+   sticky (it is a direct child of <body>, so it sticks against the viewport for
+   the whole page) so it stays put while the body scrolls. Mobile = single 64px
+   row; desktop adds the 44px utility bar + taller padded row (~108px). */
+body.wknd header {
+  height: var(--nav-height);
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: var(--background-color);
+}
+
+/* the inner wrapper follows the header normally (its own fixed/relative
+   positioning would break the sticky parent) */
+body.wknd header .nav-wrapper {
+  position: static;
+}
+
+@media (width >= 900px) {
+  body.wknd header {
+    height: 108px;
+  }
+}
+
 /* logo: WKND wordmark SVG, no adjacent text */
 body.wknd header nav .nav-brand a:any-link {
   gap: 0;
@@ -342,30 +368,26 @@ body.wknd header nav .nav-brand img {
   height: auto;
 }
 
-/* nav links: Source Sans, uppercase, regular weight */
+/* nav links: Source Sans, uppercase, regular weight. Consistent padding so the
+   yellow hover/active highlight never shifts the row layout. */
 body.wknd header nav .nav-sections a:any-link {
+  padding: 15px 17px;
   font-family: var(--body-font-family);
   font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   color: var(--text-color);
+  text-decoration: none;
+  transition: background-color 0.15s;
 }
 
-body.wknd header nav .nav-sections a:any-link:hover {
-  color: var(--text-color);
-  text-decoration: underline;
-}
-
-/* active nav item — current page highlighted with the WKND yellow block */
+/* hover + active: WKND yellow highlight block (matches source) */
+body.wknd header nav .nav-sections a:any-link:hover,
+body.wknd header nav .nav-sections a:any-link:focus-visible,
 body.wknd header nav .nav-sections a[aria-current='page'] {
   background-color: var(--wknd-accent);
-  padding: 15px 17px;
   color: var(--text-color);
-  text-decoration: none;
-}
-
-body.wknd header nav .nav-sections a[aria-current='page']:hover {
   text-decoration: none;
 }
 
