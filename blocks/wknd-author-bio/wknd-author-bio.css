@@ -43,8 +43,9 @@
   order: 1;
 }
 
-/* name — source: Asar 24px / weight 400 / rgb(32,32,32) */
-.wknd-author-bio h2 {
+/* name — source: Asar 24px / weight 400 / rgb(32,32,32). Scoped under body.wknd
+   so it beats the global `body.wknd h2` sizing (equal specificity otherwise). */
+body.wknd .wknd-author-bio h2 {
   margin: 0 0 4px;
   font-family: var(--heading-font-family);
   font-size: 24px;
@@ -54,7 +55,7 @@
 }
 
 /* role/occupations — source: 12px grey rgb(105,105,105) */
-.wknd-author-bio p {
+body.wknd .wknd-author-bio p {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 12px;
