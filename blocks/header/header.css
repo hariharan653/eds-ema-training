@@ -401,10 +401,35 @@ body.wknd header nav .nav-tools a:any-link:focus-visible {
   text-decoration: none;
 }
 
-/* ---- utility bar (SIGN IN + EN-US), black, full-width, above the white row ---- */
+/* ---- utility bar (SIGN IN + EN-US), black, full-width, above the white row.
+   Mobile: the black bar is hidden, but its links (Sign In, EN-US) surface
+   inside the open hamburger drawer so they stay reachable. ---- */
 body.wknd header nav .nav-utility {
   display: none;
   visibility: hidden;
+}
+
+@media (width < 900px) {
+  body.wknd header nav[aria-expanded='true'] .nav-utility {
+    display: block;
+    visibility: visible;
+    order: 5;
+    width: 100%;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgb(235 235 235);
+  }
+
+  body.wknd header nav[aria-expanded='true'] .nav-utility p {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* in the mobile drawer the utility links sit on white, so use dark text */
+  body.wknd header nav[aria-expanded='true'] .nav-utility a:any-link {
+    color: var(--text-color);
+  }
 }
 
 body.wknd header nav .nav-utility p {
