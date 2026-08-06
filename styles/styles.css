@@ -498,6 +498,72 @@ body.wknd main .cards-adventures-wknd-container > .default-content-wrapper:last-
   border-bottom: 1px solid rgb(235 235 235);
 }
 
+/* Adventures listing: the source renders a thin grey <hr> below the adventure
+   cards and above the footer (same as the homepage). It was dropped on import,
+   so re-create it as a bottom border on the cards block's wrapper. Match only
+   when the cards wrapper is the LAST child of its section — true on the
+   adventures listing (cards are the final block) but false on the homepage,
+   where the "All Trips" default-content-wrapper follows the cards (so the
+   homepage keeps its own separator rule above and never double-draws). */
+body.wknd main .cards-adventures-wknd-container > .cards-adventures-wknd-wrapper:last-child {
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgb(235 235 235);
+}
+
+/* FAQs: the source shows a thin grey separator above the "Need more help?"
+   block. That <hr> was dropped on import; re-create it as a top border on the
+   "Need more help?" heading (the h3 that opens the help default-content block).
+   On desktop the help block is a right sidebar (see accordion-faq grid rule
+   below), so keep the rule mobile-and-up but let the sidebar layout override
+   spacing where needed. */
+body.wknd main .accordion-faq-container > .default-content-wrapper > h3:first-child {
+  margin-top: 24px;
+  padding-top: 32px;
+  border-top: 1px solid rgb(235 235 235);
+}
+
+/* Magazine article: separator between the article body and the author bio,
+   matching the source <hr>. The author-bio block is the 2nd child of the
+   author-bio section; add a top border to it. */
+body.wknd main .section.wknd-author-bio-container > .wknd-author-bio-wrapper {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgb(235 235 235);
+}
+
+/* Magazine article: the "related articles" list (last default-content block of
+   the author-bio section) imported as a flat bulleted <ul> with each title and
+   date concatenated in one link. Style it as a bordered teaser list matching
+   the source: no bullets, a divider between rows, uppercase link text. */
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul {
+  margin: 40px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid rgb(235 235 235);
+  list-style: none;
+}
+
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul > li {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgb(235 235 235);
+}
+
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul > li > a:any-link {
+  display: block;
+  padding: 16px 0;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul > li > a:any-link:hover {
+  color: var(--link-hover-color);
+}
+
 body.wknd a.button.secondary,
 body.wknd button.button.secondary {
   background-color: transparent;

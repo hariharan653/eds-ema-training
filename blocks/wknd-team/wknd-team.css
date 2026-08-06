@@ -22,7 +22,11 @@
 
 @media (width >= 900px) {
   .wknd-team .wknd-team-list {
-    grid-template-columns: repeat(4, 1fr);
+    /* auto-fit so a row that isn't a full 4 (e.g. the 3 WKND Guides) stays
+       balanced instead of leaving one empty trailing column. Cards keep the
+       ~282px source width; justify-content centres a short final row. */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 282px));
+    justify-content: center;
   }
 }
 
