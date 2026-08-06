@@ -218,8 +218,11 @@ body.wknd footer .footer .footer-nav-link:focus-visible {
 }
 
 /* social column ("Follow Us"): the heading sits inline to the LEFT of the
-   social icons on one row (matches source), vertically centred. */
-body.wknd footer .footer .footer-social-column {
+   social icons on one row (matches source), vertically centred. EDS wraps the
+   heading + list in a .default-content-wrapper, so that wrapper is the flex row
+   (a plain flex on the column would only see the single wrapper child). */
+body.wknd footer .footer .footer-social-column,
+body.wknd footer .footer .footer-social-column > .default-content-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
