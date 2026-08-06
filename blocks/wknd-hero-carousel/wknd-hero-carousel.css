@@ -165,22 +165,23 @@ main .section > .wknd-hero-carousel-wrapper {
   outline: none;
 }
 
-/* arrow glyphs: a horizontal shaft + a chevron head (drawn with borders) */
+/* arrow glyphs: full line arrows (a horizontal shaft + an arrowhead), matching
+   the source's ← / → rather than a bare chevron. Drawn with an SVG mask tinted
+   by the button colour so the hover opacity still applies. */
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button::before {
   content: "";
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid var(--text-color);
-  border-bottom: 2px solid var(--text-color);
+  width: 22px;
+  height: 22px;
+  background-color: var(--text-color);
 }
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button.slide-prev::before {
-  transform: rotate(135deg);
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>') center / contain no-repeat;
 }
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button.slide-next::before {
-  transform: rotate(-45deg);
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>') center / contain no-repeat;
 }
 
 /* ---- indicator dots ----------------------------------------------------- */
