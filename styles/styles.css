@@ -528,6 +528,175 @@ body.wknd main > .section > .default-content-wrapper > h3::after {
   margin-top: 16px;
 }
 
+/* ==========================================================================
+   Magazine "Members Only" section (matches wknd.site/us/en/magazine).
+   The source renders two "locked" teaser cards (yellow corner ribbon + lock
+   icon, uppercase title, uppercase grey description, grey READ MORE chip, image
+   below). The import flattened this into a single default-content run of 10
+   stacked siblings inside one wrapper:
+     1 h2 "Members Only"      2 p  intro ("Sign in ...")
+     3 h2 title  4 p desc  5 p "Read More"  6 p (img)   <- card 1
+     7 h2 title  8 p desc  9 p "Read More" 10 p (img)   <- card 2
+   Re-create the two-card layout with a grid + nth-child placement (no content
+   edit needed). Scoped via :has() to the wrapper that holds #members-only so it
+   only ever targets this section. ========================================== */
+body.wknd main .default-content-wrapper:has(> #members-only) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 28px;
+  align-items: start;
+}
+
+/* full-width rows: heading + intro (with a separator under the intro) */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(1) {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(2) {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgb(235 235 235);
+}
+
+/* card 1 = children 3-6 in the left column; card 2 = children 7-10 in the right
+   column. Rows 3-6 hold title / description / button / image respectively. */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(3) {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(4) {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(5) {
+  grid-column: 1;
+  grid-row: 5;
+  justify-self: start;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(6) {
+  grid-column: 1;
+  grid-row: 6;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(7) {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(8) {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(9) {
+  grid-column: 2;
+  grid-row: 5;
+  justify-self: start;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(10) {
+  grid-column: 2;
+  grid-row: 6;
+}
+
+/* card titles (rows 3 & 7): Source Sans, uppercase, 600. A yellow corner ribbon
+   with a lock glyph sits at the top-left; the title text is indented past it
+   and vertically centred against it. The ribbon + lock are composited as two
+   background layers of a single ::before (lock SVG over the gradient triangle),
+   so no extra markup or icon font is required. */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(3),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(7) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  margin: 0;
+  padding: 0 0 0 56px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-transform: uppercase;
+  color: rgb(32 32 32);
+}
+
+/* suppress the generic WKND heading underline for these card titles */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(3)::after,
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(7)::after {
+  content: none;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(3)::before,
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(7)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 46px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23202020' d='M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3H9z'/%3E%3C/svg%3E") 7px 6px / 15px 15px no-repeat,
+    linear-gradient(to left top, rgb(255 255 255 / 0%) 0, rgb(255 255 255 / 0%) 50%, var(--wknd-accent) 50%, var(--wknd-accent) 100%);
+}
+
+/* card descriptions (rows 4 & 8): uppercase grey */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(4),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(8) {
+  margin: 9px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: rgb(105 105 105);
+}
+
+/* READ MORE (rows 5 & 9): grey chip button */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(5),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(9) {
+  display: inline-block;
+  margin: 16px 0 0;
+  padding: 7px 14px;
+  background-color: rgb(235 235 235);
+  color: rgb(105 105 105);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 21px;
+  text-transform: uppercase;
+}
+
+/* card images (rows 6 & 10) */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(6),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(10) {
+  margin: 24px 0 0;
+  line-height: 0;
+}
+
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(6) img,
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(10) img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* Mobile: stack the two cards in a single column, keeping DOM order. */
+@media (width < 900px) {
+  body.wknd main .default-content-wrapper:has(> #members-only) {
+    grid-template-columns: 1fr;
+  }
+
+  body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(n) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
 /* FAQ page: two-column layout — FAQ content (title/hero/intro + accordion) on
    the left, "Need more help?" as a right sidebar, matching wknd.site/us/en/faqs.
    The FAQ section has three children: [intro default-content, accordion,
