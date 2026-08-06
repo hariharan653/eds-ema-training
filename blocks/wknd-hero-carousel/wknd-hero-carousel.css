@@ -131,44 +131,41 @@ main .section > .wknd-hero-carousel-wrapper {
 }
 
 /* ---- prev / next arrows ------------------------------------------------- */
+/* Source: small plain arrow glyphs (no button chrome) pinned to the
+   bottom-right of the carousel, on the same row as the indicator dots. */
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons {
   position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
+  right: 16px;
+  bottom: 16px;
   z-index: 3;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: var(--wkndhc-img-h);
-  padding: 0 16px;
-  pointer-events: none;
+  gap: 17px;
 }
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 26px;
+  height: 24px;
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 50%;
-  background-color: rgb(255 255 255 / 85%);
+  border-radius: 0;
+  background-color: transparent;
   cursor: pointer;
-  pointer-events: auto;
-  transition: background-color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button:hover,
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button:focus-visible {
-  background-color: var(--wknd-accent);
+  opacity: 0.6;
   outline: none;
 }
 
-/* chevron glyphs drawn with borders (no icon font dependency) */
+/* arrow glyphs: a horizontal shaft + a chevron head (drawn with borders) */
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button::before {
   content: "";
   display: inline-block;
@@ -179,12 +176,10 @@ main .section > .wknd-hero-carousel-wrapper {
 }
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button.slide-prev::before {
-  margin-left: 4px;
   transform: rotate(135deg);
 }
 
 .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons button.slide-next::before {
-  margin-right: 4px;
   transform: rotate(-45deg);
 }
 
@@ -239,7 +234,8 @@ main .section > .wknd-hero-carousel-wrapper {
   }
 
   .wknd-hero-carousel .wknd-hero-carousel-navigation-buttons {
-    padding: 0 32px;
+    right: 32px;
+    bottom: 24px;
   }
 
   .wknd-hero-carousel .wknd-hero-carousel-slide-content {
