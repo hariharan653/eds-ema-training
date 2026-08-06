@@ -472,6 +472,18 @@ body.wknd main > .section > .default-content-wrapper > p > a:only-child:hover {
   text-decoration: none;
 }
 
+/* Horizontal separator (matches source): the source page renders a thin
+   light-grey <hr> between the "All Articles" button and the "Next Adventures"
+   heading. That <hr> was dropped during import, so re-create it as a top
+   border on the heading that follows the button in the same default-content
+   block. Source: 1px rgb(235,235,235), content-width, generous space above and
+   below (≈64px above the rule, ≈90px below to the heading text). */
+body.wknd main .cards-articles-wknd-container .default-content-wrapper > p + h2 {
+  margin-top: 64px;
+  padding-top: 90px;
+  border-top: 1px solid rgb(235 235 235);
+}
+
 body.wknd a.button.secondary,
 body.wknd button.button.secondary {
   background-color: transparent;
