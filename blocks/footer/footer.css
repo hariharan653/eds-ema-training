@@ -213,6 +213,7 @@ body.wknd footer .footer .footer-social-heading {
 
 body.wknd footer .footer .footer-social-column .footer-social {
   margin: 0;
+  gap: 0;
 }
 
 /* social buttons: square light-grey chips with a dark glyph (matches source) */
