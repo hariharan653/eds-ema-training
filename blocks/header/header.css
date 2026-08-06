@@ -333,16 +333,22 @@ header nav .nav-tools a:any-link:focus-visible {
 
 /* Sticky header + correct reserved height. The WKND header is taller than the
    global --nav-height (utility bar + white row), so reserve the real height on
-   <header> to stop page content sliding underneath, and make the bar sticky so
-   it stays put while the body scrolls. Mobile = single 64px row; desktop adds
-   the 44px utility bar + taller padded row (~108px). */
+   <header> to stop page content sliding underneath, and make <header> itself
+   sticky (it is a direct child of <body>, so it sticks against the viewport for
+   the whole page) so it stays put while the body scrolls. Mobile = single 64px
+   row; desktop adds the 44px utility bar + taller padded row (~108px). */
 body.wknd header {
   height: var(--nav-height);
-}
-
-body.wknd header .nav-wrapper {
   position: sticky;
   top: 0;
+  z-index: 3;
+  background-color: var(--background-color);
+}
+
+/* the inner wrapper follows the header normally (its own fixed/relative
+   positioning would break the sticky parent) */
+body.wknd header .nav-wrapper {
+  position: static;
 }
 
 @media (width >= 900px) {
