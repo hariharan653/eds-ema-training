@@ -188,9 +188,19 @@ body.wknd footer .footer .footer-nav-heading {
   display: none;
 }
 
+/* nav links run in a single horizontal uppercase row (matches source) */
+body.wknd footer .footer .footer-nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
 body.wknd footer .footer .footer-nav-link {
+  padding: 0 14px;
   color: rgb(235 235 235);
   font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: normal;
   opacity: 0.85;
 }
 
