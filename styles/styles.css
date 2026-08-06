@@ -484,6 +484,18 @@ body.wknd main .cards-articles-wknd-container .default-content-wrapper > p + h2 
   border-top: 1px solid rgb(235 235 235);
 }
 
+/* Second separator (matches source): a thin light-grey <hr> sits below the
+   "All Trips" button (the last default-content block of the adventures section)
+   and above the footer. That <hr> was also dropped during import, so re-create
+   it as a bottom border on the "All Trips" wrapper. Source: 1px rgb(235,235,235),
+   content-width, ≈64px between the button and the rule, ≈112px between the rule
+   and the footer. padding-bottom = button→rule gap; margin-bottom = rule→footer. */
+body.wknd main .cards-adventures-wknd-container > .default-content-wrapper:last-child {
+  padding-bottom: 64px;
+  margin-bottom: 112px;
+  border-bottom: 1px solid rgb(235 235 235);
+}
+
 body.wknd a.button.secondary,
 body.wknd button.button.secondary {
   background-color: transparent;
