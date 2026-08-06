@@ -30,6 +30,7 @@
   line-height: 0;
 }
 
+.cards-articles-wknd .cards-articles-wknd-card-image a,
 .cards-articles-wknd .cards-articles-wknd-card-image picture {
   display: block;
 }

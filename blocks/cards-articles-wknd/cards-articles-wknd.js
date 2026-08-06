@@ -16,6 +16,20 @@ export default function decorate(block) {
     const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
     img.closest('picture').replaceWith(optimizedPic);
   });
+  // Make the card image clickable, linking to the same target as the title
+  // (matches the source, where both the image and title are links).
+  ul.querySelectorAll('li').forEach((li) => {
+    const imageWrap = li.querySelector('.cards-articles-wknd-card-image');
+    const titleLink = li.querySelector('.cards-articles-wknd-card-body h3 a');
+    const picture = imageWrap && imageWrap.querySelector('picture');
+    if (imageWrap && titleLink && picture && !imageWrap.querySelector('a')) {
+      const link = document.createElement('a');
+      link.href = titleLink.getAttribute('href');
+      link.setAttribute('aria-label', titleLink.textContent.trim());
+      picture.replaceWith(link);
+      link.append(picture);
+    }
+  });
   block.textContent = '';
   block.append(ul);
 }
