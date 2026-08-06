@@ -500,12 +500,15 @@ body.wknd main .cards-adventures-wknd-container > .default-content-wrapper:last-
 
 /* Adventures listing: the source renders a thin grey <hr> below the adventure
    cards and above the footer (same as the homepage). It was dropped on import,
-   so re-create it as a bottom border on the cards block's wrapper. Match only
-   when the cards wrapper is the LAST child of its section — true on the
-   adventures listing (cards are the final block) but false on the homepage,
-   where the "All Trips" default-content-wrapper follows the cards (so the
-   homepage keeps its own separator rule above and never double-draws). */
-body.wknd main .cards-adventures-wknd-container > .cards-adventures-wknd-wrapper:last-child {
+   so re-create it as a bottom border below the cards. Match only when the cards
+   wrapper is the LAST child of its section — true on the adventures listing
+   (cards are the final block) but false on the homepage, where the "All Trips"
+   default-content-wrapper follows the cards (so the homepage keeps its own
+   separator rule above and never double-draws). The border sits on the inner
+   .cards-adventures-wknd block (content-width), NOT the wrapper — the wrapper
+   carries 24px side padding and would draw the line edge-to-edge on mobile;
+   this keeps the rule inset to content width like every other WKND separator. */
+body.wknd main .cards-adventures-wknd-container > .cards-adventures-wknd-wrapper:last-child > .cards-adventures-wknd {
   padding-bottom: 40px;
   border-bottom: 1px solid rgb(235 235 235);
 }
