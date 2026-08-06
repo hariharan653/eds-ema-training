@@ -709,6 +709,9 @@ body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(7)::be
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23202020' d='M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3H9z'/%3E%3C/svg%3E") 7px 6px / 15px 15px no-repeat,
     linear-gradient(to left top, rgb(255 255 255 / 0%) 0, rgb(255 255 255 / 0%) 50%, var(--wknd-accent) 50%, var(--wknd-accent) 100%);
+
+  /* stay full-strength even though the locked card title is dimmed (see below) */
+  opacity: 1;
 }
 
 /* card descriptions (rows 4 & 8): uppercase grey */
@@ -749,6 +752,22 @@ body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(10) im
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+/* Locked/members-only cards are dimmed in the source (card opacity 0.65) to
+   signal the content is gated behind sign-in. Fade the title text, description,
+   button and image of both cards (children 3-6 and 7-10) to match — but keep
+   each title's yellow ribbon + lock (::before) crisp so the lock still reads
+   clearly. */
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(3),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(4),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(5),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(6),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(7),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(8),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(9),
+body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(10) {
+  opacity: 0.65;
 }
 
 /* Mobile: stack the two cards in a single column, keeping DOM order. */
