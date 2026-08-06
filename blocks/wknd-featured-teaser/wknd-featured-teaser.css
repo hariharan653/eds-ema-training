@@ -147,35 +147,76 @@ main .wknd-featured-teaser p > a:any-link:hover {
 }
 
 /* ---- Adventures listing hero variant ----
-   On the Adventures index the intro teaser is a full-width image with a white
-   content card overlapping the bottom of the image (source margin-top -180px on
-   desktop). Scoped to the adventures listing (teaser shares its section with the
+   On the Adventures index the intro teaser is a full-bleed image (1440x640 in
+   source) with a white content card overlapping the bottom of the image.
+   Scoped to the adventures listing (teaser shares its section with the
    adventures card grid) so the homepage/magazine teasers are unaffected. */
-@media (width >= 900px) {
-  .wknd-featured-teaser-container.cards-adventures-wknd-container
-    .wknd-featured-teaser > div {
-    display: block;
-    position: relative;
-  }
 
-  .wknd-featured-teaser-container.cards-adventures-wknd-container
-    .wknd-featured-teaser .wknd-featured-teaser-img-col {
-    width: 100%;
-  }
+/* break the teaser out of the 1200px section container so the image is
+   full-bleed like the source */
+.wknd-featured-teaser-container.cards-adventures-wknd-container
+  .wknd-featured-teaser-wrapper {
+  max-width: unset;
+  padding: 0;
+}
 
+/* stylelint-disable-next-line no-descending-specificity */
+.wknd-featured-teaser-container.cards-adventures-wknd-container
+  .wknd-featured-teaser > div {
+  display: block;
+}
+
+/* image: full-bleed banner */
+.wknd-featured-teaser-container.cards-adventures-wknd-container
+  .wknd-featured-teaser .wknd-featured-teaser-img-col {
+  width: 100%;
+}
+
+.wknd-featured-teaser-container.cards-adventures-wknd-container
+  .wknd-featured-teaser .wknd-featured-teaser-img-col img {
+  width: 100%;
+  height: 280px;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+/* content card: white, centered in a 1200 container, left-aligned text.
+   Description restored to source 18px (the base variant uses 14px). */
+.wknd-featured-teaser-container.cards-adventures-wknd-container
+  .wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  background-color: #fff;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.wknd-featured-teaser-container.cards-adventures-wknd-container
+  .wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col)
+  > p:not(:first-child, :has(> a)) {
+  font-size: 18px;
+  line-height: 31.5px;
+}
+
+@media (width >= 600px) {
   .wknd-featured-teaser-container.cards-adventures-wknd-container
     .wknd-featured-teaser .wknd-featured-teaser-img-col img {
-    height: auto;
-    aspect-ratio: 16 / 7;
+    height: 460px;
+  }
+}
+
+@media (width >= 900px) {
+  .wknd-featured-teaser-container.cards-adventures-wknd-container
+    .wknd-featured-teaser .wknd-featured-teaser-img-col img {
+    height: 640px;
   }
 
+  /* pull the white content card up over the bottom of the image */
   .wknd-featured-teaser-container.cards-adventures-wknd-container
     .wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) {
     position: relative;
     z-index: 1;
-    width: 66%;
-    margin-top: -180px;
-    background-color: #fff;
-    padding: 40px 48px 0 0;
+    margin-top: -140px;
+    padding: 40px 24px 0;
   }
 }

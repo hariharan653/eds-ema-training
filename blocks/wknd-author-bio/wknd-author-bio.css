@@ -31,8 +31,8 @@
 
 .wknd-author-bio > div > .wknd-author-bio-img-col img {
   display: block;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -43,20 +43,27 @@
   order: 1;
 }
 
-.wknd-author-bio h2 {
+/* name — source: Asar 24px / weight 400 / rgb(32,32,32). Scoped under body.wknd
+   so it beats the global `body.wknd h2` sizing (equal specificity otherwise). */
+body.wknd .wknd-author-bio h2 {
   margin: 0 0 4px;
   font-family: var(--heading-font-family);
+  font-size: 24px;
   font-weight: 400;
+  line-height: 1.3;
   color: var(--text-color);
 }
 
-.wknd-author-bio p {
+/* role/occupations — source: 12px grey rgb(105,105,105) */
+body.wknd .wknd-author-bio p {
   margin: 0;
   font-family: var(--body-font-family);
-  color: var(--text-color);
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(105 105 105);
 }
 
-/* ---- Social links row ---- */
+/* ---- Social links row: icon glyphs (source shows icons, not text) ---- */
 .wknd-author-bio ul {
   display: flex;
   gap: 16px;
@@ -70,10 +77,17 @@
 }
 
 .wknd-author-bio a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--text-color);
   text-decoration: none;
-  font-family: var(--body-font-family);
-  font-weight: 600;
+}
+
+.wknd-author-bio a:any-link svg {
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .wknd-author-bio a:any-link:hover {
