@@ -42,6 +42,12 @@
 .cards-adventures-wknd > ul > li {
   display: flex;
   flex-direction: column;
+
+  /* grid items default to min-width:auto and refuse to shrink below their
+     content width; the single-line (nowrap) description would then force each
+     column as wide as its full un-wrapped text and blow out the grid. min-width:0
+     lets the column stay at its track width so the ellipsis truncates instead. */
+  min-width: 0;
   margin: 0;
   padding: 0;
   border: none;
