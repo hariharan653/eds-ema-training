@@ -149,7 +149,7 @@ footer .footer .footer-nav-link:focus-visible {
 body.wknd footer {
   background-color: rgb(32 32 32);
   color: rgb(235 235 235);
-  padding: 56px 0;
+  padding: 40px 0;
 }
 
 /* Layout (matches source): logo + nav on the left, Follow Us + social on the
@@ -161,8 +161,8 @@ body.wknd footer {
     grid-template-areas:
       'logo nav . social'
       'legal legal legal legal';
-    gap: 40px 64px;
-    align-items: start;
+    gap: 28px 64px;
+    align-items: center;
   }
 
   body.wknd footer .footer .footer-brand { grid-area: logo; }
@@ -217,20 +217,31 @@ body.wknd footer .footer .footer-nav-link:focus-visible {
   opacity: 1;
 }
 
-/* social column ("Follow Us") */
+/* social column ("Follow Us"): the heading sits inline to the LEFT of the
+   social icons on one row (matches source), vertically centred. */
+body.wknd footer .footer .footer-social-column {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
 body.wknd footer .footer .footer-social-heading {
-  margin: 0 0 12px;
+  margin: 0;
   color: rgb(235 235 235);
   font-family: var(--body-font-family);
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 body.wknd footer .footer .footer-social-column .footer-social {
   margin: 0;
   gap: 0;
+  flex: 0 0 auto;
 }
 
 /* social buttons: square light-grey chips with a dark glyph (matches source) */
