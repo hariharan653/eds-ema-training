@@ -357,13 +357,28 @@ body.wknd header nav .nav-sections a:any-link:hover {
   text-decoration: underline;
 }
 
-/* Sign In: plain uppercase text link (not a pill button) */
+/* active nav item — current page highlighted with the WKND yellow block */
+body.wknd header nav .nav-sections a[aria-current='page'] {
+  background-color: var(--wknd-accent);
+  padding: 15px 17px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+body.wknd header nav .nav-sections a[aria-current='page']:hover {
+  text-decoration: none;
+}
+
+/* Search (nav-tools): a bordered search pill on the right of the white row */
 body.wknd header nav .nav-tools a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: 0;
   border-radius: 0;
-  padding: 0;
-  background-color: transparent;
-  color: var(--text-color);
+  padding: 10px 16px;
+  background-color: rgb(245 245 245);
+  color: rgb(120 120 120);
   font-family: var(--body-font-family);
   font-size: 14px;
   font-weight: 400;
@@ -371,16 +386,81 @@ body.wknd header nav .nav-tools a:any-link {
   letter-spacing: 0.02em;
 }
 
+body.wknd header nav .nav-tools a:any-link::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>') center / contain no-repeat;
+}
+
 body.wknd header nav .nav-tools a:any-link:hover,
 body.wknd header nav .nav-tools a:any-link:focus-visible {
-  background-color: transparent;
-  color: var(--text-color);
+  background-color: rgb(238 238 238);
+  color: rgb(80 80 80);
+  text-decoration: none;
+}
+
+/* ---- utility bar (SIGN IN + EN-US), black, full-width, above the white row ---- */
+body.wknd header nav .nav-utility {
+  display: none;
+  visibility: hidden;
+}
+
+body.wknd header nav .nav-utility p {
+  margin: 0;
+}
+
+body.wknd header nav .nav-utility a:any-link {
+  color: rgb(235 235 235);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+
+body.wknd header nav .nav-utility a:any-link:hover {
+  color: #fff;
   text-decoration: underline;
 }
 
 @media (width >= 900px) {
   body.wknd header nav .nav-brand img {
     width: 128px;
+  }
+
+  /* make room at the top of the header for the black utility bar */
+  body.wknd header .nav-wrapper {
+    padding-top: 44px;
+  }
+
+  /* the flex nav row centers vertically in the white area */
+  body.wknd header nav {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* utility bar: full-width black strip pinned to the top of the header */
+  body.wknd header nav .nav-utility {
+    display: flex;
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+    height: 44px;
+    padding: 0 32px;
+    background-color: rgb(19 19 19);
+  }
+
+  body.wknd header nav .nav-utility p {
+    display: flex;
+    gap: 24px;
   }
 }
 

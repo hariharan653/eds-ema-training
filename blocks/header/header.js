@@ -124,10 +124,23 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  // brand, nav links, tools (e.g. search), and an optional utility row
+  // (e.g. Sign In + language). Pages with only 3 sections keep the classic
+  // brand/sections/tools mapping; a 4th section becomes the utility bar.
+  const classes = ['brand', 'sections', 'tools', 'utility'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
+  });
+
+  // mark the nav link matching the current page as active (source highlights
+  // the current section, e.g. Magazine, in yellow)
+  const navPathname = window.location.pathname.replace(/\.html$/, '');
+  nav.querySelectorAll('.nav-sections a[href]').forEach((a) => {
+    const href = a.getAttribute('href').replace(/\.html$/, '');
+    if (href && href !== '/' && navPathname.startsWith(href)) {
+      a.setAttribute('aria-current', 'page');
+    }
   });
 
   const navBrand = nav.querySelector('.nav-brand');
