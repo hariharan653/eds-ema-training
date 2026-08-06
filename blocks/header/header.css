@@ -397,21 +397,26 @@ body.wknd header nav .nav-sections a[aria-current='page'] {
   text-decoration: none;
 }
 
-/* Search (nav-tools): a bordered search pill on the right of the white row */
+/* Search (nav-tools): grey search field on the right of the white row.
+   Source metrics @1440: 166px wide, 42px tall, 12px label, ~10px left of the
+   magnifier icon then the placeholder text. */
 body.wknd header nav .nav-tools a:any-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 166px;
+  height: 42px;
   border: 0;
   border-radius: 0;
-  padding: 10px 16px;
+  padding: 0 16px;
   background-color: rgb(245 245 245);
   color: rgb(95 95 95);
   font-family: var(--body-font-family);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
 }
 
 body.wknd header nav .nav-tools a:any-link::before {
@@ -522,10 +527,24 @@ body.wknd header nav .nav-utility a[href='#language']::after {
   body.wknd header nav {
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
+    gap: 0 28px;
     height: auto;
     min-height: var(--nav-height);
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+
+  /* group the nav links + search together on the right (matches source):
+     a large gap after the logo, then nav and search sit ~28px apart. The
+     auto left-margin on the sections absorbs the free space after the logo. */
+  body.wknd header nav .nav-sections {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  body.wknd header nav .nav-tools {
+    flex: 0 0 auto;
   }
 
   /* utility bar: full-width black strip pinned to the top of the header */
