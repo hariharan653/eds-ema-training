@@ -255,6 +255,15 @@ body.wknd footer .footer .footer-legal {
   opacity: 0.75;
 }
 
+/* the legal paragraphs must stay light on the dark footer — beat the global
+   `body.wknd p` rule which would otherwise force them to dark --text-color
+   (dark-on-dark = invisible). */
 body.wknd footer .footer .footer-legal p {
   margin: 0 0 8px;
+  color: rgb(247 247 247);
+}
+
+body.wknd footer .footer .footer-legal a:any-link {
+  color: rgb(247 247 247);
+  text-decoration: underline;
 }
