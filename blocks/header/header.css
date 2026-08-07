@@ -589,4 +589,153 @@ body.wknd header nav .nav-utility a[href='#language']::after {
   }
 }
 
+/* ---- Language/country selector dropdown (EN-US) ----
+   Matches the source: a dark panel anchored top-right below the utility bar,
+   listing 7 countries, each with a flag + label and its locale links. */
+body.wknd header nav .nav-utility a.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+/* caret after EN-US, flips when the panel is open */
+body.wknd header nav .nav-utility a.lang-toggle::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentcolor;
+  border-bottom: 1.5px solid currentcolor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.15s;
+  flex: 0 0 auto;
+}
+
+body.wknd header nav .nav-utility a.lang-toggle[aria-expanded='true']::after {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+/* the dropdown panel: hidden by default */
+body.wknd header nav .nav-utility .lang-nav {
+  display: none;
+  position: absolute;
+  top: 44px;
+  right: 0;
+  z-index: 4;
+  width: 570px;
+  max-width: 100vw;
+  padding: 0;
+  background-color: rgb(19 19 19);
+  color: rgb(235 235 235);
+}
+
+body.wknd header nav .nav-utility .lang-nav.open {
+  display: block;
+}
+
+body.wknd header nav .nav-utility .lang-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* one country per row, divided by a thin rule (matches source) */
+body.wknd header nav .nav-utility .lang-nav > ul > li {
+  padding: 20px 28px;
+  border-bottom: 1px solid rgb(60 60 60);
+}
+
+body.wknd header nav .nav-utility .lang-nav > ul > li:last-child {
+  border-bottom: 0;
+}
+
+/* country label: flag + uppercase grey name */
+body.wknd header nav .nav-utility .lang-nav .lang-country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  font-family: var(--body-font-family);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(180 180 180);
+}
+
+body.wknd header nav .nav-utility .lang-nav .lang-flag {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 17px;
+}
+
+body.wknd header nav .nav-utility .lang-nav .lang-flag svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* locale links: white uppercase, separated by a vertical bar */
+body.wknd header nav .nav-utility .lang-nav .lang-country + ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  padding-left: 34px;
+}
+
+body.wknd header nav .nav-utility .lang-nav .lang-country + ul > li {
+  display: flex;
+  align-items: center;
+}
+
+body.wknd header nav .nav-utility .lang-nav .lang-country + ul > li:not(:first-child)::before {
+  content: '|';
+  margin: 0 12px;
+  color: rgb(90 90 90);
+}
+
+body.wknd header nav .nav-utility .lang-nav .lang-country + ul a:any-link {
+  font-family: var(--body-font-family);
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: rgb(235 235 235);
+  text-decoration: none;
+}
+
+body.wknd header nav .nav-utility .lang-nav .lang-country + ul a:any-link:hover,
+body.wknd header nav .nav-utility .lang-nav .lang-country + ul a[aria-current='true'] {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Mobile: the black utility bar is hidden and its links surface in the
+   hamburger drawer. There, render the language panel inline (full width,
+   in normal flow) when open rather than as an absolute overlay. */
+@media (width < 900px) {
+  body.wknd header nav .nav-utility .lang-nav {
+    position: static;
+    width: 100%;
+    top: auto;
+    background-color: transparent;
+    color: var(--text-color);
+  }
+
+  body.wknd header nav .nav-utility .lang-nav > ul > li {
+    padding: 12px 0;
+    border-bottom-color: rgb(235 235 235);
+  }
+
+  body.wknd header nav .nav-utility .lang-nav .lang-country {
+    color: rgb(105 105 105);
+  }
+
+  body.wknd header nav .nav-utility .lang-nav .lang-country + ul a:any-link {
+    color: var(--text-color);
+  }
+}
+
 /* stylelint-enable no-descending-specificity */
