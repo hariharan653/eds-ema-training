@@ -76,7 +76,9 @@
 @media (width >= 900px) {
   .wknd-article-hero .wknd-article-hero-image img {
     aspect-ratio: auto;
-    max-height: 620px;
+
+    /* source lead banner renders ~702px tall at 1440 */
+    max-height: 702px;
   }
 
   .wknd-article-hero .wknd-article-hero-text {

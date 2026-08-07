@@ -672,9 +672,11 @@ body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li > a:any-lin
   }
 }
 
-/* article body paragraphs: justified like the source */
+/* article body paragraphs: justified with the source's airy line-height (45px
+   on 18px = 2.5) — the migrated default 1.75 was noticeably tighter. */
 body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:first-child > p {
   text-align: justify;
+  line-height: 45px;
 }
 
 /* "SHARE THIS STORY" heading above the related list (source shows an <h5>;
