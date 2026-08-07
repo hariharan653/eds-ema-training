@@ -571,6 +571,53 @@ body.wknd main .section.wknd-author-bio-container > .wknd-author-bio-wrapper {
   border-top: 1px solid rgb(235 235 235);
 }
 
+/* Magazine article breadcrumb (matches source): the imported <ol> (first child
+   of the article-hero section) renders as an inline horizontal trail — no list
+   numbers, uppercase 14px Source Sans links, with a yellow arrow "▸" separating
+   the crumbs instead of the default decimal markers. */
+body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  list-style: none;
+}
+
+/* yellow arrow between crumbs (before every item except the first) */
+body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li:not(:first-child)::before {
+  content: "\25B8";
+  margin: 0 12px;
+  color: var(--wknd-accent);
+  font-size: 14px;
+}
+
+body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li > a:any-link {
+  color: var(--text-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li > a:any-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--wknd-accent);
+}
+
 /* Magazine article layout (matches source): the article body + author bio sit
    in a ~776px left column, and the related-articles list becomes a right-hand
    "Share this Story" sidebar (~291px). The author-bio section holds three
