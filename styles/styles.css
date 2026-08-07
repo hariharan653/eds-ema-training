@@ -862,22 +862,22 @@ body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(10) {
 }
 
 /* ==========================================================================
-   WKND /us/es "Coming Soon" stub (body.us-es) — match the source hero layout:
-   a full-bleed image ABOVE the heading (the source teaser lifts the image over
-   the title and bleeds it edge-to-edge), with the heading left-aligned in the
-   content column. Scoped to body.us-es so no other WKND page is affected.
+   WKND /us/es "Coming Soon" stub (body.us-es) — match the source teaser hero:
+   a full-bleed image with the heading in a white card. On mobile the image and
+   card stack; on desktop the white card OVERLAPS the bottom of the image
+   (source: card 1192px centered, overlapping the image by ~180px). The image is
+   ordered above the heading (it is second in the DOM). No yellow underline.
+   Scoped to body.us-es so no other WKND page is affected.
    ========================================================================== */
 body.us-es main > .section > .default-content-wrapper {
   display: flex;
   flex-direction: column;
 }
 
-/* image first (source shows it above the heading, though it's second in DOM) */
+/* full-bleed image above the heading (break out of the content column padding) */
 body.us-es main > .section > .default-content-wrapper > p:has(picture) {
   order: -1;
-  margin: 0 0 24px;
-
-  /* full-bleed: break out of the content column's side padding to span 100vw */
+  margin: 0;
   width: 100vw;
   max-width: 100vw;
   margin-left: calc(50% - 50vw);
@@ -889,14 +889,42 @@ body.us-es main > .section > .default-content-wrapper > p:has(picture) img {
   display: block;
   width: 100%;
   height: auto;
+
+  /* mobile: shorter hero (source ~16/9); desktop caps at a fixed 640px below */
   aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
-/* heading below the image, left-aligned like the source */
+/* heading (white card). Mobile: stacked just below the image (source shows a
+   ~7px gap, transparent), left-aligned, no yellow underline. */
 body.us-es main > .section > .default-content-wrapper > h2 {
-  margin: 0;
+  margin: 8px 0 0;
   text-align: left;
+}
+
+body.us-es main > .section > .default-content-wrapper > h2::after {
+  content: none;
+}
+
+/* Desktop: fixed 640px image + a centered white card (1192px, 28px side
+   padding) that OVERLAPS the bottom of the image, matching the source teaser. */
+@media (width >= 900px) {
+  body.us-es main > .section > .default-content-wrapper > p:has(picture) img {
+    aspect-ratio: auto;
+    height: 640px;
+  }
+
+  body.us-es main > .section > .default-content-wrapper > h2 {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1192px;
+    margin: -180px auto 0;
+    padding: 42px 28px 0;
+    min-height: 180px;
+    background-color: var(--background-color);
+  }
 }
 
 /* stylelint-enable no-descending-specificity */
