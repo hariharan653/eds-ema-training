@@ -181,4 +181,16 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // Sticky-shrink: the source header collapses to a compact bar once the page
+  // is scrolled (a 'scrolly' class on the body). Mirror that by toggling a
+  // 'scrolled' class on the <header> when the window is scrolled past a small
+  // threshold; the CSS shrinks the padded WKND header when this class is set.
+  const header = block.closest('header') || block;
+  const SCROLL_THRESHOLD = 40;
+  const onScroll = () => {
+    header.classList.toggle('scrolled', window.scrollY > SCROLL_THRESHOLD);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 }
