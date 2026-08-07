@@ -517,6 +517,39 @@
           "defaultContent": []
         }
       ]
+    },
+    {
+      "name": "us-es",
+      "urls": [
+        "https://wknd.site/us/es.html"
+      ],
+      "representativeUrl": "https://wknd.site/us/es.html",
+      "coverageGaps": [],
+      "description": "WKND Spanish 'Coming Soon' placeholder: a hero teaser (h2 + large image) and a horizontal separator. Minimal stub page.",
+      "blocks": [],
+      "sections": [
+        {
+          "id": "sec-1",
+          "name": "section-hero-coming-soon",
+          "selector": "main.container.responsivegrid > div.cmp-container > div.teaser.cmp-teaser--hero",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "div.teaser.cmp-teaser--hero .cmp-teaser__image .cmp-image img",
+            "div.teaser.cmp-teaser--hero .cmp-teaser__title"
+          ]
+        },
+        {
+          "id": "sec-2",
+          "name": "section-separator",
+          "selector": "main.container.responsivegrid > div.cmp-container > main.container.responsivegrid.cmp-layout-container--fixed",
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "main.container.responsivegrid.cmp-layout-container--fixed .cmp-separator__horizontal-rule"
+          ]
+        }
+      ]
     }
   ]
 }
