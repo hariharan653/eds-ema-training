@@ -108,6 +108,128 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
+/* WKND language/country selector (matches wknd.site). Static data: 7 countries,
+   12 locales. Each locale mirrors the source path; `current` marks en-US. Flag
+   is an inline SVG so no extra network requests. */
+const LANG_COUNTRIES = [
+  {
+    name: 'United States',
+    flag: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#b22234"/><g fill="#fff"><rect y="1.08" width="20" height="1.08"/><rect y="3.23" width="20" height="1.08"/><rect y="5.38" width="20" height="1.08"/><rect y="7.54" width="20" height="1.08"/><rect y="9.69" width="20" height="1.08"/><rect y="11.85" width="20" height="1.08"/></g><rect width="8" height="7.54" fill="#3c3b6e"/></svg>',
+    locales: [
+      { label: 'en-US', href: '/us/en', current: true },
+      { label: 'es-US', href: '/us/es' },
+    ],
+  },
+  {
+    name: 'Canada',
+    flag: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="5" height="14" fill="#d52b1e"/><rect x="15" width="5" height="14" fill="#d52b1e"/><path fill="#d52b1e" d="M10 3l.6 1.6 1.7-.4-.9 1.5 1.3 1-1.7.3.1 1.7L10 9.3 8.6 10l.1-1.7-1.7-.3 1.3-1-.9-1.5 1.7.4z"/></svg>',
+    locales: [
+      { label: 'en-CA', href: '/ca/en' },
+      { label: 'fr-CA', href: '/ca/fr' },
+    ],
+  },
+  {
+    name: 'Switzerland',
+    flag: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#d52b1e"/><rect x="8.5" y="3" width="3" height="8" fill="#fff"/><rect x="6" y="5.5" width="8" height="3" fill="#fff"/></svg>',
+    locales: [
+      { label: 'de-CH', href: '/ch/de' },
+      { label: 'fr-CH', href: '/ch/fr' },
+      { label: 'it-CH', href: '/ch/it' },
+    ],
+  },
+  {
+    name: 'Germany',
+    flag: '<svg viewBox="0 0 20 14"><rect width="20" height="4.67" y="0" fill="#000"/><rect width="20" height="4.67" y="4.67" fill="#d00"/><rect width="20" height="4.67" y="9.33" fill="#ffce00"/></svg>',
+    locales: [
+      { label: 'de-DE', href: '/de/de' },
+    ],
+  },
+  {
+    name: 'France',
+    flag: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#002395"/><rect x="13.33" width="6.67" height="14" fill="#ed2939"/></svg>',
+    locales: [
+      { label: 'fr-FR', href: '/fr/fr' },
+    ],
+  },
+  {
+    name: 'Spain',
+    flag: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#c60b1e"/><rect y="3.5" width="20" height="7" fill="#ffc400"/></svg>',
+    locales: [
+      { label: 'es-ES', href: '/es/es' },
+    ],
+  },
+  {
+    name: 'Italy',
+    flag: '<svg viewBox="0 0 20 14"><rect width="20" height="14" fill="#fff"/><rect width="6.67" height="14" fill="#009246"/><rect x="13.33" width="6.67" height="14" fill="#ce2b37"/></svg>',
+    locales: [
+      { label: 'it-IT', href: '/it/it' },
+    ],
+  },
+];
+
+/**
+ * Builds the WKND language/country selector dropdown and wires its open/close
+ * behavior onto the EN-US utility link. No-op if the link isn't present (only
+ * the WKND nav has it), so the trendsetters header is unaffected.
+ * @param {Element} nav The decorated nav element
+ */
+function decorateLanguageSelector(nav) {
+  const toggle = nav.querySelector('.nav-utility a[href="#language"]');
+  if (!toggle) return;
+
+  toggle.classList.add('lang-toggle');
+  toggle.setAttribute('aria-haspopup', 'true');
+  toggle.setAttribute('aria-expanded', 'false');
+
+  const panel = document.createElement('nav');
+  panel.className = 'lang-nav';
+  panel.setAttribute('aria-label', 'Language selector');
+  const list = document.createElement('ul');
+  LANG_COUNTRIES.forEach((country) => {
+    const li = document.createElement('li');
+    const label = document.createElement('span');
+    label.className = 'lang-country';
+    label.innerHTML = `<span class="lang-flag">${country.flag}</span>${country.name}`;
+    const locales = document.createElement('ul');
+    country.locales.forEach((loc) => {
+      const locLi = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = loc.href;
+      a.textContent = loc.label;
+      if (loc.current) a.setAttribute('aria-current', 'true');
+      locLi.append(a);
+      locales.append(locLi);
+    });
+    li.append(label, locales);
+    list.append(li);
+  });
+  panel.append(list);
+  toggle.parentElement.append(panel);
+
+  const close = () => {
+    toggle.setAttribute('aria-expanded', 'false');
+    panel.classList.remove('open');
+  };
+  const open = () => {
+    toggle.setAttribute('aria-expanded', 'true');
+    panel.classList.add('open');
+  };
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (panel.classList.contains('open')) close();
+    else open();
+  });
+
+  // close on outside click and on Escape
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') close();
+  });
+}
+
 /**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
@@ -163,6 +285,9 @@ export default async function decorate(block) {
       });
     });
   }
+
+  // WKND language/country selector dropdown (EN-US utility link)
+  decorateLanguageSelector(nav);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
