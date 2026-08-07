@@ -404,9 +404,11 @@ body.wknd {
    teaser, Recent Articles, adventures) sits in a ~1136px content column, giving
    more side padding than our default 1200px. Narrow the WKND section container
    to 1136px so the teaser and the card grids below it are inset like the source
-   and stay mutually aligned. The hero carousel breaks out of this (its own
-   1680px cap), so it is unaffected. */
-body.wknd main > .section > div {
+   and stay mutually aligned. EXCLUDE the full-bleed blocks — the hero carousel
+   (own 1680px cap) and the wknd-teaser band (full-bleed) — which must break out
+   of this column; without the :not() guards this broad rule out-specifies their
+   own wrapper rules and clamps them to 1136px. */
+body.wknd main > .section > div:not(.wknd-hero-carousel-wrapper, .wknd-teaser-wrapper) {
   max-width: 1136px;
 }
 
