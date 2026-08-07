@@ -52,16 +52,21 @@
 .wknd-article-hero .wknd-article-hero-text h1 {
   margin: 0 0 8px;
   font-family: var(--heading-font-family);
+
+  /* source: Asar 40px / line-height 60px (not the 48px global xxl) */
+  font-size: 40px;
+  line-height: 60px;
   font-weight: 400;
   color: var(--text-color);
 }
 
-/* Author byline — uppercase, muted, body font */
+/* Author byline — uppercase, muted, body font. Source: 16px / 24px, weight 600. */
 .wknd-article-hero .wknd-article-hero-text .wknd-article-hero-byline,
 .wknd-article-hero .wknd-article-hero-text h4 {
   margin: 0;
   font-family: var(--body-font-family);
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;

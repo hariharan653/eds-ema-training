@@ -571,6 +571,71 @@ body.wknd main .section.wknd-author-bio-container > .wknd-author-bio-wrapper {
   border-top: 1px solid rgb(235 235 235);
 }
 
+/* Magazine article layout (matches source): the article body + author bio sit
+   in a ~776px left column, and the related-articles list becomes a right-hand
+   "Share this Story" sidebar (~291px). The author-bio section holds three
+   wrappers: [0] article body (.default-content-wrapper), [1] author bio
+   (.wknd-author-bio-wrapper), [2] related list (.default-content-wrapper:last).
+   On mobile they stack in source order; on desktop a 2-col grid places the
+   related list in column 2 spanning both rows. */
+@media (width >= 900px) {
+  body.wknd main .section.wknd-author-bio-container {
+    display: grid;
+    grid-template-columns: minmax(0, 776px) 291px;
+    justify-content: center;
+    column-gap: 48px;
+    align-items: start;
+    max-width: 1164px;
+    margin-inline: auto;
+    padding: 0 24px;
+  }
+
+  /* article body + author bio stack in the left column */
+  body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:first-child,
+  body.wknd main .section.wknd-author-bio-container > .wknd-author-bio-wrapper {
+    grid-column: 1;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  /* related list = right sidebar, top-aligned, spanning both body rows */
+  body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* as a sidebar the list drops the full-width top rule/margin — the
+     "Share this Story" label heads it instead */
+  body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul {
+    margin: 0;
+    padding: 0;
+    border-top: 0;
+  }
+}
+
+/* article body paragraphs: justified like the source */
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:first-child > p {
+  text-align: justify;
+}
+
+/* "SHARE THIS STORY" heading above the related list (source shows an <h5>;
+   the import dropped it, so render it via a label before the list). */
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul::before {
+  content: "Share this Story";
+  display: block;
+  margin: 0 0 20px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
 /* Magazine article: the "related articles" list (last default-content block of
    the author-bio section) imported as a flat bulleted <ul> with each title and
    date concatenated in one link. Style it as a bordered teaser list matching
