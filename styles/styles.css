@@ -654,12 +654,16 @@ body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li > a:any-lin
     padding-inline: 0;
   }
 
-  /* related list = right sidebar, top-aligned, spanning both body rows */
+  /* related list = right sidebar, spanning both body rows. In the source the
+     title/byline sit in the same grid as the sidebar, so "Share this Story"
+     lines up with the H1. Here the H1 lives in the hero section above this
+     grid, so the sidebar naturally starts level with the body — ~156px too
+     low. Pull it up into the (empty) area beside the title to match. */
   body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child {
     grid-column: 2;
     grid-row: 1 / span 2;
     max-width: none;
-    margin: 0;
+    margin: -156px 0 0;
     padding: 0;
   }
 
