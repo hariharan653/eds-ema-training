@@ -38,4 +38,24 @@ export default function decorate(block) {
       if (byline) byline.classList.add('wknd-article-hero-byline');
     }
   });
+
+  // Breadcrumb placement (matches source): the import puts the breadcrumb <ol>
+  // in its own default-content-wrapper ABOVE the hero block, so it renders at
+  // the very top of the page. The source shows it BELOW the lead image and just
+  // above the title. Pull the breadcrumb into the hero block, inserted between
+  // the image row and the text (title) row.
+  const section = block.closest('.section');
+  const breadcrumb = section
+    && section.querySelector('.default-content-wrapper > ol');
+  const imageRow = block.querySelector(':scope > .wknd-article-hero-image');
+  const textRow = block.querySelector(':scope > .wknd-article-hero-text');
+  if (breadcrumb && textRow) {
+    breadcrumb.classList.add('wknd-article-hero-breadcrumb');
+    // remove the now-empty wrapper the breadcrumb came from
+    const emptyWrapper = breadcrumb.closest('.default-content-wrapper');
+    block.insertBefore(breadcrumb, textRow);
+    if (emptyWrapper && emptyWrapper.children.length === 0) emptyWrapper.remove();
+    // if there is no lead image, the breadcrumb naturally sits first — fine.
+    if (!imageRow) breadcrumb.classList.add('wknd-article-hero-breadcrumb--no-image');
+  }
 }
