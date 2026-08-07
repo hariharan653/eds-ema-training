@@ -63,10 +63,11 @@ body.wknd .wknd-author-bio p {
   color: rgb(105 105 105);
 }
 
-/* ---- Social links row: icon glyphs (source shows icons, not text) ---- */
+/* ---- Social links row: dark 48x48 square buttons with white glyphs, flush
+   against each other (matches source .cmp-button--icononly). ---- */
 .wknd-author-bio ul {
   display: flex;
-  gap: 16px;
+  gap: 0;
   margin: 12px 0 0;
   padding: 0;
   list-style: none;
@@ -76,22 +77,31 @@ body.wknd .wknd-author-bio p {
   margin: 0;
 }
 
-.wknd-author-bio a:any-link {
+/* scoped under body.wknd so the dark-on-white glyph colour beats the global
+   `body.wknd a:any-link` link colour (equal-or-higher specificity otherwise
+   leaves the glyph the dark --link-color, invisible on the dark button). */
+body.wknd .wknd-author-bio a:any-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-color);
+  width: 48px;
+  height: 48px;
+  background-color: rgb(32 32 32);
+  color: rgb(235 235 235);
   text-decoration: none;
+  transition: background-color 0.15s;
 }
 
-.wknd-author-bio a:any-link svg {
+body.wknd .wknd-author-bio a:any-link svg {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
-.wknd-author-bio a:any-link:hover {
-  color: var(--wknd-accent-hover);
+body.wknd .wknd-author-bio a:any-link:hover,
+body.wknd .wknd-author-bio a:any-link:focus-visible {
+  background-color: var(--wknd-accent);
+  color: rgb(32 32 32);
 }
 
 @media (width >= 900px) {

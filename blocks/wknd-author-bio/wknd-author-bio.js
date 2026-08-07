@@ -51,4 +51,32 @@ export default function decorate(block) {
       a.innerHTML = SOCIAL_ICONS[net];
     }
   });
+
+  // "Share this Story" related-articles list: the import concatenated each
+  // article's title and date into one link string ("Western Australia
+  // Thursday, 9 Jul 2020"). The source stacks the title over a smaller grey
+  // date. Split the link text on the leading weekday so CSS can style each
+  // line. The list is a sibling default-content-wrapper in the same section.
+  const section = block.closest('.section');
+  if (section) {
+    const relLinks = section.querySelectorAll(':scope > div:last-child ul:last-of-type > li > a[href*="/magazine/"]');
+    relLinks.forEach((a) => {
+      if (a.querySelector('.wknd-share-title')) return; // already split
+      const text = (a.textContent || '').trim();
+      // match a trailing date like "Thursday, 9 Jul 2020"
+      const m = text.match(/\s+((?:Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day,\s+.+)$/);
+      if (m) {
+        const title = text.slice(0, m.index).trim();
+        const date = m[1].trim();
+        a.textContent = '';
+        const titleEl = document.createElement('span');
+        titleEl.className = 'wknd-share-title';
+        titleEl.textContent = title;
+        const dateEl = document.createElement('span');
+        dateEl.className = 'wknd-share-date';
+        dateEl.textContent = date;
+        a.append(titleEl, dateEl);
+      }
+    });
+  }
 }
