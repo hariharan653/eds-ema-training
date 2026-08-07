@@ -571,21 +571,23 @@ body.wknd main .section.wknd-author-bio-container > .wknd-author-bio-wrapper {
   border-top: 1px solid rgb(235 235 235);
 }
 
-/* Magazine article breadcrumb (matches source): the imported <ol> (first child
-   of the article-hero section) renders as an inline horizontal trail — no list
-   numbers, uppercase 14px Source Sans links, with a yellow arrow "▸" separating
-   the crumbs instead of the default decimal markers. */
-body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol {
+/* Magazine article breadcrumb (matches source): the JS relocates the imported
+   <ol> into the hero block, BELOW the lead image and just above the title (was
+   rendering at the very top of the page). Style it as an inline horizontal
+   trail — no list numbers, uppercase 14px Source Sans links, with a yellow
+   arrow "▸" separating the crumbs. Padding matches the hero-text row so the
+   breadcrumb aligns with the title below it. */
+body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0;
   margin: 0;
-  padding: 0;
+  padding: 24px 24px 0;
   list-style: none;
 }
 
-body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li {
+body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li {
   display: inline-flex;
   align-items: center;
   margin: 0;
@@ -600,22 +602,28 @@ body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li
 }
 
 /* yellow arrow between crumbs (before every item except the first) */
-body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li:not(:first-child)::before {
+body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li:not(:first-child)::before {
   content: "\25B8";
   margin: 0 12px;
   color: var(--wknd-accent);
   font-size: 14px;
 }
 
-body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li > a:any-link {
+body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li > a:any-link {
   color: var(--text-color);
   font-weight: 600;
   text-decoration: none;
 }
 
-body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li > a:any-link:hover {
+body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li > a:any-link:hover {
   text-decoration: underline;
   text-decoration-color: var(--wknd-accent);
+}
+
+@media (width >= 900px) {
+  body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb {
+    padding: 32px 32px 0;
+  }
 }
 
 /* Magazine article layout (matches source): the article body + author bio sit
