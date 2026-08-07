@@ -7,10 +7,14 @@
    All selectors scoped to .wknd-hero-carousel. Mobile-first.
    ========================================================================== */
 
-/* Full-bleed: break the block out of the .section > div 1200px container.
-   Higher specificity than `main > .section > div { max-width: 1200px }`. */
+/* Break the block out of the .section > div 1200px container, but cap it at the
+   source's 1680px page width and centre it — so on screens wider than 1680px
+   the hero image stops at 1680px and white margins appear on both sides, exactly
+   like wknd.site (whose whole page is a 1680px centred container). Higher
+   specificity than `main > .section > div { max-width: 1200px }`. */
 main .section > .wknd-hero-carousel-wrapper {
-  max-width: 100%;
+  max-width: 1680px;
+  margin-inline: auto;
   padding: 0;
 }
 
