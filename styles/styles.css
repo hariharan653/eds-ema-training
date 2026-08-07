@@ -400,6 +400,16 @@ body.wknd {
   color: var(--text-color);
 }
 
+/* Content column width: the source's below-hero content (Featured Article
+   teaser, Recent Articles, adventures) sits in a ~1136px content column, giving
+   more side padding than our default 1200px. Narrow the WKND section container
+   to 1136px so the teaser and the card grids below it are inset like the source
+   and stay mutually aligned. The hero carousel breaks out of this (its own
+   1680px cap), so it is unaffected. */
+body.wknd main > .section > div {
+  max-width: 1136px;
+}
+
 /* Headings: Asar serif, regular weight, sentence case (no uppercase) */
 body.wknd h1,
 body.wknd h2,
