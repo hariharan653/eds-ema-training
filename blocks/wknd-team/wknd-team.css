@@ -91,7 +91,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+
+  /* source: the three square chips sit flush against each other (no gap) */
+  gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -123,9 +125,9 @@
   color: rgb(32 32 32);
 }
 
-/* social glyph (inline SVG, inherits currentColor) */
+/* social glyph (inline SVG, inherits currentColor) — source renders ~18px */
 .wknd-team .wknd-team-card-social a svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   display: block;
 }
