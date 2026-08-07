@@ -439,6 +439,26 @@ body.wknd p {
   line-height: 1.75;
 }
 
+/* About-us page typography (scoped to the unique .wknd-team-container section)
+   — match the source wknd.site/us/en/about-us.html exactly:
+   - H1 "About Us": Asar 40px / line-height 60px (our default xxl is 48px)
+   - Section intros ("Meet the outstanding…", "Meet our extraordinary…"):
+     Source Sans 14px, upright (the imported copy is wrapped in emphasis, which
+     renders italic — the source is NOT italic), justified, line-height 35px. */
+body.wknd main .wknd-team-container > .default-content-wrapper > h1 {
+  font-size: 40px;
+  line-height: 1.5;
+}
+
+body.wknd main .wknd-team-container > .default-content-wrapper > p,
+body.wknd main .wknd-team-container > .default-content-wrapper > p em {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-style: normal;
+  line-height: 35px;
+  text-align: justify;
+}
+
 /* Links: dark, no underline (underline on hover) */
 body.wknd a:any-link {
   color: var(--link-color);
