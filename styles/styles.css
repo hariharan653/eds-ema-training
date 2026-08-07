@@ -657,7 +657,7 @@ body.wknd main .wknd-article-hero-container > .default-content-wrapper > ol > li
 
   /* as a sidebar the list drops the full-width top rule/margin — the
      "Share this Story" label heads it instead */
-  body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul {
+  body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type {
     margin: 0;
     padding: 0;
     border-top: 0;
@@ -671,7 +671,7 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:fir
 
 /* "SHARE THIS STORY" heading above the related list (source shows an <h5>;
    the import dropped it, so render it via a label before the list). */
-body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul::before {
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type::before {
   content: "Share this Story";
   display: block;
   margin: 0 0 20px;
@@ -687,20 +687,20 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:las
    the author-bio section) imported as a flat bulleted <ul> with each title and
    date concatenated in one link. Style it as a bordered teaser list matching
    the source: no bullets, a divider between rows, uppercase link text. */
-body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul {
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type {
   margin: 40px 0 0;
   padding: 24px 0 0;
   border-top: 1px solid rgb(235 235 235);
   list-style: none;
 }
 
-body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul > li {
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type > li {
   margin: 0;
   padding: 0;
   border-bottom: 1px solid rgb(235 235 235);
 }
 
-body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul > li > a:any-link {
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type > li > a:any-link {
   display: block;
   padding: 16px 0;
   color: var(--text-color);
@@ -712,7 +712,7 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:las
   text-decoration: none;
 }
 
-body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul > li > a:any-link:hover {
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type > li > a:any-link:hover {
   color: var(--link-hover-color);
 }
 
