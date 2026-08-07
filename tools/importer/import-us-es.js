@@ -104,11 +104,13 @@ export default {
     // templates. decorateTemplateAndTheme() adds a "wknd" class to <body> from
     // this metadata row; brand/block CSS is scoped under body.wknd. Nav/Footer
     // point at the shared WKND header & footer fragments (the header's language
-    // selector already exposes es-US as a locale).
+    // selector already exposes es-US as a locale). Template "us-es" adds a
+    // body.us-es class so this stub's hero layout (full-bleed image above the
+    // heading, matching the source) can be scoped without affecting other pages.
     const metaBlock = main.lastElementChild;
     if (metaBlock && metaBlock.tagName === 'TABLE') {
       const body = metaBlock.querySelector('tbody') || metaBlock;
-      [['Theme', 'wknd'], ['Nav', '/us/nav'], ['Footer', '/us/footer']].forEach(([k, v]) => {
+      [['Template', 'us-es'], ['Theme', 'wknd'], ['Nav', '/us/nav'], ['Footer', '/us/footer']].forEach(([k, v]) => {
         const tr = document.createElement('tr');
         const keyCell = document.createElement('td');
         keyCell.textContent = k;
