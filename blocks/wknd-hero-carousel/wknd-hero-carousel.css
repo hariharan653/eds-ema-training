@@ -246,6 +246,12 @@ main .section > .wknd-hero-carousel-wrapper {
   .wknd-hero-carousel .wknd-hero-carousel-slide-content {
     position: relative;
     z-index: 2;
+
+    /* border-box so the 28px side padding is included in the 1192px cap — the
+       source's content card is 1192px TOTAL (content 1136 + 28px padding each
+       side). Without border-box the card renders 1248px and the hero image peek
+       beside it is narrower than the source. */
+    box-sizing: border-box;
     max-width: 1192px;
     min-height: 180px;
     margin: -180px auto 0;
