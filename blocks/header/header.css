@@ -354,6 +354,24 @@ body.wknd header .nav-wrapper {
 @media (width >= 900px) {
   body.wknd header {
     height: 192px;
+
+    /* smooth the shrink when the page is scrolled */
+    transition: height 0.2s ease;
+  }
+
+  /* sticky-shrink (matches source): once scrolled, the padded WKND header
+     collapses to a compact bar (~116px in the source) by tightening the top
+     and bottom breathing room around the logo/nav row. The black utility bar
+     (44px) stays; only the white row's padding shrinks. */
+  body.wknd header.scrolled {
+    height: 116px;
+  }
+
+  body.wknd header.scrolled nav {
+    min-height: 0;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    transition: padding 0.2s ease;
   }
 }
 
