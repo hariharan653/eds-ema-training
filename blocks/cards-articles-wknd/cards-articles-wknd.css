@@ -56,14 +56,14 @@
   padding: 0;
 }
 
-/* Title: sans-serif body font, weight 400, UPPERCASE, 18px — matches source
-   (.cmp-image-list__item-title is Source Sans Pro, uppercase). */
+/* Title: sans-serif body font, weight 600 (semibold), UPPERCASE, 18px —
+   matches source (.cmp-image-list__item-title is Source Sans Pro 600). */
 .cards-articles-wknd .cards-articles-wknd-card-body h3 {
   margin: 8px 0 0;
   padding: 0;
   font-family: var(--body-font-family);
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: normal;

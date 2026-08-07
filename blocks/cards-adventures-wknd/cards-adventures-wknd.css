@@ -78,13 +78,13 @@
   padding: 0;
 }
 
-/* title link -- match source: sans-serif body font, weight 400, UPPERCASE
-   (.cmp-image-list__item-title), consistent with the recent-articles cards */
+/* title link -- match source: sans-serif body font, weight 600 (semibold),
+   UPPERCASE (.cmp-image-list__item-title), consistent with the recent-articles cards */
 .cards-adventures-wknd .cards-adventures-wknd-card-body h3 {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: normal;
