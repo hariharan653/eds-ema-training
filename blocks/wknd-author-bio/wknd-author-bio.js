@@ -39,6 +39,18 @@ export default function decorate(block) {
     });
   });
 
+  // Group the name (h2) + role (p) so the details column can lay them out on
+  // the left with the social buttons pushed to the far right (matches source,
+  // where the bio row is name-left / icon-buttons-right on desktop).
+  const detailsCol = [...block.firstElementChild.children]
+    .find((c) => !c.classList.contains('wknd-author-bio-img-col'));
+  if (detailsCol && !detailsCol.querySelector('.wknd-author-bio-name')) {
+    const nameWrap = document.createElement('div');
+    nameWrap.className = 'wknd-author-bio-name';
+    detailsCol.querySelectorAll(':scope > h2, :scope > p').forEach((el) => nameWrap.append(el));
+    detailsCol.prepend(nameWrap);
+  }
+
   // Replace social link text with icon glyphs (keeping an accessible label).
   block.querySelectorAll('ul a').forEach((a) => {
     const label = (a.textContent || '').trim();

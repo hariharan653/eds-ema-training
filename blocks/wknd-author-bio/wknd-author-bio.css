@@ -113,7 +113,18 @@ body.wknd .wknd-author-bio a:any-link:focus-visible {
     text-align: left;
   }
 
+  /* details cell fills the remaining width so the social buttons can be pushed
+     to the far right (source lays the row out name-left / icon-buttons-right). */
+  .wknd-author-bio > div > div:not(.wknd-author-bio-img-col) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  /* name/role no longer needs the standalone top margin on the social row */
   .wknd-author-bio ul {
+    margin: 0;
     justify-content: flex-start;
   }
 }
