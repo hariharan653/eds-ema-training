@@ -149,7 +149,7 @@ footer .footer .footer-nav-link:focus-visible {
 body.wknd footer {
   background-color: rgb(32 32 32);
   color: rgb(235 235 235);
-  padding: 40px 0;
+  padding: 16px 0 24px;
 }
 
 /* Layout (matches source): logo + nav on the left, Follow Us + social on the
@@ -264,16 +264,18 @@ body.wknd footer .footer .footer-social-link:focus-visible {
 /* legal / copyright column */
 body.wknd footer .footer .footer-legal {
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.25;
   color: rgb(247 247 247);
   opacity: 0.75;
 }
 
 /* the legal paragraphs must stay light on the dark footer — beat the global
    `body.wknd p` rule which would otherwise force them to dark --text-color
-   (dark-on-dark = invisible). */
+   (dark-on-dark = invisible) AND relax the line-height to 1.75. The source
+   legal copy is tightly set at line-height 1.25 (15px on 12px), so pin it. */
 body.wknd footer .footer .footer-legal p {
   margin: 0 0 8px;
+  line-height: 1.25;
   color: rgb(247 247 247);
 }
 
