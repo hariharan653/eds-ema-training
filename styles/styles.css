@@ -663,13 +663,6 @@ body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li > a:any-lin
     padding: 0;
   }
 
-  /* as a sidebar the list drops the full-width top rule/margin — the
-     "Share this Story" label heads it instead */
-  body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type {
-    margin: 0;
-    padding: 0;
-    border-top: 0;
-  }
 }
 
 /* article body paragraphs: justified with the source's airy line-height (45px
@@ -695,12 +688,12 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:las
 
 /* Magazine article: the "related articles" list (last default-content block of
    the author-bio section) imported as a flat bulleted <ul> with each title and
-   date concatenated in one link. Style it as a bordered teaser list matching
-   the source: no bullets, a divider between rows, uppercase link text. */
+   date concatenated in one link. Style it as a teaser list matching the source:
+   no bullets, uppercase link text, each row an accent-bar block. The source has
+   NO top divider and the list sits flush at the top of the sidebar. */
 body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type {
-  margin: 40px 0 0;
-  padding: 24px 0 0;
-  border-top: 1px solid rgb(235 235 235);
+  margin: 18px 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -749,12 +742,21 @@ body.wknd main .section.wknd-author-bio-container .wknd-share-date {
   color: rgb(105 105 105);
 }
 
+/* hover: the whole item highlights yellow with a dark left bar (matches source
+   .cmp-list--upnext .cmp-list__item-link:hover { background:#ffea00; border-
+   color:#202020 }). Title/date stay dark for contrast on the yellow. */
 body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type > li > a:any-link:hover {
-  color: var(--link-hover-color);
+  background-color: var(--wknd-accent);
+  border-left-color: var(--text-color);
+  color: var(--text-color);
+}
+
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type > li > a:any-link:hover .wknd-share-title {
+  color: var(--text-color);
 }
 
 body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type > li > a:any-link:hover .wknd-share-date {
-  color: rgb(105 105 105);
+  color: var(--text-color);
 }
 
 body.wknd a.button.secondary,
