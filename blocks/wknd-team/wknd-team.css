@@ -1,8 +1,8 @@
 /*
  * Block: wknd-team — contributor / guide cards (wknd.site/us/en/about-us).
  * Responsive grid of centered cards: circular photo, serif name, uppercase
- * role, and a row of dark circular social icon buttons. Values from source
- * computed styles. Inherits body.wknd design tokens.
+ * role, and a row of dark square social icon buttons (48x48). Values from
+ * source computed styles. Inherits body.wknd design tokens.
  */
 
 .wknd-team .wknd-team-list {
@@ -107,9 +107,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+
+  /* source: 48x48 dark SQUARE chips (border-radius 0), not circles */
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
   background-color: rgb(32 32 32);
   color: #fff;
   transition: background-color 0.15s;
