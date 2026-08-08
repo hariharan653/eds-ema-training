@@ -64,33 +64,38 @@ export default function decorate(block) {
     }
   });
 
-  // Pull-quote: the source renders the article blockquote inside a grey box
-  // (large Asar serif quote + yellow underline + attribution line beneath).
-  // The import flattened it to a bare <blockquote> followed by an attribution
-  // <p> (e.g. "- Sofia Sjöberg"). Wrap the blockquote and its immediate
-  // attribution paragraph into a .wknd-pullquote box so CSS can style them.
+  // Pull-quote: MOST articles render the blockquote inside a grey box (large
+  // Asar serif quote + yellow underline + attribution). But some sources (e.g.
+  // arctic-surfing) render the blockquote as plain inline body text with no
+  // box — so we skip the grey-box treatment on those paths and leave the
+  // blockquote plain. The import flattened the styled quote to a bare
+  // <blockquote> + attribution <p> (e.g. "- Sofia Sjöberg").
+  const path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+  const PLAIN_BLOCKQUOTE_PATHS = ['/us/en/magazine/arctic-surfing'];
   const section = block.closest('.section');
   if (section) {
-    section.querySelectorAll(':scope > div:first-child blockquote').forEach((bq) => {
-      if (bq.closest('.wknd-pullquote')) return; // already wrapped
-      const box = document.createElement('div');
-      box.className = 'wknd-pullquote';
-      bq.replaceWith(box);
-      box.append(bq);
-      // pull in a following short attribution paragraph (starts with "-" or is
-      // a brief credit line), if present
-      let next = box.nextElementSibling;
-      while (next && next.tagName === 'P' && next.textContent.trim() === '') {
-        const empty = next; next = next.nextElementSibling; empty.remove();
-      }
-      if (next && next.tagName === 'P') {
-        const t = next.textContent.trim();
-        if (t && (t.startsWith('-') || t.startsWith('–') || t.length <= 40)) {
-          next.classList.add('wknd-pullquote-attribution');
-          box.append(next);
+    if (!PLAIN_BLOCKQUOTE_PATHS.includes(path)) {
+      section.querySelectorAll(':scope > div:first-child blockquote').forEach((bq) => {
+        if (bq.closest('.wknd-pullquote')) return; // already wrapped
+        const box = document.createElement('div');
+        box.className = 'wknd-pullquote';
+        bq.replaceWith(box);
+        box.append(bq);
+        // pull in a following short attribution paragraph (starts with "-" or
+        // is a brief credit line), if present
+        let next = box.nextElementSibling;
+        while (next && next.tagName === 'P' && next.textContent.trim() === '') {
+          const empty = next; next = next.nextElementSibling; empty.remove();
         }
-      }
-    });
+        if (next && next.tagName === 'P') {
+          const t = next.textContent.trim();
+          if (t && (t.startsWith('-') || t.startsWith('–') || t.length <= 40)) {
+            next.classList.add('wknd-pullquote-attribution');
+            box.append(next);
+          }
+        }
+      });
+    }
 
     const relLinks = section.querySelectorAll(':scope > div:last-child ul:last-of-type > li > a[href*="/magazine/"]');
     relLinks.forEach((a) => {
