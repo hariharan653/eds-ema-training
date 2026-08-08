@@ -777,15 +777,17 @@ body.wknd button.button.secondary:hover {
 }
 
 /* Section title with signature yellow underline (Recent Articles / Next Adventures / etc.)
-   Applies to default-content headings inside WKND sections. */
-body.wknd main > .section > .default-content-wrapper > h2,
-body.wknd main > .section > .default-content-wrapper > h3 {
+   Applies to default-content headings inside WKND sections. Excludes the
+   magazine-article template — its body headings (e.g. "Swami's") are plain in
+   the source, with no underline. */
+body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h2,
+body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h3 {
   padding-bottom: 16px;
   position: relative;
 }
 
-body.wknd main > .section > .default-content-wrapper > h2::after,
-body.wknd main > .section > .default-content-wrapper > h3::after {
+body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h2::after,
+body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h3::after {
   content: "";
   display: block;
   width: 84px;
