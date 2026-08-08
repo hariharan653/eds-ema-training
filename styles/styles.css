@@ -782,6 +782,47 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper.wkn
   text-decoration: none;
 }
 
+/* "GET THE FULL STORY" tagline under the Download-PDF heading: source renders
+   it uppercase 14px/600 (the import kept it title-case in a plain <p>). It's
+   the first <p> after the h3. */
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper.wknd-has-download > h3 + p {
+  margin: 0 0 12px;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+/* file metadata: the source shows only the values (filename / size / format)
+   as a compact uppercase grey block — the "Filename/Size/Format" labels are
+   hidden and there are no bullets. The import kept a <ul> of <li> pairs
+   (<p>label</p><p>value</p>); hide the label, style the value. */
+body.wknd main .section.wknd-author-bio-container .wknd-download-meta {
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-download-meta > li {
+  margin: 0;
+  padding: 0;
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-download-meta > li > p:first-child {
+  display: none;
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-download-meta > li > p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: rgb(105 105 105);
+}
+
 /* download control → dark button with white label (matches source) */
 body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link {
   display: inline-block;

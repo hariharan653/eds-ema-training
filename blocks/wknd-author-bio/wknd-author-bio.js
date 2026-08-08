@@ -115,6 +115,14 @@ export default function decorate(block) {
       // the standalone "Download PDF" link (in its own <p>) becomes the button
       const btnLink = [...sidebar.querySelectorAll('p > a[href$=".pdf"]')].pop();
       if (btnLink) btnLink.classList.add('wknd-download-btn');
+      // file-metadata list: the import kept it as a <ul> of <li> pairs
+      // (<p>Filename</p><p>value</p>). The source hides the labels and shows
+      // just the values as a compact uppercase grey block. Tag the list so CSS
+      // can hide the label <p> (first child) and style the value <p>.
+      const metaList = sidebar.querySelector('ul:not(:last-of-type)');
+      if (metaList && /Filename|Format|Size/i.test(metaList.textContent)) {
+        metaList.classList.add('wknd-download-meta');
+      }
     }
 
     const relLinks = section.querySelectorAll(':scope > div:last-child ul:last-of-type > li > a[href*="/magazine/"]');
