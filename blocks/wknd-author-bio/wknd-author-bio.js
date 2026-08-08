@@ -64,13 +64,34 @@ export default function decorate(block) {
     }
   });
 
-  // "Share this Story" related-articles list: the import concatenated each
-  // article's title and date into one link string ("Western Australia
-  // Thursday, 9 Jul 2020"). The source stacks the title over a smaller grey
-  // date. Split the link text on the leading weekday so CSS can style each
-  // line. The list is a sibling default-content-wrapper in the same section.
+  // Pull-quote: the source renders the article blockquote inside a grey box
+  // (large Asar serif quote + yellow underline + attribution line beneath).
+  // The import flattened it to a bare <blockquote> followed by an attribution
+  // <p> (e.g. "- Sofia Sjöberg"). Wrap the blockquote and its immediate
+  // attribution paragraph into a .wknd-pullquote box so CSS can style them.
   const section = block.closest('.section');
   if (section) {
+    section.querySelectorAll(':scope > div:first-child blockquote').forEach((bq) => {
+      if (bq.closest('.wknd-pullquote')) return; // already wrapped
+      const box = document.createElement('div');
+      box.className = 'wknd-pullquote';
+      bq.replaceWith(box);
+      box.append(bq);
+      // pull in a following short attribution paragraph (starts with "-" or is
+      // a brief credit line), if present
+      let next = box.nextElementSibling;
+      while (next && next.tagName === 'P' && next.textContent.trim() === '') {
+        const empty = next; next = next.nextElementSibling; empty.remove();
+      }
+      if (next && next.tagName === 'P') {
+        const t = next.textContent.trim();
+        if (t && (t.startsWith('-') || t.startsWith('–') || t.length <= 40)) {
+          next.classList.add('wknd-pullquote-attribution');
+          box.append(next);
+        }
+      }
+    });
+
     const relLinks = section.querySelectorAll(':scope > div:last-child ul:last-of-type > li > a[href*="/magazine/"]');
     relLinks.forEach((a) => {
       if (a.querySelector('.wknd-share-title')) return; // already split

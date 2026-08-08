@@ -676,6 +676,59 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:fir
   line-height: 45px;
 }
 
+/* Article pull-quote — the source renders the blockquote in a light-grey box:
+   large Asar serif quote, a short yellow underline, then the attribution line.
+   The decorator wraps the blockquote (+ attribution p) in .wknd-pullquote. */
+body.wknd main .section.wknd-author-bio-container .wknd-pullquote {
+  margin: 18px 0;
+  padding: 32px;
+  background-color: rgb(235 235 235);
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-pullquote blockquote {
+  margin: 0;
+  padding: 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 54px;
+  text-align: left;
+  color: var(--text-color);
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-pullquote blockquote p {
+  margin: 0;
+  font: inherit;
+  text-align: left;
+  line-height: inherit;
+}
+
+/* signature short yellow underline beneath the quote */
+body.wknd main .section.wknd-author-bio-container .wknd-pullquote blockquote::after {
+  content: "";
+  display: block;
+  width: 80px;
+  margin-top: 16px;
+  border-bottom: 2px solid var(--wknd-accent);
+}
+
+/* attribution line (e.g. "- Sofia Sjöberg") — the import wraps it in <u>, but
+   the source shows no underline decoration. */
+body.wknd main .section.wknd-author-bio-container .wknd-pullquote .wknd-pullquote-attribution {
+  margin: 24px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  text-align: left;
+  color: var(--text-color);
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-pullquote .wknd-pullquote-attribution u {
+  text-decoration: none;
+}
+
 /* "SHARE THIS STORY" heading above the related list (source shows an <h5>;
    the import dropped it, so render it via a label before the list). */
 body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:last-child > ul:last-of-type::before {
