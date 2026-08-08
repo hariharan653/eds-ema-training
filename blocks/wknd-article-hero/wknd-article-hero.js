@@ -11,9 +11,20 @@
  *
  * @param {Element} block The block element
  */
+// Magazine articles whose SOURCE renders body headings plain (no yellow
+// underline). Most articles do show the underline; these do not, so we flag
+// <body> to suppress it per-page (see styles.css .wknd-no-heading-rule).
+const NO_HEADING_RULE_PATHS = ['/us/en/magazine/san-diego-surf'];
+
 export default function decorate(block) {
   if (!block.querySelector(':scope > div:first-child picture')) {
     block.classList.add('no-image');
+  }
+
+  // per-page heading-underline suppression (matches each page's source)
+  const path = window.location.pathname.replace(/\.html$/, '').replace(/\/$/, '');
+  if (NO_HEADING_RULE_PATHS.includes(path)) {
+    document.body.classList.add('wknd-no-heading-rule');
   }
 
   // LCP: the lead banner image is the article's LCP candidate — load it eagerly
