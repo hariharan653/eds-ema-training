@@ -829,23 +829,36 @@ body.wknd button.button.secondary:hover {
   color: #fff;
 }
 
-/* Section title with signature yellow underline (Recent Articles / Next Adventures / etc.)
-   Applies to default-content headings inside WKND sections. Excludes the
-   magazine-article template — its body headings (e.g. "Swami's") are plain in
-   the source, with no underline. */
-body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h2,
-body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h3 {
+/* Section title with signature yellow underline (Recent Articles / Next
+   Adventures on the homepage, and most magazine-article body headings like
+   "The front"). Applies to default-content headings inside WKND sections. */
+body.wknd main > .section > .default-content-wrapper > h2,
+body.wknd main > .section > .default-content-wrapper > h3 {
   padding-bottom: 16px;
   position: relative;
 }
 
-body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h2::after,
-body.wknd main > .section:not(.wknd-author-bio-container) > .default-content-wrapper > h3::after {
+body.wknd main > .section > .default-content-wrapper > h2::after,
+body.wknd main > .section > .default-content-wrapper > h3::after {
   content: "";
   display: block;
   width: 84px;
   border-bottom: 2px solid var(--wknd-accent);
   margin-top: 16px;
+}
+
+/* Some source pages omit the heading underline (e.g. san-diego-surf, whose
+   source body headings are plain). The article-hero decorator adds
+   .wknd-no-heading-rule to <body> on those pages so the underline is dropped
+   there while other magazine articles keep it (matches each page's source). */
+body.wknd.wknd-no-heading-rule main > .section > .default-content-wrapper > h2,
+body.wknd.wknd-no-heading-rule main > .section > .default-content-wrapper > h3 {
+  padding-bottom: 0;
+}
+
+body.wknd.wknd-no-heading-rule main > .section > .default-content-wrapper > h2::after,
+body.wknd.wknd-no-heading-rule main > .section > .default-content-wrapper > h3::after {
+  content: none;
 }
 
 /* ==========================================================================
