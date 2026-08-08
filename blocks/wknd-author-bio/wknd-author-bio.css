@@ -54,12 +54,13 @@ body.wknd .wknd-author-bio h2 {
   color: var(--text-color);
 }
 
-/* role/occupations — source: 12px grey rgb(105,105,105) */
+/* role/occupations — source: 12px grey rgb(105,105,105), uppercase */
 body.wknd .wknd-author-bio p {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 12px;
   font-weight: 400;
+  text-transform: uppercase;
   color: rgb(105 105 105);
 }
 
