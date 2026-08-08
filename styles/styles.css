@@ -737,8 +737,7 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:las
   margin: 0 0 20px;
   font-family: var(--body-font-family);
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
   text-transform: uppercase;
   color: var(--text-color);
 }
@@ -755,8 +754,7 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper > .
   margin: 0 0 20px;
   font-family: var(--body-font-family);
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
   text-transform: uppercase;
   color: var(--text-color);
 }
@@ -823,7 +821,8 @@ body.wknd main .section.wknd-author-bio-container .wknd-download-meta > li > p {
   color: rgb(105 105 105);
 }
 
-/* download control → dark button with white label (matches source) */
+/* download control → dark button with white label. Source label is mixed-case
+   "Download PDF" at 18px / weight 400 (not uppercase/bold). */
 body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link {
   display: inline-block;
   margin: 8px 0 24px;
@@ -831,10 +830,9 @@ body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link {
   background-color: rgb(32 32 32);
   color: #fff;
   font-family: var(--body-font-family);
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: none;
   text-decoration: none;
   transition: background-color 0.15s;
 }
