@@ -85,5 +85,17 @@ export default function transform(hookName, element, payload) {
         a.setAttribute('href', href.replace(/\.html$/, ''));
       }
     });
+
+    // Download-PDF links point at a wknd.site AEM DAM path
+    // (/content/dam/.../ultimateguidetolaskateparks.pdf.coredownload.pdf) that
+    // does not exist on our EDS site, so the download 404s. The PDF has been
+    // re-hosted on our Document Authoring site; rewrite the href to the local
+    // asset so it downloads. (Guide-la-skateparks is the only page with a PDF.)
+    element.querySelectorAll('a[href*=".coredownload."], a[href*="/content/dam/"][href*=".pdf"]').forEach((a) => {
+      const href = a.getAttribute('href') || '';
+      if (/ultimateguidetolaskateparks\.pdf/.test(href)) {
+        a.setAttribute('href', '/us/en/magazine/assets/ultimateguidetolaskateparks.pdf');
+      }
+    });
   }
 }
