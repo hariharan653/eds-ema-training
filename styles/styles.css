@@ -743,6 +743,67 @@ body.wknd main .section.wknd-author-bio-container > .default-content-wrapper:las
   color: var(--text-color);
 }
 
+/* guide-la-skateparks sidebar also carries a Download-PDF block. Source order
+   is: "SHARE THIS STORY" heading → Download-PDF block → related list. The
+   decorator promotes a real .wknd-share-heading to the top of the sidebar, so
+   suppress the ::before label on the list to avoid a duplicate. */
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper.wknd-has-download > ul:last-of-type::before {
+  content: none;
+}
+
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper > .wknd-share-heading {
+  margin: 0 0 20px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+/* Download-PDF heading: the global section-title rule adds a big yellow
+   underline (leaked onto this h3). The source renders it as a small uppercase
+   label with no underline. */
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper.wknd-has-download > h3 {
+  padding-bottom: 0;
+  margin: 24px 0 8px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper.wknd-has-download > h3::after {
+  content: none;
+}
+
+body.wknd main .section.wknd-author-bio-container > .default-content-wrapper.wknd-has-download > h3 > a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* download control → dark button with white label (matches source) */
+body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link {
+  display: inline-block;
+  margin: 8px 0 24px;
+  padding: 14px 24px;
+  background-color: rgb(32 32 32);
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background-color 0.15s;
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link:hover,
+body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link:focus-visible {
+  background-color: var(--wknd-accent);
+  color: rgb(32 32 32);
+}
+
 /* Magazine article: the "related articles" list (last default-content block of
    the author-bio section) imported as a flat bulleted <ul> with each title and
    date concatenated in one link. Style it as a teaser list matching the source:

@@ -97,6 +97,26 @@ export default function decorate(block) {
       });
     }
 
+    // Download-PDF block (guide-la-skateparks): the source sidebar orders it as
+    // "SHARE THIS STORY" heading → Download-PDF block → related list, and the
+    // download control is a dark button. In the import the "Share this Story"
+    // label is a CSS ::before on the related list (so it renders BELOW the
+    // download block), and the download link is plain text. Fix the order by
+    // promoting a real Share heading to the top of the sidebar wrapper, and
+    // style the standalone download link as a dark button.
+    const sidebar = section.querySelector(':scope > div:last-child');
+    const pdfLink = sidebar && sidebar.querySelector('a[href$=".pdf"]');
+    if (sidebar && pdfLink && !sidebar.querySelector('.wknd-share-heading')) {
+      sidebar.classList.add('wknd-has-download');
+      const shareHeading = document.createElement('p');
+      shareHeading.className = 'wknd-share-heading';
+      shareHeading.textContent = 'Share this Story';
+      sidebar.prepend(shareHeading);
+      // the standalone "Download PDF" link (in its own <p>) becomes the button
+      const btnLink = [...sidebar.querySelectorAll('p > a[href$=".pdf"]')].pop();
+      if (btnLink) btnLink.classList.add('wknd-download-btn');
+    }
+
     const relLinks = section.querySelectorAll(':scope > div:last-child ul:last-of-type > li > a[href*="/magazine/"]');
     relLinks.forEach((a) => {
       if (a.querySelector('.wknd-share-title')) return; // already split
