@@ -104,6 +104,17 @@
   text-underline-offset: 3px;
 }
 
+/* Adventures listing card titles — dark, bold, UPPERCASE (per the adventures
+   index design). Scoped to the listing via the filter-tab strip, which the
+   decorator adds only on the full adventures listing (>= 8 cards); the homepage
+   "Where do you want to go?" grid has no tabs, so it keeps the blue title-case
+   links above. */
+.cards-adventures-wknd:has(.cards-adventures-wknd-tabs) .cards-adventures-wknd-card-body h3 {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
 /* description -- source: 14/21px, grey, 16px above; body font, UPPERCASE,
    truncated to a SINGLE line with an ellipsis so cards stay even height */
 .cards-adventures-wknd .cards-adventures-wknd-card-body p {
