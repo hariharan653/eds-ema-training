@@ -153,8 +153,13 @@ main .wknd-featured-teaser p > a:any-link:hover {
    adventures card grid) so the homepage/magazine teasers are unaffected. */
 
 /* break the teaser out of the 1200px section container so the image is
-   full-bleed like the source */
-.wknd-featured-teaser-container.cards-adventures-wknd-container
+   full-bleed like the source. NOTE: the global section-width cap in styles.css
+   (`body.wknd main > .section > div:not(hero-carousel, teaser, image-carousel)`,
+   specificity 0,3,3) also matches this wrapper and clamps it to 1136px. Prefix
+   with `body.wknd main` here so this override (0,4,2) out-specifies that cap;
+   scoped to .cards-adventures-wknd-container so only the adventures listing
+   teaser goes full-bleed (homepage/magazine teasers keep the 1136 column). */
+body.wknd main .wknd-featured-teaser-container.cards-adventures-wknd-container
   .wknd-featured-teaser-wrapper {
   max-width: unset;
   padding: 0;
