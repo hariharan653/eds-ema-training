@@ -460,6 +460,15 @@ body.wknd main .cards-adventures-wknd-container > .default-content-wrapper > h1 
   line-height: 1.5;
 }
 
+/* Adventure-detail trip page title (e.g. "Climbing New Zealand") — same source
+   H1 of Asar 40px / line-height 60px. The H1 is default content in the
+   two-column section that holds the trip-details + trip-tabs blocks, so it
+   carries the .wknd-trip-details-container class. Scope the override there. */
+body.wknd main .wknd-trip-details-container > .default-content-wrapper > h1 {
+  font-size: 40px;
+  line-height: 1.5;
+}
+
 body.wknd main .wknd-team-container > .default-content-wrapper > p,
 body.wknd main .wknd-team-container > .default-content-wrapper > p em {
   font-family: var(--body-font-family);
