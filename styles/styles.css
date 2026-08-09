@@ -714,7 +714,11 @@ body.wknd main .section.wknd-image-carousel-container > .default-content-wrapper
   flex-wrap: wrap;
   align-items: center;
   gap: 0;
-  margin: 0 0 24px;
+
+  /* source leaves a clear row above the breadcrumb (below the header) and a
+     small gap to the carousel image; without the top margin the crumb sits
+     flush against the sticky header and looks clipped. */
+  margin: 40px 0 24px;
   padding: 0;
   list-style: none;
   font-family: var(--body-font-family);
