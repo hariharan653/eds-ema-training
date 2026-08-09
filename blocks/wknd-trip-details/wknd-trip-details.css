@@ -43,3 +43,14 @@
 .wknd-trip-details .wknd-trip-details-value p {
   margin: 0;
 }
+
+/* "Share this Adventure" label below the fact sheet — source: 14px / 600
+   uppercase dark, ~23px vertical margin. */
+.wknd-trip-details .wknd-share-adventure {
+  margin: 23px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
