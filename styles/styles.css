@@ -626,6 +626,97 @@ body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li > a:any-lin
   }
 }
 
+/* Adventure-detail layout (matches source): the trip-details fact sheet sits
+   in a narrow ~291px LEFT sidebar and the tabbed content fills the wider right
+   column, with the H1 spanning full width above both. The section holds three
+   wrappers: [0] H1 (.default-content-wrapper), [1] fact sheet
+   (.wknd-trip-details-wrapper), [2] tabs (.wknd-trip-tabs-wrapper). Mobile
+   stacks in source order; desktop is a 2-col grid (sidebar left, tabs right). */
+@media (width >= 900px) {
+  body.wknd main .section.wknd-trip-details-container {
+    display: grid;
+    grid-template-columns: 291px minmax(0, 1fr);
+    justify-content: center;
+    column-gap: 48px;
+    align-items: start;
+    max-width: 1164px;
+    margin-inline: auto;
+    padding: 0 24px;
+  }
+
+  /* H1 spans both columns (full width, above the two-col content) */
+  body.wknd main .section.wknd-trip-details-container > .default-content-wrapper:first-child {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  /* fact sheet = left sidebar column, pinned to the TOP of its track
+     (align-self:start alone proved unreliable here; margin-bottom:auto
+     forces top alignment within the tall row). */
+  body.wknd main .section.wknd-trip-details-container > .wknd-trip-details-wrapper {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    margin: 0 0 auto;
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  /* tabs = right main column */
+  body.wknd main .section.wknd-trip-details-container > .wknd-trip-tabs-wrapper {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+}
+
+/* Adventure-detail breadcrumb: the import leaves it as a numbered <ol> in the
+   carousel section's default-content-wrapper, rendering "1. Adventures / 2. …"
+   stacked. The source shows an inline uppercase trail with a yellow "▸"
+   separator (same style as the magazine breadcrumb). */
+body.wknd main .section.wknd-image-carousel-container > .default-content-wrapper > ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+body.wknd main .section.wknd-image-carousel-container > .default-content-wrapper > ol > li {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  color: var(--text-color);
+}
+
+body.wknd main .section.wknd-image-carousel-container > .default-content-wrapper > ol > li:not(:first-child)::before {
+  content: "\25B8";
+  margin: 0 12px;
+  color: var(--wknd-accent);
+  font-size: 14px;
+}
+
+body.wknd main .section.wknd-image-carousel-container > .default-content-wrapper > ol > li > a:any-link {
+  color: var(--text-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+body.wknd main .section.wknd-image-carousel-container > .default-content-wrapper > ol > li > a:any-link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--wknd-accent);
+}
+
 /* Magazine article layout (matches source): the article body + author bio sit
    in a ~776px left column, and the related-articles list becomes a right-hand
    "Share this Story" sidebar (~291px). The author-bio section holds three
