@@ -821,10 +821,12 @@ body.wknd main .section.wknd-author-bio-container .wknd-download-meta > li > p {
   color: rgb(105 105 105);
 }
 
-/* download control → dark button with white label. Source label is mixed-case
-   "Download PDF" at 18px / weight 400 (not uppercase/bold). */
+/* download control → dark button with white label + a download-arrow icon.
+   Source label is mixed-case "Download PDF" at 18px / weight 400. */
 body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   margin: 8px 0 24px;
   padding: 14px 24px;
   background-color: rgb(32 32 32);
@@ -835,6 +837,11 @@ body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link {
   text-transform: none;
   text-decoration: none;
   transition: background-color 0.15s;
+}
+
+body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link .wknd-download-icon {
+  display: block;
+  flex: 0 0 auto;
 }
 
 body.wknd main .section.wknd-author-bio-container .wknd-download-btn:any-link:hover,

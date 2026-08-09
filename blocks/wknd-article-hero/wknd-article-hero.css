@@ -81,7 +81,10 @@
     max-height: 702px;
   }
 
+  /* gap from breadcrumb to title ≈ 27px in the source (this padding-top is the
+     breadcrumb→title gap since the breadcrumb sits directly above with no
+     bottom margin). Was 48px, which pushed the title too far down. */
   .wknd-article-hero .wknd-article-hero-text {
-    padding: 48px 32px 16px;
+    padding: 28px 32px 16px;
   }
 }
