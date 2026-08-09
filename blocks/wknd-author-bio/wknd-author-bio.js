@@ -112,9 +112,16 @@ export default function decorate(block) {
       shareHeading.className = 'wknd-share-heading';
       shareHeading.textContent = 'Share this Story';
       sidebar.prepend(shareHeading);
-      // the standalone "Download PDF" link (in its own <p>) becomes the button
+      // the standalone "Download PDF" link (in its own <p>) becomes the button.
+      // The source shows a download-arrow icon before the label (WKND icon
+      // font, unavailable here) — prepend an inline SVG glyph instead.
       const btnLink = [...sidebar.querySelectorAll('p > a[href$=".pdf"]')].pop();
-      if (btnLink) btnLink.classList.add('wknd-download-btn');
+      if (btnLink && !btnLink.querySelector('.wknd-download-icon')) {
+        btnLink.classList.add('wknd-download-btn');
+        const label = (btnLink.textContent || 'Download PDF').trim();
+        const icon = '<svg class="wknd-download-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>';
+        btnLink.innerHTML = `${icon}<span class="wknd-download-label">${label}</span>`;
+      }
       // file-metadata list: the import kept it as a <ul> of <li> pairs
       // (<p>Filename</p><p>value</p>). The source hides the labels and shows
       // just the values as a compact uppercase grey block. Tag the list so CSS
