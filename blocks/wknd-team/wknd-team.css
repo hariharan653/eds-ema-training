@@ -115,7 +115,9 @@
   height: 48px;
   border-radius: 0;
   background-color: rgb(32 32 32);
-  color: #fff;
+
+  /* source glyph is light grey rgb(235,235,235), not pure white */
+  color: rgb(235 235 235);
   transition: background-color 0.15s;
 }
 
