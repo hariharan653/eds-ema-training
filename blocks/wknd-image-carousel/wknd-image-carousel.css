@@ -7,9 +7,12 @@
    (Asar headings, Source Sans body, yellow accent). Mobile-first.
    ========================================================================== */
 
-/* Full-bleed: break the block out of the .section > div 1200px container. */
-main .section > .wknd-image-carousel-wrapper {
-  max-width: 100%;
+/* Full-bleed: break the carousel out of the .section > div content container
+   so the lead image spans edge-to-edge like the source (the breadcrumb, a
+   sibling default-content-wrapper in the same section, stays inset). Scoped
+   under body.wknd to beat the boilerplate section wrapper max-width. */
+body.wknd main .section > .wknd-image-carousel-wrapper {
+  max-width: none;
   padding: 0;
 }
 
@@ -72,41 +75,40 @@ main .section > .wknd-image-carousel-wrapper {
   object-position: 50% 50%;
 }
 
-/* ---- prev / next arrows ------------------------------------------------- */
+/* ---- prev / next arrows -------------------------------------------------
+   Source: small plain chevrons (no background, no border) docked at the
+   top-RIGHT, BELOW the image (in the indicator row), not overlaid on the
+   image. ------------------------------------------------------------------ */
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons {
   position: absolute;
-  top: 0;
+  top: var(--wkndic-img-h);
   right: 0;
-  left: 0;
   z-index: 3;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: var(--wkndic-img-h);
-  padding: 0 16px;
-  pointer-events: none;
+  gap: 24px;
+  padding: 12px 16px 0;
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 26px;
+  height: 24px;
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 50%;
-  background-color: rgb(255 255 255 / 85%);
+  border-radius: 0;
+  background-color: transparent;
   cursor: pointer;
-  pointer-events: auto;
-  transition: background-color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button:hover,
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button:focus-visible {
-  background-color: var(--wknd-accent);
+  opacity: 0.6;
   outline: none;
 }
 
@@ -114,8 +116,8 @@ main .section > .wknd-image-carousel-wrapper {
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button::before {
   content: "";
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-right: 2px solid var(--text-color);
   border-bottom: 2px solid var(--text-color);
 }
@@ -177,10 +179,11 @@ main .section > .wknd-image-carousel-wrapper {
 
 @media (width >= 900px) {
   .wknd-image-carousel {
-    --wkndic-img-h: clamp(360px, 37.5vw, 480px);
+    /* source lead carousel renders ~400px tall at desktop */
+    --wkndic-img-h: 400px;
   }
 
   .wknd-image-carousel .wknd-image-carousel-navigation-buttons {
-    padding: 0 32px;
+    padding: 12px 32px 0;
   }
 }

@@ -408,7 +408,7 @@ body.wknd {
    (own 1680px cap) and the wknd-teaser band (full-bleed) — which must break out
    of this column; without the :not() guards this broad rule out-specifies their
    own wrapper rules and clamps them to 1136px. */
-body.wknd main > .section > div:not(.wknd-hero-carousel-wrapper, .wknd-teaser-wrapper) {
+body.wknd main > .section > div:not(.wknd-hero-carousel-wrapper, .wknd-teaser-wrapper, .wknd-image-carousel-wrapper) {
   max-width: 1136px;
 }
 
