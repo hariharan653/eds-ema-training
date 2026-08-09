@@ -467,6 +467,18 @@ body.wknd main .cards-adventures-wknd-container > .default-content-wrapper > h1 
 body.wknd main .wknd-trip-details-container > .default-content-wrapper > h1 {
   font-size: 40px;
   line-height: 1.5;
+  padding-bottom: 16px;
+  position: relative;
+}
+
+/* signature yellow underline under the adventure-detail H1 (the global heading
+   underline rule only targets h2/h3, so the H1 needs it explicitly here). */
+body.wknd main .wknd-trip-details-container > .default-content-wrapper > h1::after {
+  content: "";
+  display: block;
+  width: 84px;
+  border-bottom: 2px solid var(--wknd-accent);
+  margin-top: 16px;
 }
 
 body.wknd main .wknd-team-container > .default-content-wrapper > p,

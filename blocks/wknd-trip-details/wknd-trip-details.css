@@ -12,14 +12,19 @@
   padding: 0;
 }
 
-/* source: no divider rules; each label/value pair separated by margin only */
+/* source: each label/value pair carries a thin light-grey divider bar on its
+   left (5px solid rgb(235,235,235)) with 18px of left padding. */
 .wknd-trip-details .wknd-trip-details-item {
   margin: 0 0 22px;
-  padding: 0;
+  padding: 0 0 0 18px;
+  border-left: 5px solid rgb(235 235 235);
 }
 
-/* label — source: 12px / 400 grey uppercase */
-.wknd-trip-details .wknd-trip-details-label {
+/* label — source: 12px / 400 grey uppercase. The import wraps the label text in
+   an inner <p>, and the global `body.wknd p` colour would otherwise paint that
+   <p> dark, so the grey must also be applied to the inner <p>. */
+.wknd-trip-details .wknd-trip-details-label,
+.wknd-trip-details .wknd-trip-details-label p {
   margin: 0 0 4px;
   font-family: var(--body-font-family);
   font-size: 12px;
@@ -27,6 +32,10 @@
   line-height: 1.5;
   color: rgb(105 105 105);
   text-transform: uppercase;
+}
+
+.wknd-trip-details .wknd-trip-details-label p {
+  margin: 0;
 }
 
 /* value — source: 14px / 600 dark UPPERCASE */
