@@ -185,11 +185,13 @@ body.wknd main .wknd-featured-teaser-container.cards-adventures-wknd-container
   object-fit: cover;
 }
 
-/* content card: white, centered in a 1200 container, left-aligned text.
-   Description restored to source 18px (the base variant uses 14px). */
+/* content card: white, centered in the 1136 column (matches the rest of the
+   WKND section width so the heading left-aligns with "Current Adventures" and
+   the card grid below — the source aligns them all). Left-aligned text;
+   description restored to source 18px (the base variant uses 14px). */
 .wknd-featured-teaser-container.cards-adventures-wknd-container
   .wknd-featured-teaser > div > div:not(.wknd-featured-teaser-img-col) {
-  max-width: 1200px;
+  max-width: 1136px;
   margin: 0 auto;
   padding: 0 24px;
   background-color: #fff;
