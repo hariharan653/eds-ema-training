@@ -451,6 +451,15 @@ body.wknd main .wknd-team-container > .default-content-wrapper > h1 {
   line-height: 1.5;
 }
 
+/* Adventures listing page title "Adventures" — the source renders the H1 at
+   Asar 40px / line-height 60px (our default body.wknd xxl is 48px). The H1 is
+   default content in the section that also holds the cards block, so it carries
+   the .cards-adventures-wknd-container class. Scope the override there. */
+body.wknd main .cards-adventures-wknd-container > .default-content-wrapper > h1 {
+  font-size: 40px;
+  line-height: 1.5;
+}
+
 body.wknd main .wknd-team-container > .default-content-wrapper > p,
 body.wknd main .wknd-team-container > .default-content-wrapper > p em {
   font-family: var(--body-font-family);
