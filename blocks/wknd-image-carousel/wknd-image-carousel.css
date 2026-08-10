@@ -112,24 +112,21 @@ body.wknd main .section > .wknd-image-carousel-wrapper {
   outline: none;
 }
 
-/* chevron glyphs drawn with borders (no icon font dependency) */
+/* arrow glyphs: the source uses full line arrows with a horizontal shaft
+   (← →), not bare chevrons. Render via the Unicode arrow characters. */
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button::before {
-  content: "";
   display: inline-block;
-  width: 9px;
-  height: 9px;
-  border-right: 2px solid var(--text-color);
-  border-bottom: 2px solid var(--text-color);
+  color: var(--text-color);
+  font-size: 24px;
+  line-height: 1;
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-prev::before {
-  margin-left: 4px;
-  transform: rotate(135deg);
+  content: "\2190";
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-next::before {
-  margin-right: 4px;
-  transform: rotate(-45deg);
+  content: "\2192";
 }
 
 /* ---- indicator dots ----------------------------------------------------- */
