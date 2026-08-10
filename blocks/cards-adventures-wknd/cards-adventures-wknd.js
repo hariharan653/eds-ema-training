@@ -26,8 +26,35 @@ const CATEGORY_MAP = {
 
 const TAB_ORDER = ['All', 'Climbing', 'Cycling', 'Skiing', 'Surfing', 'Travel'];
 
-/* Published query index of adventure-detail pages (see helix-query.yaml). */
+/* Published query index of adventure-detail pages (see helix-query.yaml). Used
+ * as the default when a data-source block omits an explicit path. */
 const ADVENTURES_INDEX = '/us/en/adventures/query-index.json';
+
+/**
+ * Read the data-driven config authored in the block's content, if present. The
+ * data-source authoring model (matching the source) replaces hand-authored card
+ * rows with a couple of config cells: an optional `tabs` marker (turns on the
+ * category filter strip) and a `…query-index.json` path the cards are built
+ * from. Returns { indexPath, showTabs } for a data-source block, or null when
+ * the block holds normal authored cards (e.g. the homepage "Next Adventures"
+ * grid) so those keep working unchanged.
+ */
+function getConfig(block) {
+  let indexPath = null;
+  let showTabs = false;
+  // Scan the innermost content cells so this works whether the config is
+  // authored as two rows (tabs / path) or one row with two columns. Authored
+  // card cells carry an image (image cell) or a title link to an adventure page
+  // (body cell), so neither matches the config patterns below.
+  [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
+    if (cell.querySelector('picture, img')) return;
+    const link = cell.querySelector('a');
+    const text = (link?.getAttribute('href') || cell.textContent || '').trim();
+    if (/query-index\.json$/.test(text)) indexPath = text;
+    else if (/^tabs$/i.test(text)) showTabs = true;
+  });
+  return indexPath ? { indexPath, showTabs } : null;
+}
 
 /**
  * Derive an adventure slug from a card's link (…/adventures/<slug>.html).
@@ -81,15 +108,24 @@ function addFilterTabs(block, ul) {
 }
 
 export default async function decorate(block) {
-  // Only the full adventures listing (many authored cards) is index-driven;
-  // the homepage "Next Adventures" grid (few cards) stays authored as-is.
-  const isListing = [...block.children].length >= 8;
+  // Data-source authoring model (matches the source): the block content is a
+  // `tabs` marker + a query-index.json path instead of hand-authored cards.
+  const config = getConfig(block);
+
+  // The full adventures listing is index-driven; the homepage "Next Adventures"
+  // grid (few authored cards, no config) stays authored as-is. Treat a
+  // data-source block, or a large authored grid (legacy source), as the listing.
+  const isListing = !!config || [...block.children].length >= 8;
+  // Tabs come on for a data-source block only when its `tabs` marker is present;
+  // for the legacy authored grid, keep the old "many cards" heuristic.
+  const showTabs = config ? config.showTabs : isListing;
 
   // Data-driven cards from the adventures query index (shared helper). Falls
   // back to authored rows if the index is empty/unavailable (design unchanged).
   if (isListing) {
-    const entries = sortByTitle(filterByPathPrefix(await fetchIndex(ADVENTURES_INDEX), '/us/en/adventures/'));
-    renderCardsFromEntries(block, entries);
+    const indexPath = config?.indexPath || ADVENTURES_INDEX;
+    const entries = sortByTitle(filterByPathPrefix(await fetchIndex(indexPath), '/us/en/adventures/'));
+    if (!renderCardsFromEntries(block, entries)) block.textContent = '';
   }
 
   /* change to ul, li */
@@ -124,9 +160,9 @@ export default async function decorate(block) {
   block.textContent = '';
   block.append(ul);
 
-  // Category filter tabs only on the full adventures listing (many cards);
-  // the homepage "Next Adventures" grid (4 cards) keeps a simple grid.
-  if (ul.children.length >= 8) {
+  // Category filter tabs only on the full adventures listing; the homepage
+  // "Next Adventures" grid (few cards) keeps a simple grid.
+  if (showTabs && ul.children.length >= 8) {
     addFilterTabs(block, ul);
   }
 }
