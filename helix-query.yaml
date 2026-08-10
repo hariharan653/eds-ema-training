@@ -1,6 +1,26 @@
 version: 1
 
 indices:
+  # Site-wide index of WKND /us/en pages, consumed by the header search
+  # typeahead. Excludes nav/footer fragments and the generated index files.
+  site:
+    include:
+      - '/us/en/**'
+    exclude:
+      - '/us/nav'
+      - '/us/footer'
+      - '/**/query-index.json'
+    target: /us/en/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: |
+          attribute(el, 'content')
+
   # Index of WKND adventure-detail pages, consumed by the adventures listing
   # (cards-adventures-wknd) so the grid is data-driven: new adventure pages
   # appear automatically once published. Excludes the listing page itself.

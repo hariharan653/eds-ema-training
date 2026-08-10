@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import decorateSearch from './search.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -288,6 +289,9 @@ export default async function decorate(block) {
 
   // WKND language/country selector dropdown (EN-US utility link)
   decorateLanguageSelector(nav);
+
+  // WKND header search typeahead (replaces the dead /us/en/search link)
+  decorateSearch(nav);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');

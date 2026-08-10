@@ -417,19 +417,38 @@ body.wknd header nav .nav-sections a[aria-current='page'] {
 
 /* Search (nav-tools): grey search field on the right of the white row.
    Source metrics @1440: 166px wide, 42px tall, 12px label, ~10px left of the
-   magnifier icon then the placeholder text. */
-body.wknd header nav .nav-tools a:any-link {
+   magnifier icon then the placeholder text. The search link is upgraded by JS
+   into .nav-search (field wrapper) > .nav-search-input + .nav-search-results
+   (a dark typeahead dropdown matching the source). */
+body.wknd header nav .nav-tools .nav-search {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   box-sizing: border-box;
   width: 166px;
   height: 42px;
-  border: 0;
-  border-radius: 0;
   padding: 0 16px;
   background-color: rgb(245 245 245);
-  color: rgb(95 95 95);
+}
+
+/* magnifier icon before the input */
+body.wknd header nav .nav-tools .nav-search::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  background: rgb(95 95 95);
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>') center / contain no-repeat;
+}
+
+body.wknd header nav .nav-tools .nav-search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: rgb(80 80 80);
   font-family: var(--body-font-family);
   font-size: 12px;
   font-weight: 400;
@@ -437,19 +456,58 @@ body.wknd header nav .nav-tools a:any-link {
   letter-spacing: 0.04em;
 }
 
-body.wknd header nav .nav-tools a:any-link::before {
-  content: '';
-  width: 16px;
-  height: 16px;
-  background: currentcolor;
-  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>') center / contain no-repeat;
+body.wknd header nav .nav-tools .nav-search-input::placeholder {
+  color: rgb(95 95 95);
+  opacity: 1;
 }
 
-body.wknd header nav .nav-tools a:any-link:hover,
-body.wknd header nav .nav-tools a:any-link:focus-visible {
-  background-color: rgb(238 238 238);
-  color: rgb(80 80 80);
+/* dark results dropdown (matches source): anchored under the field, wider than
+   it, dark panel with white result text and a highlighted match. */
+body.wknd header nav .nav-tools .nav-search-results {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  width: 360px;
+  max-width: 90vw;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background-color: rgb(19 19 19);
+}
+
+body.wknd header nav .nav-tools .nav-search-results[hidden] {
+  display: none;
+}
+
+body.wknd header nav .nav-tools .nav-search-results > li {
+  margin: 0;
+  padding: 0;
+}
+
+body.wknd header nav .nav-tools .nav-search-results > li > a:any-link {
+  display: block;
+  padding: 12px 24px;
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
   text-decoration: none;
+}
+
+body.wknd header nav .nav-tools .nav-search-results > li > a:hover,
+body.wknd header nav .nav-tools .nav-search-results > li > a:focus-visible,
+body.wknd header nav .nav-tools .nav-search-results > li[aria-selected="true"] > a {
+  background-color: rgb(40 40 40);
+  outline: none;
+}
+
+/* highlighted matched substring — source highlights the match with the WKND
+   yellow accent behind dark text. */
+body.wknd header nav .nav-tools .nav-search-results mark {
+  background: var(--wknd-accent);
+  color: var(--text-color);
+  font-weight: 400;
 }
 
 /* ---- utility bar (SIGN IN + EN-US), black, full-width, above the white row.
