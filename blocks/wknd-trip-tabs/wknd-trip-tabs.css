@@ -106,6 +106,25 @@
   color: var(--text-color);
 }
 
+/* "What to Bring" list markers: the source uses a small dark right-pointing
+   arrow (▸) rather than the default round disc bullet. */
+.wknd-trip-tabs .wknd-trip-tabs-panel ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel ul > li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-panel ul > li::before {
+  content: "\25B8";
+  position: absolute;
+  left: 0;
+  color: var(--text-color);
+}
+
 .wknd-trip-tabs .wknd-trip-tabs-panel > *:last-child {
   margin-bottom: 0;
 }
