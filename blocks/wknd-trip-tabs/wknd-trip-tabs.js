@@ -10,6 +10,37 @@ import { toClassName } from '../../scripts/aem.js';
  * Implements the ARIA tabs pattern with roving tabindex + arrow-key support.
  */
 
+/** A paragraph whose only meaningful content is a single image. */
+function isImageOnlyParagraph(el) {
+  if (!el || el.tagName !== 'P') return false;
+  if (!el.querySelector('picture, img')) return false;
+  return el.textContent.trim() === '';
+}
+
+/**
+ * Group runs of consecutive image-only paragraphs into a flex row, matching the
+ * source: trailing gear/gallery images (e.g. "What to Bring") sit side by side
+ * in a row rather than stacking full-width. A lone image paragraph (e.g. the
+ * Overview illustrations) is left untouched so it stays full-width.
+ */
+function groupImageRows(panel) {
+  let run = [];
+  const flush = () => {
+    if (run.length >= 2) {
+      const gallery = document.createElement('div');
+      gallery.className = 'wknd-trip-tabs-gallery';
+      run[0].before(gallery);
+      run.forEach((p) => gallery.append(p));
+    }
+    run = [];
+  };
+  [...panel.children].forEach((child) => {
+    if (isImageOnlyParagraph(child)) run.push(child);
+    else flush();
+  });
+  flush();
+}
+
 export default async function decorate(block) {
   const tablist = document.createElement('div');
   tablist.className = 'wknd-trip-tabs-list';
@@ -24,6 +55,9 @@ export default async function decorate(block) {
 
     // decorate tabpanel (the content cell)
     panel.className = 'wknd-trip-tabs-panel';
+    // group consecutive image-only paragraphs into a side-by-side row (source
+    // lays the trailing gear images horizontally, not stacked)
+    groupImageRows(panel);
     panel.id = `wknd-trip-tabs-panel-${id}`;
     panel.setAttribute('aria-hidden', !!i);
     panel.setAttribute('aria-labelledby', `wknd-trip-tabs-tab-${id}`);

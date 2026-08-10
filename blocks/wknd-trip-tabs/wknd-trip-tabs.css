@@ -96,6 +96,26 @@
   margin: 0 0 24px;
 }
 
+/* gallery: consecutive gear/gallery images sit side by side in a row (source
+   lays the "What to Bring" images horizontally rather than stacked). */
+.wknd-trip-tabs .wknd-trip-tabs-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 0 0 24px;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-gallery p {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+}
+
+.wknd-trip-tabs .wknd-trip-tabs-gallery img {
+  margin: 0;
+  object-fit: contain;
+}
+
 .wknd-trip-tabs .wknd-trip-tabs-panel ul,
 .wknd-trip-tabs .wknd-trip-tabs-panel ol {
   margin: 0 0 24px;
