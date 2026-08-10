@@ -1,3 +1,39 @@
+/**
+ * Defer a non-first slide's images: move src/srcset to data-* so the browser
+ * doesn't fetch them at load (they're above-the-fold in the scroller, so
+ * loading=lazy alone won't stop the fetch). restoreDeferredSlide() puts them
+ * back when the slide is shown or after the page has loaded.
+ */
+function deferSlideImages(slide) {
+  slide.querySelectorAll('picture source, picture img').forEach((el) => {
+    if (el.getAttribute('srcset')) {
+      el.dataset.srcset = el.getAttribute('srcset');
+      el.removeAttribute('srcset');
+    }
+    if (el.tagName === 'IMG' && el.getAttribute('src')) {
+      el.dataset.src = el.getAttribute('src');
+      // 1x1 transparent placeholder keeps layout stable (no CLS)
+      el.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+    }
+  });
+}
+
+/** Restore a deferred slide's real image sources (idempotent). */
+function restoreDeferredSlide(slide) {
+  if (!slide || slide.dataset.restored) return;
+  slide.querySelectorAll('picture source, picture img').forEach((el) => {
+    if (el.dataset.srcset) {
+      el.setAttribute('srcset', el.dataset.srcset);
+      delete el.dataset.srcset;
+    }
+    if (el.dataset.src) {
+      el.setAttribute('src', el.dataset.src);
+      delete el.dataset.src;
+    }
+  });
+  slide.dataset.restored = 'true';
+}
+
 function updateActiveSlide(slide) {
   const block = slide.closest('.wknd-hero-carousel');
   const slideIndex = parseInt(slide.dataset.slideIndex, 10);
@@ -31,6 +67,9 @@ export function showSlide(block, slideIndex = 0) {
   let realSlideIndex = slideIndex < 0 ? slides.length - 1 : slideIndex;
   if (slideIndex >= slides.length) realSlideIndex = 0;
   const activeSlide = slides[realSlideIndex];
+
+  // ensure the target slide's deferred images are loaded before we scroll to it
+  restoreDeferredSlide(activeSlide);
 
   activeSlide.querySelectorAll('a').forEach((link) => link.removeAttribute('tabindex'));
   block.querySelector('.wknd-hero-carousel-slides').scrollTo({
@@ -131,8 +170,12 @@ export default async function decorate(block) {
     slidesWrapper.append(slide);
 
     // LCP optimization: the first slide's image is the LCP candidate — load it
-    // eagerly at high priority; hidden slides stay lazy at low priority so they
-    // don't compete for bandwidth (see modern-web optimize-image-priority).
+    // eagerly at high priority. The other slides sit in an above-the-fold
+    // horizontal scroller, so `loading=lazy` does NOT stop the browser fetching
+    // them at load — they'd compete with the LCP image on slow connections
+    // (~130 KiB on this hero). Instead DEFER them: strip src/srcset into data-*
+    // and restore after window load or when the slide is shown (see
+    // restoreDeferredSlide + the load handler in decorate).
     const slideImg = slide.querySelector('img');
     if (slideImg) {
       if (idx === 0) {
@@ -141,6 +184,8 @@ export default async function decorate(block) {
       } else {
         slideImg.setAttribute('loading', 'lazy');
         slideImg.setAttribute('fetchpriority', 'low');
+        // eslint-disable-next-line no-use-before-define
+        deferSlideImages(slide);
       }
     }
 
@@ -173,5 +218,15 @@ export default async function decorate(block) {
 
   if (!isSingleSlide) {
     bindEvents(block);
+
+    // After the page has loaded (LCP done), restore the deferred slide images
+    // so the carousel is fully ready without ever competing with the LCP image.
+    const restoreAll = () => block.querySelectorAll('.wknd-hero-carousel-slide')
+      .forEach((slide) => restoreDeferredSlide(slide));
+    if (document.readyState === 'complete') {
+      restoreAll();
+    } else {
+      window.addEventListener('load', restoreAll, { once: true });
+    }
   }
 }
