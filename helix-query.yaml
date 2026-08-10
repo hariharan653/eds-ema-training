@@ -23,48 +23,11 @@ indices:
         value: |
           attribute(el, 'content')
 
-  # Index of WKND magazine article pages, consumed by the magazine listing
-  # (cards-articles-wknd) when its content cell points at this path. Excludes
-  # the listing page itself.
-  magazine:
-    include:
-      - '/us/en/magazine/**'
-    exclude:
-      - '/us/en/magazine'
-    target: /us/en/magazine/query-index.json
-    properties:
-      title:
-        select: head > meta[property="og:title"]
-        value: |
-          attribute(el, 'content')
-      description:
-        select: head > meta[name="description"]
-        value: |
-          attribute(el, 'content')
-      image:
-        select: head > meta[property="og:image"]
-        value: |
-          attribute(el, 'content')
-
-  # Index of WKND adventure-detail pages, consumed by the adventures listing
-  # (cards-adventures-wknd) so the grid is data-driven: new adventure pages
-  # appear automatically once published. Excludes the listing page itself.
-  adventures:
-    include:
-      - '/us/en/adventures/**'
-    exclude:
-      - '/us/en/adventures'
-    target: /us/en/adventures/query-index.json
-    properties:
-      title:
-        select: head > meta[property="og:title"]
-        value: |
-          attribute(el, 'content')
-      description:
-        select: head > meta[name="description"]
-        value: |
-          attribute(el, 'content')
-      image:
-        select: head > meta[property="og:image"]
-        value: |
-          attribute(el, 'content')
+  # NOTE: the magazine and adventures listings are NOT auto-indexed here.
+  # Their query-index.json files (/us/en/magazine/query-index.json and
+  # /us/en/adventures/query-index.json) are hand-authored SHEETS in Document
+  # Authoring instead — so they can be edited directly in da.live like the FAQ
+  # and contributors sheets. If those indexes were auto-generated here, the
+  # generator would overwrite the authored sheets whenever a page is published.
+  # To add a new magazine article / adventure to a listing, add a row to the
+  # corresponding sheet (it will no longer appear automatically on publish).
