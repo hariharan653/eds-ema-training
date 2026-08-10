@@ -1,4 +1,10 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import {
+  fetchIndex,
+  filterByPathPrefix,
+  sortByTitle,
+  renderCardsFromEntries,
+} from '../../scripts/cards-from-index.js';
 
 /*
  * Category filter map (from wknd.site/us/en/adventures). Keys are the tab
@@ -74,74 +80,16 @@ function addFilterTabs(block, ul) {
   block.prepend(tablist);
 }
 
-/**
- * Fetch the adventures query index and return its entries sorted by title.
- * Returns [] on any failure so the caller falls back to authored content.
- */
-async function fetchAdventures() {
-  try {
-    const resp = await fetch(ADVENTURES_INDEX);
-    if (!resp.ok) return [];
-    const json = await resp.json();
-    const data = Array.isArray(json?.data) ? json.data : [];
-    // only real detail pages with a title; sort alphabetically (matches source)
-    return data
-      .filter((e) => e.path && e.title)
-      .sort((a, b) => a.title.localeCompare(b.title));
-  } catch {
-    return [];
-  }
-}
-
-/**
- * Build an authored-shape row (image cell + body cell) from an index entry,
- * so the shared transform below produces exactly the same card DOM as the
- * hand-authored content.
- */
-function rowFromEntry(entry) {
-  const row = document.createElement('div');
-
-  const imgCell = document.createElement('div');
-  const picture = document.createElement('picture');
-  const img = document.createElement('img');
-  // strip any existing rendition query so createOptimizedPicture builds clean params
-  [img.src] = (entry.image || '').split('?');
-  img.alt = entry.title || '';
-  picture.append(img);
-  imgCell.append(picture);
-
-  const bodyCell = document.createElement('div');
-  const h3 = document.createElement('h3');
-  const a = document.createElement('a');
-  a.href = entry.path;
-  a.textContent = entry.title;
-  h3.append(a);
-  bodyCell.append(h3);
-  if (entry.description) {
-    const p = document.createElement('p');
-    p.textContent = entry.description;
-    bodyCell.append(p);
-  }
-  row.append(imgCell, bodyCell);
-  return row;
-}
-
 export default async function decorate(block) {
   // Only the full adventures listing (many authored cards) is index-driven;
   // the homepage "Next Adventures" grid (few cards) stays authored as-is.
-  const authoredRows = [...block.children];
-  const isListing = authoredRows.length >= 8;
+  const isListing = [...block.children].length >= 8;
 
-  // Data-driven card source when the index is published; otherwise fall back
-  // to the hand-authored rows (design unchanged, no dependency on the index).
-  let rows = authoredRows;
+  // Data-driven cards from the adventures query index (shared helper). Falls
+  // back to authored rows if the index is empty/unavailable (design unchanged).
   if (isListing) {
-    const entries = await fetchAdventures();
-    if (entries.length) {
-      rows = entries.map(rowFromEntry);
-      block.textContent = '';
-      block.append(...rows);
-    }
+    const entries = sortByTitle(filterByPathPrefix(await fetchIndex(ADVENTURES_INDEX), '/us/en/adventures/'));
+    renderCardsFromEntries(block, entries);
   }
 
   /* change to ul, li */
