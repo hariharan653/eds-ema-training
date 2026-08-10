@@ -78,15 +78,14 @@
   padding: 0;
 }
 
-/* title link -- match source: sans-serif body font, normal weight, UPPERCASE,
-   dark (not blue). The homepage "Where do you want to go?" titles use this
-   non-bold dark uppercase treatment; the adventures listing overrides to bold
-   below. */
+/* title link -- match source: sans-serif body font, bold, UPPERCASE, dark
+   (not blue). Both the homepage "Where do you want to go?" grid and the
+   adventures listing use this bold dark uppercase treatment. */
 .cards-adventures-wknd .cards-adventures-wknd-card-body h3 {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: normal;
