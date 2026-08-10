@@ -1093,6 +1093,31 @@ body.wknd.wknd-no-heading-rule main > .section > .default-content-wrapper > h3::
   content: none;
 }
 
+/* FAQs page: the source puts the signature yellow underline under the page
+   title "FAQs" (H1), NOT under the sidebar "Need more help?" (H3). The global
+   rule above only targets h2/h3, so (a) add the underline to the FAQs H1 and
+   (b) suppress it on the H3s inside the accordion-faq section. */
+body.wknd main .accordion-faq-container > .default-content-wrapper > h1 {
+  padding-bottom: 16px;
+  position: relative;
+}
+
+body.wknd main .accordion-faq-container > .default-content-wrapper > h1::after {
+  content: "";
+  display: block;
+  width: 84px;
+  border-bottom: 2px solid var(--wknd-accent);
+  margin-top: 16px;
+}
+
+body.wknd main .accordion-faq-container > .default-content-wrapper > h3 {
+  padding-bottom: 0;
+}
+
+body.wknd main .accordion-faq-container > .default-content-wrapper > h3::after {
+  content: none;
+}
+
 /* ==========================================================================
    Magazine "Members Only" section (matches wknd.site/us/en/magazine).
    The source renders two "locked" teaser cards (yellow corner ribbon + lock
