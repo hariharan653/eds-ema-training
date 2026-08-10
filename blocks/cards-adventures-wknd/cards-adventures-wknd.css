@@ -78,18 +78,18 @@
   padding: 0;
 }
 
-/* title link -- match source: sans-serif body font, weight 400, sentence case,
-   and a blue link colour (rgb(0,69,255)) — the adventures listing titles are
-   plain blue links, unlike the dark uppercase card titles elsewhere. */
+/* title link -- match source: sans-serif body font, bold, UPPERCASE, dark
+   (not blue). The homepage "Where do you want to go?" titles and the adventures
+   listing titles share this dark bold uppercase treatment. */
 .cards-adventures-wknd .cards-adventures-wknd-card-body h3 {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.5;
-  text-transform: none;
+  text-transform: uppercase;
   letter-spacing: normal;
-  color: rgb(0 69 255);
+  color: var(--text-color);
 }
 
 .cards-adventures-wknd .cards-adventures-wknd-card-body h3 a {
