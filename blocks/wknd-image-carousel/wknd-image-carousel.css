@@ -139,17 +139,17 @@ body.wknd main .section > .wknd-image-carousel-wrapper {
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-prev::before {
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M10 5l1.41 1.41L5.83 12H22v2H5.83l5.58 5.59L10 21l-8-8z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='21' y1='12' x2='4' y2='12'/%3E%3Cpolyline points='10 6 4 12 10 18'/%3E%3C/svg%3E");
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M10 5l1.41 1.41L5.83 12H22v2H5.83l5.58 5.59L10 21l-8-8z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='21' y1='12' x2='4' y2='12'/%3E%3Cpolyline points='10 6 4 12 10 18'/%3E%3C/svg%3E");
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-next::before {
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M14 5l-1.41 1.41L18.17 12H2v2h16.17l-5.58 5.59L14 21l8-8z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='3' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='14 6 20 12 14 18'/%3E%3C/svg%3E");
 
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M14 5l-1.41 1.41L18.17 12H2v2h16.17l-5.58 5.59L14 21l8-8z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cline x1='3' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='14 6 20 12 14 18'/%3E%3C/svg%3E");
 }
 
 /* ---- indicator dots ----------------------------------------------------- */
