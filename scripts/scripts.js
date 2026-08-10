@@ -156,6 +156,47 @@ export function decorateMain(main) {
 }
 
 /**
+ * Preload the LCP image so the browser discovers it immediately instead of
+ * waiting for block JS to run. The LCP candidate is the first image in the
+ * first section (e.g. the hero carousel's first slide). We mirror the rendition
+ * the browser would actually pick for the current viewport by reading the
+ * matching <source>/<img> from the <picture>, so no extra/duplicate download.
+ * Generic + idempotent: no-op if there's no image or a preload already exists.
+ * @param {Element} main The main element
+ */
+function preloadLCPImage(main) {
+  const firstSection = main.querySelector('.section');
+  const picture = firstSection?.querySelector('picture');
+  const img = picture?.querySelector('img');
+  if (!img || document.head.querySelector('link[rel="preload"][as="image"]')) return;
+
+  // Pick the source that matches the current viewport (falls back to <img>).
+  const sources = [...picture.querySelectorAll('source')];
+  const match = sources.find((s) => {
+    const media = s.getAttribute('media');
+    return s.getAttribute('srcset') && (!media || window.matchMedia(media).matches);
+  });
+  const srcset = match?.getAttribute('srcset');
+  const href = srcset ? undefined : img.currentSrc || img.src;
+  if (!srcset && !href) return;
+
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.setAttribute('fetchpriority', 'high');
+  if (srcset) {
+    link.setAttribute('imagesrcset', srcset);
+    const sizes = match.getAttribute('sizes');
+    if (sizes) link.setAttribute('imagesizes', sizes);
+    const type = match.getAttribute('type');
+    if (type) link.type = type;
+  } else {
+    link.href = href;
+  }
+  document.head.append(link);
+}
+
+/**
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
@@ -166,6 +207,7 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
+    preloadLCPImage(main);
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
 
