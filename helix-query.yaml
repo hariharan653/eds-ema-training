@@ -18,6 +18,33 @@ indices:
         select: head > meta[name="description"]
         value: |
           attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: |
+          attribute(el, 'content')
+
+  # Index of WKND magazine article pages, consumed by the magazine listing
+  # (cards-articles-wknd) when its content cell points at this path. Excludes
+  # the listing page itself.
+  magazine:
+    include:
+      - '/us/en/magazine/**'
+    exclude:
+      - '/us/en/magazine'
+    target: /us/en/magazine/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: |
+          attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: |
+          attribute(el, 'content')
 
   # Index of WKND adventure-detail pages, consumed by the adventures listing
   # (cards-adventures-wknd) so the grid is data-driven: new adventure pages
