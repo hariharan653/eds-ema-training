@@ -114,21 +114,42 @@ body.wknd main .section > .wknd-image-carousel-wrapper {
   outline: none;
 }
 
-/* arrow glyphs: the source uses full line arrows with a horizontal shaft
-   (← →), not bare chevrons. Render via the Unicode arrow characters. */
+/* arrow icons: the source uses full line arrows with a horizontal shaft and a
+   clear arrowhead (an icon-font glyph). The Unicode ← → render too light in the
+   system font, so draw crisp SVG arrows via CSS mask — this keeps the exact
+   weight/proportion and inherits the dark text colour via background-color. */
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button::before {
+  content: "";
   display: inline-block;
-  color: var(--text-color);
-  font-size: 20px;
-  line-height: 1;
+  width: 22px;
+  height: 20px;
+  background-color: var(--text-color);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-repeat: no-repeat;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-position: center;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-size: contain;
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-prev::before {
-  content: "\2190";
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M10 5l1.41 1.41L5.83 12H22v2H5.83l5.58 5.59L10 21l-8-8z'/%3E%3C/svg%3E");
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M10 5l1.41 1.41L5.83 12H22v2H5.83l5.58 5.59L10 21l-8-8z'/%3E%3C/svg%3E");
 }
 
 .wknd-image-carousel .wknd-image-carousel-navigation-buttons button.slide-next::before {
-  content: "\2192";
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M14 5l-1.41 1.41L18.17 12H2v2h16.17l-5.58 5.59L14 21l8-8z'/%3E%3C/svg%3E");
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M14 5l-1.41 1.41L18.17 12H2v2h16.17l-5.58 5.59L14 21l8-8z'/%3E%3C/svg%3E");
 }
 
 /* ---- indicator dots ----------------------------------------------------- */
