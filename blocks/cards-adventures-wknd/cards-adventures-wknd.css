@@ -78,14 +78,15 @@
   padding: 0;
 }
 
-/* title link -- match source: sans-serif body font, bold, UPPERCASE, dark
-   (not blue). Both the homepage "Where do you want to go?" grid and the
-   adventures listing use this bold dark uppercase treatment. */
+/* title link -- match source: sans-serif body font, semibold, UPPERCASE, dark
+   (not blue). The homepage "Where do you want to go?" grid uses weight 600 to
+   match the "Recent Articles" card titles; the full adventures listing bumps to
+   700 via the override below. */
 .cards-adventures-wknd .cards-adventures-wknd-card-body h3 {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: normal;
