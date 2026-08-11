@@ -365,6 +365,10 @@ body.wknd header .nav-wrapper {
      (44px) stays; only the white row's padding shrinks. */
   body.wknd header.scrolled {
     height: 116px;
+
+    /* subtle drop shadow under the compact bar once scrolled (matches source:
+       rgba(0,0,0,.26) 0 8px 20px) */
+    box-shadow: rgb(0 0 0 / 26%) 0 8px 20px 0;
   }
 
   body.wknd header.scrolled nav {
