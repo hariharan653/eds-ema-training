@@ -1133,6 +1133,14 @@ body.wknd main .accordion-faq-container > .default-content-wrapper > p {
   line-height: 45px;
 }
 
+/* FAQs "Need more help?" sidebar copy: the source renders this smaller than the
+   intro — 14px / 35px line-height (not the 18px/45px intro treatment). Scope to
+   the wrapper that holds the #need-more-help heading. */
+body.wknd main .accordion-faq-container > .default-content-wrapper:has(> #need-more-help) > p {
+  font-size: 14px;
+  line-height: 35px;
+}
+
 /* ==========================================================================
    Magazine "Members Only" section (matches wknd.site/us/en/magazine).
    The source renders two "locked" teaser cards (yellow corner ribbon + lock
