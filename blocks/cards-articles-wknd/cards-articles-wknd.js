@@ -24,7 +24,7 @@ function getConfig(block) {
     const link = cell.querySelector('a');
     const text = (link?.getAttribute('href') || cell.textContent || '').trim();
     const limitMatch = text.match(/^limit\s*[:=]?\s*(\d+)$/i);
-    const sortMatch = text.match(/^sort\s*[:=]?\s*(asc|desc)$/i);
+    const sortMatch = text.match(/^sort\s*[:=]?\s*(asc|desc|none)$/i);
     if (/query-index\.json$/.test(text)) indexPath = text;
     else if (limitMatch) limit = parseInt(limitMatch[1], 10);
     else if (sortMatch) sortDir = sortMatch[1].toLowerCase();
@@ -41,7 +41,10 @@ export default async function decorate(block) {
   // rows, e.g. an authored grid) behave exactly as before.
   const config = getConfig(block);
   if (config) {
-    let entries = sortByTitle(await fetchIndex(config.indexPath));
+    // `sort: none` keeps the sheet's authored row order (curated); asc/desc
+    // sort by title (default asc).
+    const raw = await fetchIndex(config.indexPath);
+    let entries = config.sortDir === 'none' ? [...raw] : sortByTitle(raw);
     if (config.sortDir === 'desc') entries.reverse();
     if (config.limit > 0) entries = entries.slice(0, config.limit);
     // replace the path cell with the built cards; if the index is empty/
