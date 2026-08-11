@@ -8,6 +8,8 @@
  * fetch/filter/build logic instead of duplicating it per block.
  */
 
+import { createOptimizedPicture } from './aem.js';
+
 const indexCache = new Map();
 
 /**
@@ -97,4 +99,49 @@ export function renderCardsFromEntries(block, entries) {
   block.textContent = '';
   entries.forEach((entry) => block.append(rowFromEntry(entry)));
   return true;
+}
+
+/**
+ * Transform a card block's rows into the shared `ul`/`li` card DOM: each row
+ * becomes an `<li>` with an image cell (`{prefix}-card-image`) and a body cell
+ * (`{prefix}-card-body`), images run through createOptimizedPicture, and the
+ * card image is made a link to the same target as the title. Produces the exact
+ * markup the card blocks built inline; `prefix` (e.g. 'cards-articles-wknd')
+ * keeps each block's existing class names byte-identical. Returns the `<ul>`.
+ * @param {HTMLElement} block
+ * @param {string} prefix block class prefix used for the card cell classes
+ * @returns {HTMLUListElement}
+ */
+export function cardsToList(block, prefix) {
+  const ul = document.createElement('ul');
+  [...block.children].forEach((row) => {
+    const li = document.createElement('li');
+    while (row.firstElementChild) li.append(row.firstElementChild);
+    [...li.children].forEach((div) => {
+      if (div.children.length === 1 && div.querySelector('picture')) div.className = `${prefix}-card-image`;
+      else div.className = `${prefix}-card-body`;
+    });
+    ul.append(li);
+  });
+  ul.querySelectorAll('picture > img').forEach((img) => {
+    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    img.closest('picture').replaceWith(optimizedPic);
+  });
+  // Make the card image clickable, linking to the same target as the title
+  // (matches the source, where both the image and title are links).
+  ul.querySelectorAll('li').forEach((li) => {
+    const imageWrap = li.querySelector(`.${prefix}-card-image`);
+    const titleLink = li.querySelector(`.${prefix}-card-body h3 a`);
+    const picture = imageWrap && imageWrap.querySelector('picture');
+    if (imageWrap && titleLink && picture && !imageWrap.querySelector('a')) {
+      const link = document.createElement('a');
+      link.href = titleLink.getAttribute('href');
+      link.setAttribute('aria-label', titleLink.textContent.trim());
+      picture.replaceWith(link);
+      link.append(picture);
+    }
+  });
+  block.textContent = '';
+  block.append(ul);
+  return ul;
 }

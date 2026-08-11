@@ -1,9 +1,9 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
 import {
   fetchIndex,
   filterByPathPrefix,
   sortByTitle,
   renderCardsFromEntries,
+  cardsToList,
 } from '../../scripts/cards-from-index.js';
 
 /*
@@ -142,37 +142,8 @@ export default async function decorate(block) {
     if (!renderCardsFromEntries(block, entries)) block.textContent = '';
   }
 
-  /* change to ul, li */
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
-    const li = document.createElement('li');
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-adventures-wknd-card-image';
-      else div.className = 'cards-adventures-wknd-card-body';
-    });
-    ul.append(li);
-  });
-  ul.querySelectorAll('picture > img').forEach((img) => {
-    const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    img.closest('picture').replaceWith(optimizedPic);
-  });
-  // Make the card image clickable, linking to the same target as the title
-  // (matches the source, where both the image and title are links).
-  ul.querySelectorAll('li').forEach((li) => {
-    const imageWrap = li.querySelector('.cards-adventures-wknd-card-image');
-    const titleLink = li.querySelector('.cards-adventures-wknd-card-body h3 a');
-    const picture = imageWrap && imageWrap.querySelector('picture');
-    if (imageWrap && titleLink && picture && !imageWrap.querySelector('a')) {
-      const link = document.createElement('a');
-      link.href = titleLink.getAttribute('href');
-      link.setAttribute('aria-label', titleLink.textContent.trim());
-      picture.replaceWith(link);
-      link.append(picture);
-    }
-  });
-  block.textContent = '';
-  block.append(ul);
+  // transform to the shared ul/li card DOM (identical markup, shared helper)
+  const ul = cardsToList(block, 'cards-adventures-wknd');
 
   // Category filter tabs only on the full adventures listing; the homepage
   // "Next Adventures" grid (few cards) keeps a simple grid.
