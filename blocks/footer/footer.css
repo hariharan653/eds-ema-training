@@ -85,7 +85,8 @@ footer .footer .footer-social-link:focus-visible {
   outline-offset: 2px;
 }
 
-footer .footer .footer-social-link img {
+footer .footer .footer-social-link img,
+footer .footer .footer-social-link svg {
   width: 16px;
   height: 16px;
 }
