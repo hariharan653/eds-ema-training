@@ -1,3 +1,103 @@
+import { fetchIndex } from '../../scripts/cards-from-index.js';
+
+/* Site index (title/description/image for every /us/en page) + the adventures/
+   magazine sheets, used to fall back for any image the site index is missing. */
+const SITE_INDEX = '/us/en/query-index.json';
+const FALLBACK_INDEXES = {
+  '/us/en/adventures/': '/us/en/adventures/query-index.json',
+  '/us/en/magazine/': '/us/en/magazine/query-index.json',
+};
+
+/**
+ * Data-source authoring model (matches the source): each carousel slide is
+ * authored as a single cell holding a page path (e.g. `/us/en/adventures`).
+ * Returns the list of paths, or null when the block holds authored slide rows
+ * (image + content cells) so those keep working unchanged.
+ */
+function getSlidePaths(block) {
+  const rows = [...block.querySelectorAll(':scope > div')];
+  const paths = [];
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    if (cells.length !== 1) return;
+    const cell = cells[0];
+    if (cell.querySelector('picture, img')) return;
+    const link = cell.querySelector('a');
+    const text = (link?.getAttribute('href') || cell.textContent || '').trim();
+    if (/^\//.test(text) && !/\.json$/.test(text)) paths.push(text);
+  });
+  // data-source only if EVERY row is a lone path cell (and there's at least one)
+  return paths.length && paths.length === rows.length ? paths : null;
+}
+
+/** CTA label for a slide, derived from the target path (matches the source). */
+function ctaLabel(path) {
+  if (path === '/us/en/adventures') return 'View Trips';
+  if (path.startsWith('/us/en/magazine/')) return 'Full Article';
+  if (path.startsWith('/us/en/adventures/')) return 'View Trip';
+  return 'Learn More';
+}
+
+/**
+ * Resolve a slide path to { title, description, image } from the site index,
+ * falling back to the adventures/magazine sheet for a missing image.
+ */
+async function resolveSlide(path) {
+  const site = await fetchIndex(SITE_INDEX);
+  const entry = site.find((e) => e.path === path) || {};
+  let { image } = entry;
+  if (!image) {
+    const prefix = Object.keys(FALLBACK_INDEXES).find((p) => path.startsWith(p));
+    if (prefix) {
+      const alt = (await fetchIndex(FALLBACK_INDEXES[prefix])).find((e) => e.path === path);
+      if (alt?.image) image = alt.image;
+    }
+  }
+  return { title: entry.title || '', description: entry.description || '', image };
+}
+
+/**
+ * Build authored-shape slide rows (image cell + content cell with h2/desc/CTA)
+ * from resolved index data, so the existing carousel decoration renders them.
+ */
+async function buildSlidesFromPaths(block, paths) {
+  const resolved = await Promise.all(paths.map((p) => resolveSlide(p)));
+  block.textContent = '';
+  paths.forEach((path, i) => {
+    const { title, description, image } = resolved[i];
+    const row = document.createElement('div');
+
+    const imgCell = document.createElement('div');
+    if (image) {
+      const picture = document.createElement('picture');
+      const img = document.createElement('img');
+      [img.src] = image.split('?');
+      img.alt = title;
+      picture.append(img);
+      imgCell.append(picture);
+    }
+
+    const body = document.createElement('div');
+    const h2 = document.createElement('h2');
+    h2.textContent = title;
+    body.append(h2);
+    if (description) {
+      const p = document.createElement('p');
+      p.textContent = description;
+      body.append(p);
+    }
+    const ctaP = document.createElement('p');
+    const a = document.createElement('a');
+    a.href = path;
+    a.textContent = ctaLabel(path);
+    ctaP.append(a);
+    body.append(ctaP);
+
+    row.append(imgCell, body);
+    block.append(row);
+  });
+}
+
 /**
  * Defer a non-first slide's images: move src/srcset to data-* so the browser
  * doesn't fetch them at load (they're above-the-fold in the scroller, so
@@ -130,6 +230,13 @@ let carouselId = 0;
 export default async function decorate(block) {
   carouselId += 1;
   block.setAttribute('id', `wknd-hero-carousel-${carouselId}`);
+
+  // Data-source mode (matches the source): when every slide row is a lone page
+  // path, resolve each to its title/description/image from the site index and
+  // build authored-shape slides. Otherwise keep authored slide rows unchanged.
+  const slidePaths = getSlidePaths(block);
+  if (slidePaths) await buildSlidesFromPaths(block, slidePaths);
+
   const rows = block.querySelectorAll(':scope > div');
   const isSingleSlide = rows.length < 2;
 
