@@ -74,9 +74,10 @@
   text-decoration: none;
 }
 
+/* no hover underline/color change — the source card titles stay static */
 .cards-articles-wknd .cards-articles-wknd-card-body h3 a:hover {
-  color: var(--link-hover-color);
-  text-decoration: underline;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 /* Description: body font, muted grey, 14px, UPPERCASE, 16px above. Source
