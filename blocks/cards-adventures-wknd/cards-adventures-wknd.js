@@ -33,27 +33,31 @@ const ADVENTURES_INDEX = '/us/en/adventures/query-index.json';
 /**
  * Read the data-driven config authored in the block's content, if present. The
  * data-source authoring model (matching the source) replaces hand-authored card
- * rows with a couple of config cells: an optional `tabs` marker (turns on the
- * category filter strip) and a `…query-index.json` path the cards are built
- * from. Returns { indexPath, showTabs } for a data-source block, or null when
- * the block holds normal authored cards (e.g. the homepage "Next Adventures"
- * grid) so those keep working unchanged.
+ * rows with a few config cells: an optional `tabs` marker (turns on the
+ * category filter strip), an optional `limit: N` cell (cap the number of cards,
+ * e.g. the homepage grid shows 4), and a `…query-index.json` path the cards are
+ * built from. Returns { indexPath, showTabs, limit } for a data-source block, or
+ * null when the block holds normal authored cards (e.g. the homepage "Next
+ * Adventures" grid) so those keep working unchanged.
  */
 function getConfig(block) {
   let indexPath = null;
   let showTabs = false;
+  let limit = 0;
   // Scan the innermost content cells so this works whether the config is
-  // authored as two rows (tabs / path) or one row with two columns. Authored
-  // card cells carry an image (image cell) or a title link to an adventure page
-  // (body cell), so neither matches the config patterns below.
+  // authored as separate rows or one row with columns. Authored card cells
+  // carry an image (image cell) or a title link to an adventure page (body
+  // cell), so neither matches the config patterns below.
   [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
     if (cell.querySelector('picture, img')) return;
     const link = cell.querySelector('a');
     const text = (link?.getAttribute('href') || cell.textContent || '').trim();
+    const limitMatch = text.match(/^limit\s*[:=]?\s*(\d+)$/i);
     if (/query-index\.json$/.test(text)) indexPath = text;
     else if (/^tabs$/i.test(text)) showTabs = true;
+    else if (limitMatch) limit = parseInt(limitMatch[1], 10);
   });
-  return indexPath ? { indexPath, showTabs } : null;
+  return indexPath ? { indexPath, showTabs, limit } : null;
 }
 
 /**
@@ -124,7 +128,9 @@ export default async function decorate(block) {
   // back to authored rows if the index is empty/unavailable (design unchanged).
   if (isListing) {
     const indexPath = config?.indexPath || ADVENTURES_INDEX;
-    const entries = sortByTitle(filterByPathPrefix(await fetchIndex(indexPath), '/us/en/adventures/'));
+    let entries = sortByTitle(filterByPathPrefix(await fetchIndex(indexPath), '/us/en/adventures/'));
+    // optional `limit: N` config caps the card count (e.g. homepage grid = 4)
+    if (config?.limit > 0) entries = entries.slice(0, config.limit);
     if (!renderCardsFromEntries(block, entries)) block.textContent = '';
   }
 
