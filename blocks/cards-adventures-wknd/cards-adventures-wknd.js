@@ -44,6 +44,7 @@ function getConfig(block) {
   let indexPath = null;
   let showTabs = false;
   let limit = 0;
+  let sortDir = 'asc';
   // Scan the innermost content cells so this works whether the config is
   // authored as separate rows or one row with columns. Authored card cells
   // carry an image (image cell) or a title link to an adventure page (body
@@ -53,11 +54,16 @@ function getConfig(block) {
     const link = cell.querySelector('a');
     const text = (link?.getAttribute('href') || cell.textContent || '').trim();
     const limitMatch = text.match(/^limit\s*[:=]?\s*(\d+)$/i);
+    const sortMatch = text.match(/^sort\s*[:=]?\s*(asc|desc)$/i);
     if (/query-index\.json$/.test(text)) indexPath = text;
     else if (/^tabs$/i.test(text)) showTabs = true;
     else if (limitMatch) limit = parseInt(limitMatch[1], 10);
+    else if (sortMatch) sortDir = sortMatch[1].toLowerCase();
   });
-  return indexPath ? { indexPath, showTabs, limit } : null;
+  if (!indexPath) return null;
+  return {
+    indexPath, showTabs, limit, sortDir,
+  };
 }
 
 /**
@@ -129,6 +135,8 @@ export default async function decorate(block) {
   if (isListing) {
     const indexPath = config?.indexPath || ADVENTURES_INDEX;
     let entries = sortByTitle(filterByPathPrefix(await fetchIndex(indexPath), '/us/en/adventures/'));
+    // optional `sort: desc` config reverses to Z→A (default asc, A→Z)
+    if (config?.sortDir === 'desc') entries.reverse();
     // optional `limit: N` config caps the card count (e.g. homepage grid = 4)
     if (config?.limit > 0) entries = entries.slice(0, config.limit);
     if (!renderCardsFromEntries(block, entries)) block.textContent = '';
