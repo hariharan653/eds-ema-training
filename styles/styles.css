@@ -1361,10 +1361,13 @@ body.wknd main .default-content-wrapper:has(> #members-only) > :nth-child(10) {
     grid-column: 1;
   }
 
-  /* "Need more help?" sidebar in the right column, top-aligned */
+  /* "Need more help?" sidebar in the right column, top-aligned. The source
+     indents the sidebar content ~97px from the column's left edge, leaving a
+     clear gap between the accordion column and this copy. */
   body.wknd main > .section.accordion-faq-container > .default-content-wrapper:last-child {
     grid-column: 2;
     grid-row: 1 / span 2;
+    padding-left: 97px;
   }
 }
 
