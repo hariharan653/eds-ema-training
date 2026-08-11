@@ -97,11 +97,9 @@
   text-decoration: none;
 }
 
+/* no hover underline — the source card titles stay static */
 .cards-adventures-wknd .cards-adventures-wknd-card-body h3 a:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--wknd-accent);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
 
 /* Adventures listing card titles — dark, bold, UPPERCASE (per the adventures
