@@ -6,32 +6,44 @@ import {
 } from '../../scripts/cards-from-index.js';
 
 /**
- * Read a query-index path authored in the block's content, if present. The
- * data-driven authoring model puts a single cell holding a `…query-index.json`
- * path (as a link or plain text) instead of hand-authored card rows — the block
- * then renders every card from that index. Returns the path, or null when the
- * block holds normal authored cards (e.g. the homepage "Recent Articles" grid).
+ * Read the data-source config authored in the block's content, if present. The
+ * data-driven authoring model replaces hand-authored card rows with a few
+ * config cells: a `…query-index.json` path (required), an optional `limit: N`
+ * (cap the card count, e.g. the homepage "Recent Articles" grid shows 4), and
+ * an optional `sort: asc|desc` (order by title; default asc). Returns
+ * { indexPath, limit, sortDir }, or null when the block holds normal authored
+ * cards so those keep working unchanged. Config cells carry no image and are
+ * not a title link to an article, so they never collide with authored rows.
  */
-function getIndexPath(block) {
-  const cells = block.querySelectorAll(':scope > div > div');
-  // a data-source block is a single cell whose only content is the json path
-  if (cells.length !== 1) return null;
-  const cell = cells[0];
-  if (cell.querySelector('picture, img')) return null;
-  const link = cell.querySelector('a');
-  const text = (link?.getAttribute('href') || cell.textContent || '').trim();
-  return /query-index\.json$/.test(text) ? text : null;
+function getConfig(block) {
+  let indexPath = null;
+  let limit = 0;
+  let sortDir = 'asc';
+  [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
+    if (cell.querySelector('picture, img')) return;
+    const link = cell.querySelector('a');
+    const text = (link?.getAttribute('href') || cell.textContent || '').trim();
+    const limitMatch = text.match(/^limit\s*[:=]?\s*(\d+)$/i);
+    const sortMatch = text.match(/^sort\s*[:=]?\s*(asc|desc)$/i);
+    if (/query-index\.json$/.test(text)) indexPath = text;
+    else if (limitMatch) limit = parseInt(limitMatch[1], 10);
+    else if (sortMatch) sortDir = sortMatch[1].toLowerCase();
+  });
+  if (!indexPath) return null;
+  return { indexPath, limit, sortDir };
 }
 
 export default async function decorate(block) {
   // Data-driven mode (matches the source authoring model): when the block's
-  // content is a single cell pointing at a query-index.json, render all article
-  // cards from that index (sorted alphabetically) — no hand-authored cards, so
-  // new articles appear automatically once published. Otherwise (authored card
-  // rows, e.g. the homepage "Recent Articles" grid) behave exactly as before.
-  const indexPath = getIndexPath(block);
-  if (indexPath) {
-    const entries = sortByTitle(await fetchIndex(indexPath));
+  // content is a cell pointing at a query-index.json (+ optional limit/sort),
+  // render article cards from that index — no hand-authored cards, so new
+  // articles appear automatically once published. Otherwise (authored card
+  // rows, e.g. an authored grid) behave exactly as before.
+  const config = getConfig(block);
+  if (config) {
+    let entries = sortByTitle(await fetchIndex(config.indexPath));
+    if (config.sortDir === 'desc') entries.reverse();
+    if (config.limit > 0) entries = entries.slice(0, config.limit);
     // replace the path cell with the built cards; if the index is empty/
     // unavailable, clear the stray path cell so it never renders as text.
     if (!renderCardsFromEntries(block, entries)) block.textContent = '';
