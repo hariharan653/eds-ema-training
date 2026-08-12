@@ -232,6 +232,71 @@ function decorateLanguageSelector(nav) {
 }
 
 /**
+ * Wire the utility-bar "Sign In" link to open a WKND-styled Sign In modal
+ * instead of navigating to /us/en/signin (which 404s — there is no sign-in
+ * page). Matches the source: a dark panel with a "Sign In" heading + yellow
+ * underline, "Welcome Back", username/password fields, a "Forgot your
+ * password?" link, and a yellow SIGN IN button. No backend — the form is a
+ * static demo (same as the source), so submit just closes the modal.
+ * No-op if the link isn't present (only the WKND nav has it).
+ * @param {Element} nav The decorated nav element
+ */
+function decorateSignIn(nav) {
+  const toggle = nav.querySelector('.nav-utility a[href$="/signin"], .nav-utility a[href="#sign-in"]');
+  if (!toggle) return;
+  toggle.classList.add('signin-toggle');
+  toggle.setAttribute('aria-haspopup', 'dialog');
+  toggle.setAttribute('aria-expanded', 'false');
+
+  const overlay = document.createElement('div');
+  overlay.className = 'signin-overlay';
+  const modal = document.createElement('div');
+  modal.className = 'signin-modal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', 'Sign In');
+  modal.innerHTML = `
+    <button type="button" class="signin-close" aria-label="Close">&#215;</button>
+    <h2 class="signin-title">Sign In</h2>
+    <p class="signin-welcome">Welcome Back</p>
+    <form class="signin-form">
+      <input type="text" name="username" aria-label="Username" placeholder="USERNAME" autocomplete="username">
+      <input type="password" name="password" aria-label="Password" placeholder="PASSWORD" autocomplete="current-password">
+      <a class="signin-forgot" href="#forgot-password">Forgot your password?</a>
+      <button type="submit" class="signin-submit">SIGN IN</button>
+    </form>`;
+  overlay.append(modal);
+  document.body.append(overlay);
+
+  const close = () => {
+    overlay.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+  const open = () => {
+    overlay.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    modal.querySelector('input')?.focus();
+  };
+
+  toggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    open();
+  });
+  modal.querySelector('.signin-close').addEventListener('click', close);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') close();
+  });
+  // demo form: no backend, just close on submit (matches the source stub)
+  modal.querySelector('.signin-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    close();
+  });
+}
+
+/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -289,6 +354,9 @@ export default async function decorate(block) {
 
   // WKND language/country selector dropdown (EN-US utility link)
   decorateLanguageSelector(nav);
+
+  // WKND Sign In modal (replaces the dead /us/en/signin link → 404)
+  decorateSignIn(nav);
 
   // WKND header search typeahead (replaces the dead /us/en/search link)
   decorateSearch(nav);
