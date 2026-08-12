@@ -803,3 +803,117 @@ body.wknd header nav .nav-utility .lang-nav .lang-country + ul a[aria-current='t
 }
 
 /* stylelint-enable no-descending-specificity */
+
+/* ==========================================================================
+   Sign In modal (WKND) — opened from the utility-bar "Sign In" link. Matches
+   the source: a dark panel with a serif "Sign In" heading + short yellow
+   underline, "Welcome Back", username/password fields, a forgot link, and a
+   yellow SIGN IN button. Hidden until .open is toggled by header.js.
+   ========================================================================== */
+body.wknd .signin-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background-color: rgb(0 0 0 / 45%);
+}
+
+body.wknd .signin-overlay.open {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+body.wknd .signin-modal {
+  position: relative;
+  width: 420px;
+  max-width: calc(100vw - 32px);
+  margin-top: 96px;
+  padding: 48px;
+  background-color: rgb(32 32 32);
+  color: rgb(235 235 235);
+  box-shadow: 0 10px 40px rgb(0 0 0 / 40%);
+}
+
+body.wknd .signin-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  border: 0;
+  background: none;
+  color: rgb(235 235 235);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+body.wknd .signin-title {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #fff;
+}
+
+body.wknd .signin-title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  margin-top: 12px;
+  border-bottom: 3px solid var(--wknd-accent);
+}
+
+body.wknd .signin-welcome {
+  margin: 32px 0 16px;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
+}
+
+body.wknd .signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+body.wknd .signin-form input {
+  padding: 16px;
+  border: 1px solid rgb(90 90 90);
+  background-color: transparent;
+  color: #fff;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+body.wknd .signin-form input::placeholder {
+  color: rgb(150 150 150);
+  text-transform: uppercase;
+}
+
+body.wknd .signin-forgot:any-link {
+  margin-top: 4px;
+  color: rgb(235 235 235);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+body.wknd .signin-submit {
+  margin-top: 8px;
+  padding: 16px;
+  border: 0;
+  background-color: var(--wknd-accent);
+  color: rgb(0 0 0);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
