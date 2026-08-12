@@ -600,7 +600,7 @@ body.wknd header nav .nav-utility a[href='#language']::after {
   /* make room at the top of the header for the black utility bar, plus
      breathing room so the logo sits clear below it (matches source rhythm) */
   body.wknd header .nav-wrapper {
-    padding-top: 44px;
+    padding-top: 25px;
   }
 
   /* the flex nav row: generous vertical breathing room so the logo sits well
@@ -640,7 +640,7 @@ body.wknd header nav .nav-utility a[href='#language']::after {
     justify-content: flex-end;
     align-items: center;
     gap: 24px;
-    height: 44px;
+    height: 25px;
     padding: 0 32px;
     background-color: rgb(32 32 32);
   }
