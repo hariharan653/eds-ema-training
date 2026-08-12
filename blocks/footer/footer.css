@@ -257,6 +257,13 @@ body.wknd footer .footer .footer-social-link {
   color: rgb(32 32 32);
 }
 
+/* larger glyph inside the 48px chip (source renders ~24px, not the base 16px) */
+body.wknd footer .footer .footer-social-link img,
+body.wknd footer .footer .footer-social-link svg {
+  width: 24px;
+  height: 24px;
+}
+
 body.wknd footer .footer .footer-social-link:hover,
 body.wknd footer .footer .footer-social-link:focus-visible {
   background-color: #fff;
