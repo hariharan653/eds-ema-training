@@ -17,6 +17,19 @@
   padding: 0;
 }
 
+/* Tighten the gap from the byline to the first body paragraph. The hero
+   section (byline) and the following author-bio section (body) each carry the
+   default 40px section margin, which stacked to a ~52px gap; the source keeps
+   these ~21px apart. Collapse the hero's bottom margin and the body section's
+   top margin so the byline sits just above the first paragraph. */
+body.wknd main .section.wknd-article-hero-container {
+  margin-bottom: 0;
+}
+
+body.wknd main .section.wknd-article-hero-container + .section.wknd-author-bio-container {
+  margin-top: 0;
+}
+
 .wknd-article-hero {
   padding: 0;
 }
