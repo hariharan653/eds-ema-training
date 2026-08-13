@@ -631,12 +631,13 @@ body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li {
   list-style: none;
 }
 
-/* yellow arrow between crumbs (before every item except the first) */
+/* yellow arrow between crumbs (before every item except the first). Source
+   keeps the arrow tight to the crumbs (~8px each side, small glyph). */
 body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li:not(:first-child)::before {
   content: "\25B8";
-  margin: 0 12px;
+  margin: 0 8px;
   color: var(--wknd-accent);
-  font-size: 14px;
+  font-size: 11px;
 }
 
 body.wknd main .wknd-article-hero .wknd-article-hero-breadcrumb > li > a:any-link {
